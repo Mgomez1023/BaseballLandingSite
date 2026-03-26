@@ -132,11 +132,12 @@ function AboutSection() {
 
       <div className="about-layout">
         <p className="about-intro">
-          I am a software engineer and computer science student at the University of Illinois
-          Chicago with experience building full-stack applications, analytics tools, and
-          user-facing web products. My recent work spans React, TypeScript, FastAPI, SQL, and
-          WordPress, with an emphasis on shipping software that is technically sound, clear to
-          users, and useful in real workflows.
+          I’m a software engineer focused on building polished, 
+          dependable applications with clean implementation and 
+          clear user value. I enjoy combining AI and traditional 
+          software engineering to ship thoughtful, reliable products. 
+          I’m particularly interested in full-stack systems, 
+          AI-assisted tools, and software that solves practical problems.
         </p>
 
         <div className="info-grid">
