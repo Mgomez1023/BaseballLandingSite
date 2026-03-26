@@ -64,6 +64,7 @@ const baseLinks = [
     label: 'About',
     x: fieldGeometry.firstBase.x,
     y: fieldGeometry.firstBase.y,
+    floatDelay: '0s',
     labelOffsetX: 10,
     labelOffsetY: 50,
     textAnchor: 'start',
@@ -73,6 +74,7 @@ const baseLinks = [
     label: 'Projects',
     x: fieldGeometry.secondBase.x,
     y: fieldGeometry.secondBase.y,
+    floatDelay: '0.55s',
     labelOffsetX: 0,
     labelOffsetY: -46,
     textAnchor: 'middle',
@@ -82,6 +84,7 @@ const baseLinks = [
     label: 'Education',
     x: fieldGeometry.thirdBase.x,
     y: fieldGeometry.thirdBase.y,
+    floatDelay: '1.1s',
     labelOffsetX: 10,
     labelOffsetY: 55,
     textAnchor: 'end',
@@ -91,6 +94,7 @@ const baseLinks = [
     label: 'Contact',
     x: fieldGeometry.homePlate.x,
     y: fieldGeometry.homePlate.y + 10,
+    floatDelay: '1.65s',
     labelOffsetX: 0,
     labelOffsetY: 54,
     textAnchor: 'middle',
@@ -99,7 +103,7 @@ const baseLinks = [
 ]
 
 function getHomePlatePoints(x, y) {
-  return `${x},${y - 18} ${x + 18},${y - 2} ${x + 18},${y + 22} ${x - 18},${y + 22} ${x - 18},${y - 2}`
+  return `${x - 18},${y - 22} ${x + 18},${y - 22} ${x + 18},${y + 2} ${x},${y + 18} ${x - 18},${y + 2}`
 }
 
 export function BaseballField() {
@@ -181,50 +185,49 @@ export function BaseballField() {
           className="base-link"
           aria-label={`Scroll to ${base.label}`}
         >
-          <g className="base-group">
-            <circle className="base-hit-area" cx={base.x} cy={base.y} r="34" />
-            <circle className="base-hover-ring" cx={base.x} cy={base.y} r="24" />
-            {base.homePlate ? (
-              <>
-                <polygon
-                  className="base-underlay"
-                  points={getHomePlatePoints(base.x, base.y)}
-                  transform={`rotate(180 ${base.x} ${base.y})`}
-                />
-                <polygon 
-                  className="base-shape" 
-                  x={base.x - 50}
-                  y={base.y - 55}  
-                  points={getHomePlatePoints(base.x, base.y)} 
-                  rx="2"
-                  ry="2"
-                  transform={`rotate(180 ${base.x} ${base.y})`}
-                />
-              </>
-            ) : (
-              <>
-                <rect
-                  className="base-underlay"
-                  x={base.x - 15}
-                  y={base.y - 15}
-                  width="30"
-                  height="30"
-                  rx="2"
-                  ry="2"
-                  transform={`rotate(45 ${base.x} ${base.y})`}
-                />
-                <rect
-                  className="base-shape"
-                  x={base.x - 15}
-                  y={base.y - 15}
-                  width="30"
-                  height="30"
-                  rx="2"
-                  ry="2"
-                  transform={`rotate(45 ${base.x} ${base.y})`}
-                />
-              </>
-            )}
+          <g className="base-group" style={{ '--float-delay': base.floatDelay }}>
+            <g className="base-visual">
+              <circle className="base-hit-area" cx={base.x} cy={base.y} r="40" />
+              <circle className="base-hover-ring" cx={base.x} cy={base.y} r="30" />
+              {base.homePlate ? (
+                <>
+                  <polygon
+                    className="base-underlay"
+                    points={getHomePlatePoints(base.x, base.y)}
+                  />
+                  <polygon 
+                    className="base-shape home-plate-shape" 
+                    x={base.x}
+                    y={base.y}  
+                    points={getHomePlatePoints(base.x, base.y)} 
+                    rx="2"
+                    ry="2"
+                  />
+                </>
+              ) : (
+                <>
+                  <rect
+                    className="base-underlay"
+                    x={base.x - 15}
+                    y={base.y - 15}
+                    width="30"
+                    height="30"
+                    rx="2"
+                    ry="2"
+                    transform={`rotate(45 ${base.x} ${base.y})`}
+                  />
+                  <rect
+                    className="base-shape base-square-shape"
+                    x={base.x - 15}
+                    y={base.y - 15}
+                    width="30"
+                    height="30"
+                    rx="2"
+                    ry="2"
+                  />
+                </>
+              )}
+            </g>
             <text
               className="base-label"
               x={base.x + base.labelOffsetX}

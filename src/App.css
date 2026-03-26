@@ -99,17 +99,26 @@
   text-decoration: none;
 }
 
+.base-visual {
+  animation: baseFloat 3.8s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 .base-hit-area {
   fill: transparent;
 }
 
 .base-hover-ring {
   fill: none;
-  stroke: rgba(255, 143, 42, 0.2);
-  stroke-width: 1.3;
+  stroke: rgba(255, 255, 255, 0.48);
+  stroke-width: 1.5;
   opacity: 0;
-  transition: opacity 180ms ease, transform 180ms ease;
+  transition: opacity 180ms ease, transform 180ms ease, stroke 180ms ease, filter 180ms ease;
   transform-origin: center;
+  transform-box: fill-box;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.18));
 }
 
 .base-underlay {
@@ -119,11 +128,16 @@
 }
 
 .base-shape {
-  fill: rgba(255, 143, 42, 0.14);
-  stroke: #ff8f2a;
+  fill: rgba(255, 255, 255, 0.12);
+  stroke: rgba(255, 255, 255, 0.92);
   stroke-width: 2.1;
   transition: fill 180ms ease, stroke 180ms ease, filter 180ms ease, transform 180ms ease;
-  filter: drop-shadow(0 0 6px rgba(255, 143, 42, 0.16));
+  transform-box: fill-box;
+  transform-origin: center;
+  filter:
+    drop-shadow(0 8px 12px rgba(0, 0, 0, 0.16))
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.24))
+    drop-shadow(0 0 18px rgba(255, 255, 255, 0.1));
 }
 
 .base-label {
@@ -138,14 +152,24 @@
 .base-link:hover .base-hover-ring,
 .base-link:focus-visible .base-hover-ring {
   opacity: 1;
-  transform: scale(1.04);
+  stroke: rgba(255, 255, 255, 0.82);
+  transform: scale(1.14);
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.3));
 }
 
 .base-link:hover .base-shape,
 .base-link:focus-visible .base-shape {
-  fill: rgba(255, 143, 42, 0.22);
-  stroke: #ffb36b;
-  filter: drop-shadow(0 0 8px rgba(255, 143, 42, 0.22));
+  fill: rgba(255, 255, 255, 0.22);
+  stroke: #ffffff;
+  filter:
+    drop-shadow(0 10px 16px rgba(0, 0, 0, 0.22))
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.34))
+    drop-shadow(0 0 22px rgba(255, 255, 255, 0.16));
+}
+
+.base-link:hover .base-square-shape,
+.base-link:focus-visible .base-square-shape {
+  transform: scale(1.06);
 }
 
 .base-link:hover .base-label,
@@ -215,6 +239,17 @@
   }
 }
 
+@keyframes baseFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
 @media (max-width: 640px) {
   .hero-section {
     --hero-pad-inline: 0.0rem;
@@ -249,7 +284,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .field-arc,
-  .field-diamond {
+  .field-diamond,
+  .base-visual {
     animation: none;
     stroke-dashoffset: 0;
   }
