@@ -210,8 +210,8 @@
 
 @media (max-width: 640px) {
   .hero-section {
-    --hero-pad-inline: 0.6rem;
-    --hero-caption-space: 3rem;
+    --hero-pad-inline: 0.0rem;
+    --hero-caption-space: 0rem;
     --hero-lift: clamp(0.75rem, 2.5vh, 1.5rem);
   }
 

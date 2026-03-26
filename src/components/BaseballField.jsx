@@ -64,8 +64,8 @@ const baseLinks = [
     label: 'About',
     x: fieldGeometry.firstBase.x,
     y: fieldGeometry.firstBase.y,
-    labelX: 528,
-    labelY: 388,
+    labelOffsetX: 10,
+    labelOffsetY: 50,
     textAnchor: 'start',
   },
   {
@@ -73,8 +73,8 @@ const baseLinks = [
     label: 'Projects',
     x: fieldGeometry.secondBase.x,
     y: fieldGeometry.secondBase.y,
-    labelX: 350,
-    labelY: 202,
+    labelOffsetX: 0,
+    labelOffsetY: -46,
     textAnchor: 'middle',
   },
   {
@@ -82,8 +82,8 @@ const baseLinks = [
     label: 'Education',
     x: fieldGeometry.thirdBase.x,
     y: fieldGeometry.thirdBase.y,
-    labelX: 172,
-    labelY: 388,
+    labelOffsetX: 10,
+    labelOffsetY: 55,
     textAnchor: 'end',
   },
   {
@@ -91,8 +91,8 @@ const baseLinks = [
     label: 'Contact',
     x: fieldGeometry.homePlate.x,
     y: fieldGeometry.homePlate.y,
-    labelX: 350,
-    labelY: 574,
+    labelOffsetX: 0,
+    labelOffsetY: 54,
     textAnchor: 'middle',
     homePlate: true,
   },
@@ -218,8 +218,8 @@ export function BaseballField() {
             )}
             <text
               className="base-label"
-              x={base.labelX}
-              y={base.labelY}
+              x={base.x + base.labelOffsetX}
+              y={base.y + base.labelOffsetY}
               textAnchor={base.textAnchor}
             >
               {base.label}
