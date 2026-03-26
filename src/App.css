@@ -325,7 +325,7 @@
 }
 
 .project-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
 }
 
@@ -411,10 +411,23 @@
   padding: clamp(1.5rem, 3vw, 2rem);
 }
 
+.education-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 1.25rem;
+}
+
 .education-overview {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+}
+
+.education-location {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
 }
 
 .education-meta {
@@ -473,6 +486,7 @@
 @media (max-width: 960px) {
   .info-grid,
   .project-grid,
+  .education-grid,
   .education-overview,
   .contact-layout {
     grid-template-columns: 1fr;

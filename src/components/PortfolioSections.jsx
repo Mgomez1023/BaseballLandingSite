@@ -2,62 +2,94 @@ const aboutAreas = [
   {
     title: 'Current Focus',
     description:
-      'Building reliable full-stack applications, sharpening product thinking, and creating software that balances performance, usability, and maintainability.',
+      'Pursuing a B.S. in Computer Science at the University of Illinois Chicago while building full-stack applications centered on analytics, applied AI, and practical product development.',
   },
   {
     title: 'Technologies',
     description:
-      'React, TypeScript, C++, Node.js, Express, PostgreSQL, REST APIs',
+      'JavaScript, TypeScript, Python, SQL, C/C++, Java, React, FastAPI, Node.js, WordPress, Git, Linux, Vercel, and modern frontend tooling.',
   },
   {
     title: 'Interests',
     description:
-      'Distributed systems, thoughtful interface design, developer experience, backend architecture, and software engineering internships with strong mentorship.',
+      'Data-driven products, sports analytics, transparent AI workflows, polished interfaces, and software engineering internships where strong implementation and product thinking both matter.',
   },
 ]
 
 const projectCards = [
   {
-    title: 'Project Alpha',
+    title: 'NL→SQL Explorer',
     description:
-      'A concise placeholder for a flagship project. Replace this with the product problem, the user value, and the engineering scope.',
-    stack: ['React', 'Node.js', 'PostgreSQL'],
+      'A full-stack analytics application that converts natural-language questions into validated SQL queries over uploaded datasets.',
+    stack: ['React', 'TypeScript', 'FastAPI', 'SQL', 'OpenAI API', 'Vercel'],
     highlights: [
-      'Outline the main feature or workflow delivered.',
-      'Call out a measurable result, optimization, or technical decision.',
-      'Mention collaboration, deployment, or architecture impact.',
+      'Built a CSV ingestion flow so users can upload, parse, and query their own tabular data.',
+      'Integrated GPT-based query generation with SQL validation, execution, and error-safe fallback handling.',
+      'Designed the interface to expose schema, generated SQL, and results for a more transparent analytics workflow.',
     ],
     links: [
-      { label: 'Demo', href: 'https://your-demo-url.com' },
-      { label: 'GitHub', href: 'https://github.com/your-username/project-alpha' },
+      { label: 'Demo', href: 'https://nl2sql-frontend-jet.vercel.app/' },
+      { label: 'GitHub', href: 'https://github.com/Mgomez1023/NL2SQL' },
     ],
   },
   {
-    title: 'Project Beta',
+    title: 'PitchSearch',
     description:
-      'Use this card for a second strong example with a different technical profile, such as a data-driven app, internal tool, or API-focused build.',
-    stack: ['TypeScript', 'Express', 'MongoDB'],
+      'A pitch-level MLB analytics tool built to explore pitch tendencies, filtering workflows, and performance insights across large datasets.',
+    stack: ['React', 'TypeScript', 'FastAPI', 'SQLite', 'Docker', 'Vercel'],
     highlights: [
-      'Describe the business or user-facing objective.',
-      'Highlight a key implementation detail worth discussing.',
-      'Note testing, scalability, or developer workflow improvements.',
+      'Created for a second-round Washington Nationals interview with a focus on usable baseball analytics.',
+      'Implemented multi-parameter search, sortable results, and detailed pitch views for exploratory analysis.',
+      'Containerized the backend with Docker to keep development and deployment workflows consistent.',
     ],
     links: [
-      { label: 'Demo', href: 'https://your-demo-url.com/project-beta' },
-      { label: 'GitHub', href: 'https://github.com/your-username/project-beta' },
+      { label: 'Demo', href: 'https://pitch-search.vercel.app/' },
+      { label: 'GitHub', href: 'https://github.com/Mgomez1023/PitchSearch' },
     ],
   },
   {
-    title: 'Project Gamma',
+    title: 'EatThis - Food Picker',
     description:
-      'Reserve this space for a project that shows range: performance work, automation, design systems, or an end-to-end application.',
-    stack: ['Next.js', 'Supabase', 'Tailwind CSS'],
+      'A restaurant discovery app that helps users make faster dining decisions with local search and cleaner place detail views.',
+    stack: ['React', 'Vite', 'Google Places API', 'Tailwind CSS', 'Vercel'],
     highlights: [
-      'Summarize the technical challenge addressed.',
-      'Point to an important design or architectural choice.',
-      'Mention production readiness, CI/CD, or reliability considerations.',
+      'Uses Google Places data to surface nearby restaurant options in a simple, guided flow.',
+      'Built polished detail views for hours, address, reviews, and other decision-making context.',
+      'Focused on a user-friendly frontend experience that keeps the path from search to choice lightweight.',
     ],
-    links: [{ label: 'GitHub', href: 'https://github.com/your-username/project-gamma' }],
+    links: [
+      { label: 'Demo', href: 'https://eat-this-app-mgomez1023s-projects.vercel.app/' },
+      { label: 'GitHub', href: 'https://github.com/Mgomez1023/EatThis-App' },
+    ],
+  },
+  {
+    title: 'Loaner Vehicle Management System',
+    description:
+      'A workflow system for a local auto shop that digitized loaner vehicle checkout and return for both customers and staff.',
+    stack: ['WordPress', 'Elementor Pro', 'jQuery', 'Google Apps Script', 'Google Sheets'],
+    highlights: [
+      'Built QR-accessible forms for vehicle checkout and return with required signature capture.',
+      'Automated PDF contract generation and email confirmation after form completion.',
+      'Improved record logging and workflow reliability during a software developer internship at Chicago Tire and Auto.',
+    ],
+    links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/Loaner-Vehicle-Project' }],
+  },
+]
+
+const educationEntries = [
+  {
+    school: 'University of Illinois Chicago',
+    degree: 'B.S. in Computer Science',
+    location: 'Chicago, IL',
+    timeline: 'Aug 2025 - Present',
+    expectedGraduation: 'May 2027',
+  },
+  {
+    school: 'Moraine Valley Community College',
+    degree: 'Associate in Applied Science',
+    location: 'Palos Hills, IL',
+    timeline: 'Aug 2023 - May 2025',
+    expectedGraduation: 'Completed',
   },
 ]
 
@@ -69,14 +101,14 @@ const coursework = [
 ]
 
 const contactLinks = [
-  { label: 'Email', value: 'your.email@example.com', href: 'mailto:your.email@example.com' },
-  { label: 'GitHub', value: 'github.com/your-username', href: 'https://github.com/your-username' },
+  { label: 'Email', value: 'mgome20@uic.edu', href: 'mailto:mgome20@uic.edu' },
+  { label: 'GitHub', value: 'github.com/Mgomez1023', href: 'https://github.com/Mgomez1023' },
   {
     label: 'LinkedIn',
-    value: 'linkedin.com/in/your-profile',
-    href: 'https://www.linkedin.com/in/your-profile',
+    value: 'linkedin.com/in/martin-gomez-',
+    href: 'https://www.linkedin.com/in/martin-gomez-',
   },
-  { label: 'Resume', value: 'Resume PDF placeholder', href: '/resume.pdf' },
+  { label: 'Resume', value: 'MartinGomez_Resume.pdf', href: '/MartinGomez_Resume.pdf' },
 ]
 
 function SectionHeader({ eyebrow, title, description }) {
@@ -94,14 +126,17 @@ function AboutSection() {
     <section className="content-section" id="about">
       <SectionHeader
         eyebrow="About"
-        title="Thoughtful software engineering with a product-first mindset."
-        description="Use this section to introduce your background, what you are working toward, and the kind of engineering problems you want to solve."
+        title="Computer science student building practical full-stack software."
+        description=""
       />
 
       <div className="about-layout">
         <p className="about-intro">
-          I am a software engineer focused on building polished, dependable applications with
-          clean implementation details and clear user value. I enjoy leveraging AI and traditional programming approaches to ship thoughtful-reliable work.
+          I am a software engineer and computer science student at the University of Illinois
+          Chicago with experience building full-stack applications, analytics tools, and
+          user-facing web products. My recent work spans React, TypeScript, FastAPI, SQL, and
+          WordPress, with an emphasis on shipping software that is technically sound, clear to
+          users, and useful in real workflows.
         </p>
 
         <div className="info-grid">
@@ -122,8 +157,8 @@ function ProjectsSection() {
     <section className="content-section" id="projects">
       <SectionHeader
         eyebrow="Projects"
-        title="Featured work presented with clarity."
-        description="Each card is structured so you can quickly replace placeholders with real project outcomes, technical depth, and links."
+        title="Personal Projects"
+        description=""
       />
 
       <div className="project-grid">
@@ -181,30 +216,42 @@ function EducationSection() {
     <section className="content-section" id="education">
       <SectionHeader
         eyebrow="Education"
-        title="Academic foundation and relevant coursework."
-        description="Keep this section direct and factual so the most important academic details are easy to scan."
+        title="Academic background and core coursework."
+        description=""
       />
 
-      <article className="education-card">
-        <div className="education-overview">
-          <div>
-            <p className="detail-label">School</p>
-            <h3>University Name Placeholder</h3>
-          </div>
+      <div className="education-grid">
+        {educationEntries.map((entry) => (
+          <article className="education-card" key={entry.school}>
+            <div className="education-overview">
+              <div>
+                <p className="detail-label">School</p>
+                <h3>{entry.school}</h3>
+                <p className="education-location">{entry.location}</p>
+              </div>
 
-          <div className="education-meta">
-            <div>
-              <p className="detail-label">Degree</p>
-              <p>B.S. in Computer Science Placeholder</p>
+              <div className="education-meta">
+                <div>
+                  <p className="detail-label">Degree</p>
+                  <p>{entry.degree}</p>
+                </div>
+
+                <div>
+                  <p className="detail-label">Timeline</p>
+                  <p>{entry.timeline}</p>
+                </div>
+
+                <div>
+                  <p className="detail-label">Expected Graduation</p>
+                  <p>{entry.expectedGraduation}</p>
+                </div>
+              </div>
             </div>
+          </article>
+        ))}
+      </div>
 
-            <div>
-              <p className="detail-label">Expected Graduation</p>
-              <p>Month 20XX</p>
-            </div>
-          </div>
-        </div>
-
+      <article className="education-card education-coursework-card">
         <div className="education-coursework">
           <p className="detail-label">Relevant Coursework</p>
           <div className="tag-row">
@@ -226,15 +273,14 @@ function ContactSection() {
       <SectionHeader
         eyebrow="Contact"
         title="Open to internships and software engineering opportunities."
-        description="Use these placeholders for the best ways to reach you and the materials you want recruiters or collaborators to review."
+        description=""
       />
 
       <div className="contact-layout">
         <div className="contact-copy">
           <p>
-            I am currently open to software engineering internships, collaborative projects, and
-            early-career opportunities where I can contribute across product development and
-            implementation.
+            I am currently seeking software engineering internships and early-career opportunities
+            where I can contribute across frontend and full-stack product development.
           </p>
         </div>
 
