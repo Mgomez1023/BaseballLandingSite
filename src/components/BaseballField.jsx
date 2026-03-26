@@ -6,7 +6,7 @@ const fieldGeometry = {
   mound: { x: 350, y: 384, r: 38 },
   foulLineExtension: 200,
   outfieldArcRadiusScale: 0.8,
-  title: { x: 350, y: 45 },
+  title: { x: 350, y: 20, subtitleOffsetY: 30 },
 }
 
 function extendPastBase(fromPoint, throughPoint, extension) {
@@ -162,7 +162,16 @@ export function BaseballField() {
         y={fieldGeometry.title.y}
         textAnchor="middle"
       >
-        Martin Gomez
+        <tspan x={fieldGeometry.title.x} dy="0">
+          Martin Gomez
+        </tspan>
+        <tspan
+          className="mound-subtitle"
+          x={fieldGeometry.title.x}
+          dy={fieldGeometry.title.subtitleOffsetY}
+        >
+          Software Engineer
+        </tspan>
       </text>
 
       {baseLinks.map((base) => (

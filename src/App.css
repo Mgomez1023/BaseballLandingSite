@@ -54,7 +54,7 @@
 
 .field-arc {
   stroke-width: 4;
-  opacity: 0.40;
+  opacity: 0.24;
   animation: drawField 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s forwards;
 }
 
@@ -85,6 +85,13 @@
     drop-shadow(0 1px 1px rgba(0, 0, 0, 0.28))
     drop-shadow(0 8px 16px rgba(0, 0, 0, 0.14))
     drop-shadow(0 0 7px rgba(255, 143, 42, 0.1));
+}
+
+.mound-subtitle {
+  fill: rgba(255, 255, 255, 0.5);
+  font-size: 0.58em;
+  font-weight: 400;
+  letter-spacing: 0.14em;
 }
 
 .base-link {
