@@ -90,7 +90,7 @@ const baseLinks = [
     id: 'contact',
     label: 'Contact',
     x: fieldGeometry.homePlate.x,
-    y: fieldGeometry.homePlate.y,
+    y: fieldGeometry.homePlate.y + 10,
     labelOffsetX: 0,
     labelOffsetY: 54,
     textAnchor: 'middle',
@@ -99,7 +99,7 @@ const baseLinks = [
 ]
 
 function getHomePlatePoints(x, y) {
-  return `${x},${y - 18} ${x + 18},${y - 2} ${x + 12},${y + 22} ${x - 12},${y + 22} ${x - 18},${y - 2}`
+  return `${x},${y - 18} ${x + 18},${y - 2} ${x + 18},${y + 22} ${x - 18},${y + 22} ${x - 18},${y - 2}`
 }
 
 export function BaseballField() {
