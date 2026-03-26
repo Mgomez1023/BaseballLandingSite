@@ -1,0 +1,254 @@
+.portfolio-shell {
+  position: relative;
+}
+
+.hero-section {
+  --hero-pad-block: clamp(1.5rem, 4vw, 3rem);
+  --hero-pad-inline: clamp(1.25rem, 6vw, 3rem);
+  --hero-caption-space: 3.5rem;
+  --hero-lift: 0rem;
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--hero-pad-block) var(--hero-pad-inline);
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  right: var(--hero-pad-inline);
+  bottom: 0;
+  left: var(--hero-pad-inline);
+  height: clamp(3rem, 8vw, 5rem);
+  background: linear-gradient(180deg, rgba(5, 5, 5, 0) 0%, rgba(5, 5, 5, 0.94) 100%);
+  pointer-events: none;
+}
+
+.hero-center {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 68rem);
+  transform: translateY(calc(0 * var(--hero-lift)));
+}
+
+.baseball-field {
+  width: min(100%, 60rem, calc(100svh - (var(--hero-pad-block) * 2) - var(--hero-caption-space)));
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  overflow: visible;
+}
+
+.field-arc,
+.field-diamond {
+  fill: none;
+  stroke: #ff8f2a;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+.field-arc {
+  stroke-width: 4;
+  opacity: 0.40;
+  animation: drawField 2.58s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s forwards;
+}
+
+.field-diamond {
+  stroke-width: 3.2;
+  opacity: 0.94;
+  animation: drawField 2.52s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.mound-circle {
+  fill: none;
+  stroke: rgba(255, 143, 42, 0.38);
+  stroke-width: 1.6;
+}
+
+.mound-rectangle {
+  fill: rgba(255, 143, 42, 0.06);
+  stroke: rgba(255, 143, 42, 0.42);
+  stroke-width: 1.6;
+}
+
+.mound-label {
+  fill: rgba(255, 143, 42, 0.72);
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  filter:
+    drop-shadow(0 1px 1px rgba(0, 0, 0, 0.28))
+    drop-shadow(0 8px 16px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 0 7px rgba(255, 143, 42, 0.1));
+}
+
+.base-link {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.base-hit-area {
+  fill: transparent;
+}
+
+.base-hover-ring {
+  fill: none;
+  stroke: rgba(255, 143, 42, 0.2);
+  stroke-width: 1.3;
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  transform-origin: center;
+}
+
+.base-underlay {
+  fill: rgba(5, 5, 5, 0.98);
+  stroke: rgba(5, 5, 5, 0.98);
+  stroke-width: 6;
+}
+
+.base-shape {
+  fill: rgba(255, 143, 42, 0.14);
+  stroke: #ff8f2a;
+  stroke-width: 2.1;
+  transition: fill 180ms ease, stroke 180ms ease, filter 180ms ease, transform 180ms ease;
+  filter: drop-shadow(0 0 6px rgba(255, 143, 42, 0.16));
+}
+
+.base-label {
+  fill: rgba(255, 255, 255, 0.84);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: fill 180ms ease;
+}
+
+.base-link:hover .base-hover-ring,
+.base-link:focus-visible .base-hover-ring {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.base-link:hover .base-shape,
+.base-link:focus-visible .base-shape {
+  fill: rgba(255, 143, 42, 0.22);
+  stroke: #ffb36b;
+  filter: drop-shadow(0 0 8px rgba(255, 143, 42, 0.22));
+}
+
+.base-link:hover .base-label,
+.base-link:focus-visible .base-label {
+  fill: #ffffff;
+}
+
+.hero-instruction {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  width: max-content;
+  max-width: 100%;
+}
+
+.placeholder-stack {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+}
+
+.placeholder-section {
+  display: flex;
+  align-items: center;
+  min-height: 52vh;
+  padding: clamp(2rem, 6vw, 4rem) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  scroll-margin-top: 1rem;
+}
+
+.placeholder-content {
+  max-width: 40rem;
+}
+
+.section-kicker {
+  margin: 0 0 0.9rem;
+  color: #ff9a3d;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.placeholder-content h2 {
+  margin: 0 0 1rem;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: -0.04em;
+}
+
+.placeholder-content p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.8;
+}
+
+@keyframes drawField {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    --hero-caption-space: 3rem;
+    --hero-lift: clamp(0.75rem, 2.5vh, 1.5rem);
+  }
+
+  .baseball-field {
+    width: min(100%, 34rem, calc(100svh - (var(--hero-pad-block) * 2) - var(--hero-caption-space)));
+  }
+
+  .mound-label {
+  fill: rgba(255, 143, 42, 0.76);;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  filter:
+    drop-shadow(0 10px 10px rgba(0, 0, 0, 1))
+    drop-shadow(0 18px 18px rgba(0, 0, 0, 1))
+    drop-shadow(0 0 10px rgba(255, 143, 42, 0.16));  
+  }
+
+  .base-label {
+    font-size: 0.9rem;
+  }
+
+  .hero-instruction {
+    font-size: 0.76rem;
+    width: min(100%, 18rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-arc,
+  .field-diamond {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .base-hover-ring,
+  .base-shape,
+  .base-label {
+    transition: none;
+  }
+}
