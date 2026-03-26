@@ -1,4 +1,14 @@
 .portfolio-shell {
+  --surface-0: #050505;
+  --surface-1: #0d0d0f;
+  --surface-2: #121214;
+  --surface-3: #18181b;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.74);
+  --text-muted: rgba(255, 255, 255, 0.54);
+  --accent: #ff8f2a;
+  --accent-soft: rgba(255, 143, 42, 0.14);
+  --border-soft: rgba(255, 255, 255, 0.08);
   position: relative;
 }
 
@@ -200,45 +210,297 @@
   max-width: 100%;
 }
 
-.placeholder-stack {
+.content-stack {
+  position: relative;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+  padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(4rem, 8vw, 6rem);
 }
 
-.placeholder-section {
-  display: flex;
-  align-items: center;
-  min-height: 52vh;
-  padding: clamp(2rem, 6vw, 4rem) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+.content-stack::before {
+  content: '';
+  position: absolute;
+  inset: 0 clamp(1.25rem, 4vw, 3rem) auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  pointer-events: none;
+}
+
+.content-section {
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+  border-top: 1px solid var(--border-soft);
   scroll-margin-top: 1rem;
 }
 
-.placeholder-content {
-  max-width: 40rem;
+.content-section-last {
+  padding-bottom: clamp(2rem, 5vw, 3rem);
 }
 
-.section-kicker {
-  margin: 0 0 0.9rem;
-  color: #ff9a3d;
+.section-header {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 4vw, 2.75rem);
+}
+
+.section-eyebrow {
+  margin: 0;
+  color: var(--accent);
   font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
-.placeholder-content h2 {
-  margin: 0 0 1rem;
-  color: #ffffff;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  letter-spacing: -0.04em;
+.section-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.05em;
 }
 
-.placeholder-content p {
+.section-description {
   margin: 0;
-  color: rgba(255, 255, 255, 0.72);
-  line-height: 1.8;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 42rem;
+}
+
+.about-layout {
+  display: grid;
+  gap: 2rem;
+}
+
+.about-intro {
+  margin: 0;
+  max-width: 54rem;
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 1.6vw, 1.08rem);
+  line-height: 1.9;
+}
+
+.info-grid,
+.project-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.info-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.info-card,
+.project-card,
+.education-card,
+.contact-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+    var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.info-card {
+  padding: 1.35rem;
+}
+
+.info-card h3,
+.project-card h3,
+.education-overview h3 {
+  margin: 0 0 0.7rem;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.info-card p,
+.project-card-header p,
+.contact-copy p,
+.education-meta p:last-child {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.project-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+}
+
+.project-card {
+  display: grid;
+  gap: 1.35rem;
+  padding: 1.5rem;
+}
+
+.project-card-header {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.project-card-block {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.detail-label {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(255, 143, 42, 0.2);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: #ffd2ae;
+  font-size: 0.88rem;
+  line-height: 1.2;
+}
+
+.project-highlights {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.project-highlights li + li {
+  margin-top: 0.55rem;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 0.2rem;
+}
+
+.text-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 143, 42, 0.45);
+  padding-bottom: 0.18rem;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.text-link:hover,
+.text-link:focus-visible {
+  color: #ffd2ae;
+  border-color: var(--accent);
+}
+
+.education-card {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+.education-overview {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+}
+
+.education-meta {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.education-coursework {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.contact-layout {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: start;
+}
+
+.contact-copy {
+  padding-top: 0.2rem;
+}
+
+.contact-card {
+  overflow: hidden;
+}
+
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1.1rem 1.25rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-soft);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.contact-row:last-child {
+  border-bottom: 0;
+}
+
+.contact-row:hover,
+.contact-row:focus-visible {
+  background: rgba(255, 255, 255, 0.03);
+  color: #ffd2ae;
+}
+
+.contact-value {
+  color: var(--text-secondary);
+  text-align: right;
+  word-break: break-word;
+}
+
+@media (max-width: 960px) {
+  .info-grid,
+  .project-grid,
+  .education-overview,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .content-stack {
+    padding-bottom: 4rem;
+  }
+
+  .content-section {
+    padding: 3.25rem 0;
+  }
+
+  .project-card,
+  .education-card {
+    padding: 1.25rem;
+  }
+
+  .contact-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact-value {
+    text-align: left;
+  }
 }
 
 @keyframes drawField {

@@ -1,29 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 import { HeroSection } from './components/HeroSection.jsx'
-
-const placeholderSections = [
-  {
-    id: 'about',
-    title: 'About',
-    description: 'Placeholder section for a concise introduction, experience summary, and technical point of view.',
-  },
-  {
-    id: 'projects',
-    title: 'Projects',
-    description: 'Placeholder section for selected work, case studies, and engineering outcomes.',
-  },
-  {
-    id: 'education',
-    title: 'Education',
-    description: 'Placeholder section for formal education, certifications, and continuous learning.',
-  },
-  {
-    id: 'contact',
-    title: 'Contact',
-    description: 'Placeholder section for email, social links, and a direct way to start a conversation.',
-  },
-]
+import { PortfolioSections } from './components/PortfolioSections.jsx'
 
 export default function App() {
   useEffect(() => {
@@ -50,18 +28,7 @@ export default function App() {
   return (
     <div className="portfolio-shell">
       <HeroSection />
-
-      <main className="placeholder-stack">
-        {placeholderSections.map((section) => (
-          <section className="placeholder-section" id={section.id} key={section.id}>
-            <div className="placeholder-content">
-              <p className="section-kicker">Base Destination</p>
-              <h2>{section.title}</h2>
-              <p>{section.description}</p>
-            </div>
-          </section>
-        ))}
-      </main>
+      <PortfolioSections />
     </div>
   )
 }
