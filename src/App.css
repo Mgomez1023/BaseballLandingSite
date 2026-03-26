@@ -55,25 +55,25 @@
 .field-arc {
   stroke-width: 4;
   opacity: 0.40;
-  animation: drawField 2.58s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s forwards;
+  animation: drawField 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s forwards;
 }
 
 .field-diamond {
   stroke-width: 3.2;
   opacity: 0.94;
-  animation: drawField 2.52s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: drawField 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 .mound-circle {
   fill: none;
   stroke: rgba(255, 143, 42, 0.38);
-  stroke-width: 1.6;
+  stroke-width: 2.5;
 }
 
 .mound-rectangle {
   fill: rgba(255, 143, 42, 0.06);
   stroke: rgba(255, 143, 42, 0.42);
-  stroke-width: 1.6;
+  stroke-width: 2.5;
 }
 
 .mound-label {
@@ -210,6 +210,7 @@
 
 @media (max-width: 640px) {
   .hero-section {
+    --hero-pad-inline: 0.6rem;
     --hero-caption-space: 3rem;
     --hero-lift: clamp(0.75rem, 2.5vh, 1.5rem);
   }
@@ -230,7 +231,7 @@
   }
 
   .base-label {
-    font-size: 0.9rem;
+    font-size: 1.15rem;
   }
 
   .hero-instruction {
