@@ -100,10 +100,14 @@
 }
 
 .base-visual {
-  animation: baseFloat 3.8s ease-in-out infinite;
+  animation: baseFloat 3.0s ease-in-out infinite;
   animation-delay: var(--float-delay, 0s);
   transform-box: fill-box;
   transform-origin: center;
+}
+
+.base-visual-static {
+  animation: none;
 }
 
 .base-hit-area {
@@ -112,13 +116,15 @@
 
 .base-hover-ring {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.48);
-  stroke-width: 1.5;
+  stroke: rgba(255, 255, 255, 0.58);
+  stroke-width: 1.7;
   opacity: 0;
   transition: opacity 180ms ease, transform 180ms ease, stroke 180ms ease, filter 180ms ease;
   transform-origin: center;
   transform-box: fill-box;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.18));
+  filter:
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.24))
+    drop-shadow(0 0 24px rgba(255, 255, 255, 0.1));
 }
 
 .base-underlay {
@@ -128,16 +134,16 @@
 }
 
 .base-shape {
-  fill: rgba(255, 255, 255, 0.12);
-  stroke: rgba(255, 255, 255, 0.92);
+  fill: rgba(255, 255, 255, 0.18);
+  stroke: rgba(255, 255, 255, 0.98);
   stroke-width: 2.1;
   transition: fill 180ms ease, stroke 180ms ease, filter 180ms ease, transform 180ms ease;
   transform-box: fill-box;
   transform-origin: center;
   filter:
-    drop-shadow(0 8px 12px rgba(0, 0, 0, 0.16))
-    drop-shadow(0 0 8px rgba(255, 255, 255, 0.24))
-    drop-shadow(0 0 18px rgba(255, 255, 255, 0.1));
+    drop-shadow(0 8px 10px rgba(139, 139, 139, 0.18))
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.34))
+    drop-shadow(0 0 20px rgba(255, 255, 255, 0.16));
 }
 
 .base-label {
@@ -152,19 +158,21 @@
 .base-link:hover .base-hover-ring,
 .base-link:focus-visible .base-hover-ring {
   opacity: 1;
-  stroke: rgba(255, 255, 255, 0.82);
+  stroke: rgba(255, 255, 255, 0.95);
   transform: scale(1.14);
-  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.3));
+  filter:
+    drop-shadow(0 0 18px rgba(255, 255, 255, 0.42))
+    drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
 }
 
 .base-link:hover .base-shape,
 .base-link:focus-visible .base-shape {
-  fill: rgba(255, 255, 255, 0.22);
+  fill: rgba(255, 255, 255, 0.28);
   stroke: #ffffff;
   filter:
-    drop-shadow(0 10px 16px rgba(0, 0, 0, 0.22))
-    drop-shadow(0 0 10px rgba(255, 255, 255, 0.34))
-    drop-shadow(0 0 22px rgba(255, 255, 255, 0.16));
+    drop-shadow(0 10px 16px rgba(0, 0, 0, 0.24))
+    drop-shadow(0 0 14px rgba(255, 255, 255, 0.48))
+    drop-shadow(0 0 30px rgba(255, 255, 255, 0.22));
 }
 
 .base-link:hover .base-square-shape,

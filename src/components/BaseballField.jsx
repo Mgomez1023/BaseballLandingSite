@@ -186,7 +186,7 @@ export function BaseballField() {
           aria-label={`Scroll to ${base.label}`}
         >
           <g className="base-group" style={{ '--float-delay': base.floatDelay }}>
-            <g className="base-visual">
+            <g className={`base-visual${base.homePlate ? ' base-visual-static' : ''}`}>
               <circle className="base-hit-area" cx={base.x} cy={base.y} r="40" />
               <circle className="base-hover-ring" cx={base.x} cy={base.y} r="30" />
               {base.homePlate ? (
@@ -214,7 +214,6 @@ export function BaseballField() {
                     height="30"
                     rx="2"
                     ry="2"
-                    transform={`rotate(45 ${base.x} ${base.y})`}
                   />
                   <rect
                     className="base-shape base-square-shape"
