@@ -174,7 +174,7 @@ export function BaseballField() {
           x={fieldGeometry.title.x}
           dy={fieldGeometry.title.subtitleOffsetY}
         >
-          Software Engineer
+          Computer Science
         </tspan>
       </text>
 

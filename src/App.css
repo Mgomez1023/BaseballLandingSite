@@ -236,40 +236,57 @@
   padding-bottom: clamp(2rem, 5vw, 3rem);
 }
 
-.section-header {
-  display: grid;
-  gap: 0.9rem;
-  max-width: 46rem;
-  margin-bottom: clamp(2rem, 4vw, 2.75rem);
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
 }
 
-.section-eyebrow {
-  margin: 0;
-  color: var(--accent);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 42rem;
+  margin-bottom: clamp(2rem, 4vw, 2.75rem);
 }
 
 .section-title {
   margin: 0;
   color: var(--text-primary);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
   line-height: 1.08;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
 }
 
 .section-description {
   margin: 0;
   color: var(--text-secondary);
-  line-height: 1.75;
-  max-width: 42rem;
+  line-height: 1.8;
+  max-width: 38rem;
 }
 
 .about-layout {
   display: grid;
   gap: 2rem;
+}
+
+.about-top {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1.2fr) auto;
+  align-items: center;
+}
+
+.about-copy {
+  min-width: 0;
 }
 
 .about-intro {
@@ -280,8 +297,23 @@
   line-height: 1.9;
 }
 
-.info-grid,
-.project-grid {
+.about-photo-wrap {
+  display: grid;
+  place-items: center;
+  width: clamp(11rem, 20vw, 14.5rem);
+  aspect-ratio: 1;
+}
+
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+}
+
+.info-grid {
   display: grid;
   gap: 1.25rem;
 }
@@ -308,6 +340,7 @@
 
 .info-card h3,
 .project-card h3,
+.featured-project-card h3,
 .education-overview h3 {
   margin: 0 0 0.7rem;
   color: var(--text-primary);
@@ -324,15 +357,107 @@
   line-height: 1.75;
 }
 
-.project-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: start;
-}
-
 .project-card {
   display: grid;
   gap: 1.35rem;
   padding: 1.5rem;
+}
+
+.featured-project-card {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255, 143, 42, 0.06), rgba(255, 255, 255, 0) 28%),
+    var(--surface-1);
+  border: 1px solid rgba(255, 143, 42, 0.14);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.featured-project-main,
+.featured-project-body {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.featured-project-summary {
+  display: grid;
+  gap: 0.8rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--border-soft);
+}
+
+.featured-project-summary p,
+.project-context {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.secondary-project-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.project-card-secondary {
+  min-height: 100%;
+}
+
+.project-title-row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.project-title-row-featured {
+  align-items: start;
+}
+
+.project-logo-frame {
+  display: grid;
+  place-items: center;
+  width: 3.75rem;
+  aspect-ratio: 1;
+  padding: 0.55rem;
+  border-radius: 1rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
+    rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.project-logo-frame-featured {
+  width: 4.5rem;
+  border-radius: 1.1rem;
+}
+
+.project-logo-frame-placeholder {
+  background:
+    linear-gradient(180deg, rgba(255, 143, 42, 0.08), rgba(255, 255, 255, 0)),
+    rgba(255, 255, 255, 0.02);
+}
+
+.project-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.7rem;
+}
+
+.project-logo-placeholder {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .project-card-header {
@@ -403,6 +528,45 @@
 .text-link:focus-visible {
   color: #ffd2ae;
   border-color: var(--accent);
+}
+
+.projects-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.projects-github-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.9rem;
+  padding: 0.75rem 1.15rem;
+  border: 1px solid rgba(255, 143, 42, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 143, 42, 0.08);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.projects-github-button:hover,
+.projects-github-button:focus-visible {
+  background: rgba(255, 143, 42, 0.12);
+  border-color: rgba(255, 143, 42, 0.38);
+  color: #ffd2ae;
+  transform: translateY(-1px);
+}
+
+.projects-github-button-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
 }
 
 .education-card {
@@ -485,7 +649,9 @@
 
 @media (max-width: 960px) {
   .info-grid,
-  .project-grid,
+  .featured-project-main,
+  .featured-project-body,
+  .secondary-project-grid,
   .education-grid,
   .education-overview,
   .contact-layout {
@@ -502,9 +668,43 @@
     padding: 3.25rem 0;
   }
 
+  .about-top {
+    gap: 1.1rem 1rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .about-copy {
+    display: contents;
+  }
+
+  .about-top .section-header {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 0;
+  }
+
+  .about-intro {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: none;
+  }
+
+  .about-photo-wrap {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    width: clamp(6.75rem, 24vw, 8rem);
+  }
+
   .project-card,
-  .education-card {
+  .education-card,
+  .featured-project-card {
     padding: 1.25rem;
+  }
+
+  .project-title-row {
+    align-items: start;
   }
 
   .contact-row {
@@ -572,6 +772,12 @@
   .base-visual {
     animation: none;
     stroke-dashoffset: 0;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .base-hover-ring,
