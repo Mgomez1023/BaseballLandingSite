@@ -165,7 +165,6 @@
   transition: fill 180ms ease;
 }
 
-.base-link:hover .base-hover-ring,
 .base-link:focus-visible .base-hover-ring {
   opacity: 1;
   stroke: rgba(255, 255, 255, 0.95);
@@ -423,7 +422,7 @@
 .project-logo-frame {
   display: grid;
   place-items: center;
-  width: 3.75rem;
+  width: 4.1rem;
   aspect-ratio: 1;
   padding: 0.55rem;
   border-radius: 1rem;
@@ -435,7 +434,7 @@
 }
 
 .project-logo-frame-featured {
-  width: 4.5rem;
+  width: 5rem;
   border-radius: 1.1rem;
 }
 

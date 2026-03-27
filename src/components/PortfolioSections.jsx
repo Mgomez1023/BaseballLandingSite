@@ -13,11 +13,6 @@ const aboutAreas = [
       'I am studying computer science at UIC and spending most of my time outside class building full-stack apps with real data, auth, and admin workflows.',
   },
   {
-    title: 'How I like to work',
-    description:
-      'Clean frontend structure matters to me, but so do the backend details that make a product hold up once people actually start using it.',
-  },
-  {
     title: 'What I keep coming back to',
     description:
       'Baseball software, analytics tools, internal products, and AI-assisted interfaces where the output still needs to feel understandable and reliable.',
@@ -116,7 +111,7 @@ const educationEntries = [
     degree: 'Associate in Applied Science',
     location: 'Palos Hills, IL',
     timeline: 'Aug 2023 - May 2025',
-    expectedGraduation: 'Completed',
+    expectedGraduation: 'Graduated',
   },
 ]
 
