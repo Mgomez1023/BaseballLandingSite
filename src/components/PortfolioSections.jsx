@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import benitoLogo from '../ProjectLogos/BenitoLogo.png'
 import chiLogo from '../ProjectLogos/ChiLogo.png'
 import eatThisLogo from '../ProjectLogos/EatThisLogo.png'
@@ -6,16 +6,64 @@ import nl2sqlLogo from '../ProjectLogos/nl2sqlLogo.png'
 import pitchSearchLogo from '../ProjectLogos/PitchSearchLogo.png'
 import proPic from '../ProjectLogos/ProPic.jpeg'
 
+
 const aboutAreas = [
+  /* 
+    {
+      title: 'What I am doing now',
+      description:
+        'I am studying computer science at UIC and spending most of my time outside class building full-stack apps with real data, auth, and admin workflows.',
+    },
+    {
+      title: 'What I keep coming back to',
+      description:
+        'Baseball software, analytics tools, internal products, and AI-assisted interfaces where the output still needs to feel understandable and reliable.',
+    },
+    */
+  ]
+  
+
+const experienceEntries = [
   {
-    title: 'What I am doing now',
-    description:
-      'I am studying computer science at UIC and spending most of my time outside class building full-stack apps with real data, auth, and admin workflows.',
+    id: 'mens-league-platform-developer',
+    title: 'Benito Juarez Men`s League - Software Developer (Feb 2026 - May 2026)',
+    label: '',
+    summary:
+      'Built software for a live baseball league platform and shipped improvements around real operating needs instead of portfolio-only requirements.',
+    tags: ['Full-stack delivery', 'Workflow design', 'Mobile-first UX', 'Production support'],
+    highlights: [
+      'Built and iterated on a full-stack league management platform covering schedules, rosters, standings, and league updates.',
+      'Improved day-to-day workflows by making administrative and game-related actions faster to manage inside one system.',
+      'Focused on mobile-first UX so league staff and users could complete core tasks quickly on real devices.',
+      'Shipped production-ready changes, maintained the live system, and adjusted features around practical user feedback.',
+    ],
   },
   {
-    title: 'What I keep coming back to',
-    description:
-      'Baseball software, analytics tools, internal products, and AI-assisted interfaces where the output still needs to feel understandable and reliable.',
+    id: 'chicago-tire-and-auto-intern',
+    title: 'Chicago Tire & Auto Intern \n(May 2024 - Aug 2024)',
+    label: '',
+    summary:
+      'Worked in a live automotive shop environment where attention to detail, adaptability, and steady execution mattered every day.',
+    tags: ['Operations support', 'Detail-oriented work', 'Hands-on execution', 'Team coordination'],
+    highlights: [
+      'Supported technical and operational tasks in a real automotive shop serving active day-to-day customer demand.',
+      'Contributed to the shop’s daily workflow by developing a loaner vehicle tracking system',
+      'Built experience working reliably in an environment where team coordination and practical problem-solving mattered.',
+    ],
+  },
+  {
+    id: 'ups-package-handler',
+    title: 'UPS Package Handler (Aug 2022 - Present)',
+    label: '',
+    summary:
+      'Performed in a fast-paced logistics environment that depended on reliability, pace, and consistent execution under pressure.',
+    tags: ['Reliability', 'Execution under pressure', 'Team efficiency', 'Daily throughput'],
+    highlights: [
+      'Worked in a high-volume logistics environment with strict timing and consistent throughput demands.',
+      'Demonstrated reliability and physical work ethic across fast-paced shifts with little room for slowdowns.',
+      'Operated effectively under time pressure while maintaining pace, task accuracy, and day-to-day consistency.',
+      'Held primarily responsible for scanning and sorting bulk packages coming through the dock.',
+    ],
   },
 ]
 
@@ -108,7 +156,7 @@ const educationEntries = [
   },
   {
     school: 'Moraine Valley Community College',
-    degree: 'Associate in Applied Science',
+    degree: 'A.A.S in Computer Science',
     location: 'Palos Hills, IL',
     timeline: 'Aug 2023 - May 2025',
     expectedGraduation: 'Graduated',
@@ -245,6 +293,139 @@ function AboutSection() {
               <p>{area.description}</p>
             </article>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ExperienceSection() {
+  const [activeExperienceIndex, setActiveExperienceIndex] = useState(0)
+  const experienceTabRefs = useRef([])
+  const experiencePanelId = useId()
+  const activeExperience = experienceEntries[activeExperienceIndex]
+  const timelineProgress = `${(activeExperienceIndex / (experienceEntries.length - 1)) * 100}%`
+
+  const focusExperienceTab = (nextIndex) => {
+    const clampedIndex = Math.min(Math.max(nextIndex, 0), experienceEntries.length - 1)
+    const nextTab = experienceTabRefs.current[clampedIndex]
+
+    setActiveExperienceIndex(clampedIndex)
+    nextTab?.focus()
+  }
+
+  const handleTimelineKeyDown = (event, index) => {
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault()
+        focusExperienceTab(index + 1)
+        break
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault()
+        focusExperienceTab(index - 1)
+        break
+      case 'Home':
+        event.preventDefault()
+        focusExperienceTab(0)
+        break
+      case 'End':
+        event.preventDefault()
+        focusExperienceTab(experienceEntries.length - 1)
+        break
+      default:
+        break
+    }
+  }
+
+  return (
+    <section className="content-section" id="experience">
+      <SectionHeader
+        title="Experience"
+        description="My experience spans software development, real-world operations, and logistics. I focus on building dependable systems and executing consistently in fast-moving environments."
+      />
+
+      <div className="experience-showcase" data-reveal>
+        <div className="experience-timeline-shell">
+          <div
+            className="experience-timeline"
+            role="tablist"
+            aria-label="Experience timeline"
+          >
+            <div className="experience-timeline-track" aria-hidden="true">
+              <span
+                className="experience-timeline-progress"
+                style={{ width: timelineProgress }}
+              />
+            </div>
+
+            {experienceEntries.map((experience, index) => {
+              const isActive = index === activeExperienceIndex
+              const tabId = `${experiencePanelId}-tab-${experience.id}`
+
+              return (
+                <button
+                  className={`experience-timeline-button${isActive ? ' experience-timeline-button-active' : ''}`}
+                  type="button"
+                  key={experience.id}
+                  id={tabId}
+                  ref={(node) => {
+                    experienceTabRefs.current[index] = node
+                  }}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={experiencePanelId}
+                  tabIndex={isActive ? 0 : -1}
+                  onClick={() => setActiveExperienceIndex(index)}
+                  onKeyDown={(event) => handleTimelineKeyDown(event, index)}
+                >
+                  <span className="experience-timeline-dot" aria-hidden="true" />
+                  <span className="experience-timeline-step">{`0${index + 1}`}</span>
+                  <span className="experience-timeline-title">{experience.title}</span>
+                  <span className="experience-timeline-meta">{experience.label}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="experience-panel-shell">
+          <article
+            className="experience-card"
+            key={activeExperience.id}
+            id={experiencePanelId}
+            role="tabpanel"
+            aria-labelledby={`${experiencePanelId}-tab-${activeExperience.id}`}
+          >
+            <div className="experience-card-top">
+              <div className="experience-card-header">
+                <p className="detail-label">Selected Role</p>
+                <h3>{activeExperience.title}</h3>
+                <p>{activeExperience.summary}</p>
+              </div>
+
+              <div className="experience-card-aside">
+                <p className="detail-label">Focus</p>
+                <div className="tag-row">
+                  {activeExperience.tags.map((tag) => (
+                    <span className="tag-pill" key={tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card-block">
+              <span className="detail-label">Highlights</span>
+              <ul className="project-highlights experience-highlights">
+                {activeExperience.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -501,6 +682,7 @@ export function PortfolioSections() {
   return (
     <main className="content-stack" ref={contentRef}>
       <AboutSection />
+      <ExperienceSection />
       <ProjectsSection />
       <EducationSection />
       <ContactSection />

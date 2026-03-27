@@ -60,8 +60,8 @@ const fieldOutlinePath = [
 
 const baseLinks = [
   {
-    id: 'about',
-    label: 'About',
+    id: 'experience',
+    label: 'Experience',
     x: fieldGeometry.firstBase.x,
     y: fieldGeometry.firstBase.y,
     floatDelay: '0s',
