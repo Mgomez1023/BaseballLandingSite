@@ -29,7 +29,7 @@ const experienceEntries = [
     title: 'Benito Juarez Men`s League - Software Developer (Feb 2026 - May 2026)',
     label: '',
     summary:
-      'Built software for a live baseball league platform and shipped improvements around real operating needs instead of portfolio-only requirements.',
+      'Built software for a live baseball league platform and shipped improvements around real operating needs',
     tags: ['Full-stack delivery', 'Workflow design', 'Mobile-first UX', 'Production support'],
     highlights: [
       'Built and iterated on a full-stack league management platform covering schedules, rosters, standings, and league updates.',
