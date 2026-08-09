@@ -5,7 +5,8 @@ import eatThisLogo from '../ProjectLogos/EatThisLogo.png'
 import nl2sqlLogo from '../ProjectLogos/nl2sqlLogo.png'
 import pitchSearchLogo from '../ProjectLogos/PitchSearchLogo.png'
 import proPic from '../ProjectLogos/ProPic.jpeg'
-
+import CookieClickerLogo from '../ProjectLogos/CookieClicker.jpg'
+import MarketMapLogo from '../ProjectLogos/MarketMapLogo.png'
 
 const aboutAreas = [
   /* 
@@ -40,8 +41,8 @@ const experienceEntries = [
   },
   {
     id: 'chicago-tire-and-auto-intern',
-    title: 'Chicago Tire & Auto Intern \n(May 2024 - Aug 2024)',
-    label: '',
+    title: 'Software Engineer Intern \n(May 2024 - Aug 2024)',
+    label: 'Chicago Tire & Auto',
     summary:
       'Worked in a live automotive shop environment where attention to detail, adaptability, and steady execution mattered every day.',
     tags: ['Operations support', 'Detail-oriented work', 'Hands-on execution', 'Team coordination'],
@@ -76,13 +77,13 @@ const featuredProject = {
   stack: ['React', 'TypeScript', 'Vite', 'FastAPI', 'SQLAlchemy', 'PostgreSQL'],
   summary: [
     'Handles teams, rosters, standings, schedules, league posts, and administrative updates in one system.',
-    'Includes role-based access so league staff and team managers can work in the same product without sharing the same permissions.',
-    'Supports bilingual content and league-specific configuration instead of forcing a generic sports template.',
+    'Includes role-based access so league staff and team managers work with seperate features.',
+    'Supports bilingual content',
   ],
   highlights: [
-    'Built the app as a React + Vite frontend with a FastAPI backend, then carried the deployment through as separate web and API services.',
-    'Added league operations flows like roster management, player records, schedule editing, standings, and short social-style updates for league communication.',
-    'Worked through persistence, uploads, auth, and environment-specific deployment issues so the project could function like a real product rather than a mock portfolio build.',
+    'Built the app as a React + Vite frontend with a FastAPI backend',
+    'Added league operations flows like roster management, player records, schedule editing, and standings.',
+    'Designed the product to be used intuitively as a league website for anyone visiting.'
   ],
   links: [
     { label: 'Demo', href: 'https://mens-league-web.vercel.app/' },
@@ -91,6 +92,30 @@ const featuredProject = {
 }
 
 const secondaryProjects = [
+  {
+    title: 'Loaner Vehicle Management System',
+    logo: chiLogo,
+    logoAlt: 'Chicago Tire and Auto logo',
+    description:
+      'A workflow system for Chicago Tire and Auto that digitized loaner vehicle checkout and return for both staff and customers.',
+    context:
+      'Built during an internship to replace paper-heavy tracking with QR-accessible forms, signature capture, and automatic contract delivery.',
+    stack: ['WordPress', 'Elementor Pro', 'jQuery', 'Google Apps Script', 'Google Sheets'],
+    links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/Loaner-Vehicle-Project' }],
+  },
+  {
+    title: 'AI Market Map',
+    logo: MarketMapLogo,
+    logoAlt: 'Market Map logo',
+    description:
+      'Allows users to generate an accurate graph designed to visualize oppurtunites with a prompt. Uses Tavily API for real-time web searches and OpenAI\'s mini model for quick interpretation.',
+    context:
+      'This project was built for UIC\'s CS Expo in which students were able to show off their projects in a science fair like fashion.',
+    stack: ['React', 'TypeScript', 'FastAPI', 'Tavily API', 'OpenAI API' ],
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Mgomez1023/Cookie-Clicker' },
+    ],
+  },
   {
     title: 'NL→SQL Explorer',
     logo: nl2sqlLogo,
@@ -134,15 +159,17 @@ const secondaryProjects = [
     ],
   },
   {
-    title: 'Loaner Vehicle Management System',
-    logo: chiLogo,
-    logoAlt: 'Chicago Tire and Auto logo',
+    title: 'Cookie Clicker in C++',
+    logo: CookieClickerLogo,
+    logoAlt: 'CookieClicker logo',
     description:
-      'A workflow system for Chicago Tire and Auto that digitized loaner vehicle checkout and return for both staff and customers.',
+      'The popular Cookie Clicker game remade in C++ using the SFML graphics library',
     context:
-      'Built during an internship to replace paper-heavy tracking with QR-accessible forms, signature capture, and automatic contract delivery.',
-    stack: ['WordPress', 'Elementor Pro', 'jQuery', 'Google Apps Script', 'Google Sheets'],
-    links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/Loaner-Vehicle-Project' }],
+      'This project was built as my final project for my Advanced Computer Science class. I presented this project through a live classroom demonstration. ',
+    stack: ['C++', 'SFML Grpahics'],
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Mgomez1023/Cookie-Clicker' },
+    ],
   },
 ]
 
@@ -269,7 +296,7 @@ function AboutSection() {
             />
 
             <p className="about-intro" data-reveal>
-              Most of my work starts with a specific use case, not a trend. I like building
+              Most of my work starts with a specific use case. I like building
               products that have real users, real constraints, and enough technical depth to be
               worth solving properly, whether that means working through data flow, auth,
               deployment, or the details that make an interface feel dependable.
@@ -343,7 +370,7 @@ function ExperienceSection() {
     <section className="content-section" id="experience">
       <SectionHeader
         title="Experience"
-        description="My experience spans software development, real-world operations, and logistics. I focus on building dependable systems and executing consistently in fast-moving environments."
+        description=""
       />
 
       <div className="experience-showcase" data-reveal>
@@ -437,7 +464,7 @@ function ProjectsSection() {
     <section className="content-section" id="projects">
       <SectionHeader
         title="Projects"
-        description="The league platform is the clearest example of how I like to work: strong product structure, real backend logic, and enough detail to feel like an actual system."
+        description=""
       />
 
       <article className="featured-project-card" data-reveal>
@@ -500,58 +527,71 @@ function ProjectsSection() {
         </div>
       </article>
 
-      <div className="secondary-project-grid">
-        {secondaryProjects.map((project, index) => (
-          <article
-            className="project-card project-card-secondary"
-            key={project.title}
-            data-reveal
-            style={{ '--reveal-delay': `${0.08 + 0.06 * index}s` }}
-          >
-            <div className="project-title-row">
-              <ProjectLogo
-                logo={project.logo}
-                logoAlt={project.logoAlt}
-                placeholder={project.placeholder}
-              />
+      <div className="secondary-project-carousel" data-reveal>
+        <div className="secondary-project-carousel-track">
+          {[...secondaryProjects, ...secondaryProjects].map((project, index) => {
+            const isClone = index >= secondaryProjects.length
+            const originalIndex = index % secondaryProjects.length
 
-              <div className="project-card-header">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-              </div>
-            </div>
+            return (
+              <article
+                className={`project-card project-card-secondary${isClone ? ' project-card-secondary-clone' : ''}`}
+                key={`${project.title}-${isClone ? 'clone' : 'original'}`}
+                aria-hidden={isClone ? 'true' : undefined}
+                data-reveal={isClone ? undefined : ''}
+                style={
+                  isClone
+                    ? undefined
+                    : { '--reveal-delay': `${0.08 + 0.06 * originalIndex}s` }
+                }
+              >
+                <div className="project-title-row">
+                  <ProjectLogo
+                    logo={project.logo}
+                    logoAlt={project.logoAlt}
+                    placeholder={project.placeholder}
+                  />
 
-            <div className="project-card-block">
-              <span className="detail-label">Context</span>
-              <p className="project-context">{project.context}</p>
-            </div>
+                  <div className="project-card-header">
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                  </div>
+                </div>
 
-            <div className="project-card-block">
-              <span className="detail-label">Tech Stack</span>
-              <div className="tag-row">
-                {project.stack.map((item) => (
-                  <span className="tag-pill" key={item}>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+                <div className="project-card-block">
+                  <span className="detail-label">Context</span>
+                  <p className="project-context">{project.context}</p>
+                </div>
 
-            <div className="project-links">
-              {project.links.map((link) => (
-                <a
-                  key={link.label}
-                  className="text-link"
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </article>
-        ))}
+                <div className="project-card-block">
+                  <span className="detail-label">Tech Stack</span>
+                  <div className="tag-row">
+                    {project.stack.map((item) => (
+                      <span className="tag-pill" key={item}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="project-links">
+                  {project.links.map((link) => (
+                    <a
+                      key={link.label}
+                      className="text-link"
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      tabIndex={isClone ? -1 : undefined}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </article>
+            )
+          })}
+        </div>
       </div>
 
       <div className="projects-footer" data-reveal style={{ '--reveal-delay': '0.12s' }}>

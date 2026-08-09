@@ -611,15 +611,60 @@
   line-height: 1.75;
 }
 
-.secondary-project-grid {
-  display: grid;
+.secondary-project-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 0.25rem 0;
+  scroll-snap-type: x mandatory;
+}
+
+.secondary-project-carousel::before,
+.secondary-project-carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.secondary-project-carousel::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--surface-0), rgba(5, 5, 5, 0));
+}
+
+.secondary-project-carousel::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--surface-0), rgba(5, 5, 5, 0));
+}
+
+.secondary-project-carousel-track {
+  display: flex;
+  align-items: stretch;
   gap: 1.25rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: start;
+  width: max-content;
+  animation: secondaryProjectCarouselScroll 48s linear infinite;
+  will-change: transform;
+}
+
+.secondary-project-carousel:hover .secondary-project-carousel-track,
+.secondary-project-carousel:focus-within .secondary-project-carousel-track {
+  animation-play-state: paused;
 }
 
 .project-card-secondary {
-  min-height: 100%;
+  flex: 0 0 22.5rem;
+  width: 22.5rem;
+  min-width: 22.5rem;
+  max-width: 22.5rem;
+  scroll-snap-align: start;
+}
+
+@keyframes secondaryProjectCarouselScroll {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .project-title-row {
@@ -1106,5 +1151,18 @@
   .experience-card {
     transition: none;
     animation: none;
+  }
+
+  .secondary-project-carousel {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .secondary-project-carousel-track {
+    animation: none;
+  }
+
+  .project-card-secondary.project-card-secondary-clone {
+    display: none;
   }
 }
