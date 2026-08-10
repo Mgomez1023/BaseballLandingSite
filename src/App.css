@@ -32,7 +32,7 @@
   bottom: 0;
   left: var(--hero-pad-inline);
   height: clamp(3rem, 8vw, 5rem);
-  background: linear-gradient(180deg, rgba(5, 5, 5, 0) 0%, rgba(5, 5, 5, 0.94) 100%);
+  background: linear-gradient(180deg, rgba(5, 5, 5, 0) 0%);
   pointer-events: none;
 }
 
@@ -55,7 +55,7 @@
 .field-arc,
 .field-diamond {
   fill: none;
-  stroke: #ff8f2a;
+  stroke: #ff8419;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 100;
@@ -76,13 +76,13 @@
 
 .mound-circle {
   fill: none;
-  stroke: rgba(255, 143, 42, 0.38);
+  stroke: rgba(255, 141, 42, 0.656);
   stroke-width: 2.5;
 }
 
 .mound-rectangle {
-  fill: rgba(255, 143, 42, 0.06);
-  stroke: rgba(255, 143, 42, 0.42);
+  fill: rgba(255, 141, 42, 0.175);
+  stroke: rgba(255, 141, 42, 0.601);
   stroke-width: 2.5;
 }
 
@@ -659,6 +659,10 @@
   min-width: 22.5rem;
   max-width: 22.5rem;
   scroll-snap-align: start;
+}
+
+.project-card-secondary.project-card-secondary-clone {
+  aria-hidden: true;
 }
 
 @keyframes secondaryProjectCarouselScroll {
