@@ -8,6 +8,11 @@ import proPic from '../ProjectLogos/ProPic.jpeg'
 import CookieClickerLogo from '../ProjectLogos/CookieClicker.jpg'
 import MarketMapLogo from '../ProjectLogos/MarketMapLogo.png'
 import WallBuildingLogo from '../ProjectLogos/Box.png'
+import benitoJuarezHomepage from '../HomePages/BenitoJuarezHomepage.png'
+import networkXpertsHomepage from '../HomePages/NetworkXpertsHomepage.png'
+import maromPaintingHomepage from '../HomePages/MaromPaintingHomepage.png'
+import MGMFloorsHomepage from '../HomePages/MGMFloorsHomepage.png'
+import RobloxThumbnail from '../HomePages/Thumbnail.png'
 
 const aboutAreas = [
   /* 
@@ -49,7 +54,7 @@ const experienceEntries = [
     tags: ['Operations support', 'Detail-oriented work', 'Hands-on execution', 'Team coordination'],
     highlights: [
       'Supported technical and operational tasks in a real automotive shop serving active day-to-day customer demand.',
-      'Contributed to the shop’s daily workflow by developing a loaner vehicle tracking system',
+      "Contributed to the shop's daily workflow by developing a loaner vehicle tracking system",
       'Built experience working reliably in an environment where team coordination and practical problem-solving mattered.',
     ],
   },
@@ -70,25 +75,33 @@ const experienceEntries = [
 ]
 
 const featuredProject = {
-  title: 'Men’s League Platform',
-  logo: benitoLogo,
-  logoAlt: 'Men’s League Platform logo',
+  title: 'Build a Wall!',
+  thumbnail: RobloxThumbnail,
+  thumbnailAlt:
+    'Build a Wall Roblox game showing a player building a package wall in an industrial facility',
   description:
-    'A full-stack operations platform for a local men’s baseball league, built with public-facing league pages and separate workflows for commissioners and team managers.',
-  stack: ['React', 'TypeScript', 'Vite', 'FastAPI', 'SQLAlchemy', 'PostgreSQL'],
+    'A Roblox package-handling tycoon inspired by my experience working at UPS. Players claim a facility, install workers, route packages, earn cash, complete challenges, and upgrade their operation.',
+  stack: [
+    'Roblox Studio',
+    'Luau',
+    'Client-Server Architecture',
+    'DataStoreService',
+  ],
   summary: [
-    'Handles teams, rosters, standings, schedules, league posts, and administrative updates in one system.',
-    'Includes role-based access so league staff and team managers work with seperate features.',
-    'Supports bilingual content',
+    'Players claim and develop their own package-handling facility using collectible workers that generate income.',
+    'Progression combines worker upgrades, backpack and movement upgrades, challenges, minigames, and rebirths.',
+    'The game includes a hands-on wall-building minigame inspired by the real process of loading package trailers.',
   ],
   highlights: [
-    'Built the app as a React + Vite frontend with a FastAPI backend',
-    'Added league operations flows like roster management, player records, schedule editing, and standings.',
-    'Designed the product to be used intuitively as a league website for anyone visiting.'
+    'Built server-authoritative systems for base claiming, purchases, worker installation, package routing, and progression.',
+    'Created persistent player profiles for cash, upgrades, inventory, challenges, rewards, and rebirth progress.',
+    'Designed custom industrial UI, responsive controls, minigames, visual package systems, and performance-conscious client effects.',
   ],
   links: [
-    { label: 'Demo', href: 'https://mens-league-web.vercel.app/' },
-    { label: 'GitHub', href: 'https://github.com/Mgomez1023/mens-league-mvp' },
+    {
+      label: 'Play Game',
+      href: 'https://www.roblox.com/games/75842793514825/Build-a-Wall',
+    },
   ],
 }
 
@@ -118,9 +131,9 @@ const secondaryProjects = [
     ],
   },
   {
-    title: 'NL→SQL Explorer',
+    title: 'NL to SQL Explorer',
     logo: nl2sqlLogo,
-    logoAlt: 'NL→SQL Explorer logo',
+    logoAlt: 'NL to SQL Explorer logo',
     description:
       'A full-stack analytics app that turns plain-English questions into validated SQL over uploaded datasets.',
     context:
@@ -150,7 +163,7 @@ const secondaryProjects = [
     logo: eatThisLogo,
     logoAlt: 'EatThis logo',
     description:
-      'A restaurant discovery app built to make the “where should we eat?” decision faster and less annoying.',
+      'A restaurant discovery app built to make the question of where to eat faster and less annoying.',
     context:
       'The project is intentionally lightweight: simple local search, cleaner place details, and a shorter path from browsing to picking a spot.',
     stack: ['React', 'Vite', 'Google Places API', 'Tailwind CSS', 'Vercel'],
@@ -185,6 +198,49 @@ const secondaryProjects = [
       { label: 'Demo', href: 'https://wall-building-simulator.vercel.app/' },
       { label: 'GitHub', href: 'https://github.com/Mgomez1023/WallBuildingSimulator' },
     ],
+  },
+]
+
+const clientProjects = [
+  {
+    id: 'MGMFLoors',
+    title: 'MGM Floors LLC',
+    description: 'A polished marketing website for a Chicagoland flooring contractor, featuring service pages, an interactive installation guide, project galleries, and a streamlined quote experience.',
+    screenshot: MGMFloorsHomepage,
+    screenshotAlt: 'Homepage screenshot of the Benito Juarez Men\'s League platform.',
+    stack: ['JavaScript', 'HTML','CSS'],
+    liveUrl: 'https://mgmflooring.vercel.app/',
+    contextLabel: '',
+  },
+  {
+    id: 'benito-juarez-platform',
+    title: 'Benito Juarez Platform',
+    description: 'A full-stack operations platform for a local men\'s baseball league, with public-facing league pages and separate workflows for commissioners and team managers. Generates roughly 1,000 users/week.',
+    screenshot: benitoJuarezHomepage,
+    screenshotAlt: 'Homepage screenshot of the Benito Juarez Men\'s League platform.',
+    stack: ['React', 'TypeScript', 'Vite', 'FastAPI', 'SQLAlchemy', 'PostgreSQL'],
+    liveUrl: 'https://mens-league-web.vercel.app/',
+    contextLabel: '',
+  },
+  {
+    id: 'network-xperts-group',
+    title: 'Network Xperts Group',
+    description: 'A responsive business website for an IT consulting company, built around a bold visual identity with service information, pricing, company details, and lead-generation forms.',
+    screenshot: networkXpertsHomepage,
+    screenshotAlt: 'Homepage screenshot for Network Xperts Group.',
+    stack: ['React', 'TypeScript', 'Vite'],
+    liveUrl: "https://www.networkxpertsgroup.com/",
+    contextLabel: '',
+  },
+  {
+    id: 'marom-painting',
+    title: 'Marom Painting',
+    description: 'A React website made for a local painting business. This site includes a hero, services, about, contact form, and a more detailed portfolio with CRUD features using PostgresSQL storage.',
+    screenshot: maromPaintingHomepage,
+    screenshotAlt: 'Homepage screenshot for Marom Painting.',
+    stack: ['React', 'TypeScript', 'Vite', 'PostgresSQL'],
+    liveUrl: 'https://marompainting.org/',
+    contextLabel: '',
   },
 ]
 
@@ -268,9 +324,10 @@ function useScrollReveal() {
   }, [])
 
   return contentRef
+      {eyebrow ? <p className="section-eyebrow">{eyebrow}</p> : null}
 }
 
-function SectionHeader({ title, description }) {
+function SectionHeader({ eyebrow, title, description }) {
   return (
     <div className="section-header" data-reveal>
       <h2 className="section-title">{title}</h2>
@@ -556,7 +613,6 @@ function SecondaryProjectCarousel() {
       }
     }
     const onPointerMove = (event) => {
-      console.log('POINTER MOVE', event.clientX, event.clientY)
       const interaction = interactionRef.current
 
       if (event.pointerId !== interaction.pointerId) return
@@ -632,6 +688,10 @@ function SecondaryProjectCarousel() {
 }
 
 function ProjectsSection() {
+  const playLink = featuredProject.links.find((link) =>
+    link.href && !link.href.startsWith('TODO_')
+  )
+
   return (
     <section className="content-section" id="projects">
       <SectionHeader
@@ -640,62 +700,48 @@ function ProjectsSection() {
       />
 
       <article className="featured-project-card" data-reveal>
-        <div className="featured-project-main">
-          <div className="project-title-row project-title-row-featured">
-            <ProjectLogo
-              logo={featuredProject.logo}
-              logoAlt={featuredProject.logoAlt}
-              featured
-            />
-
-            <div className="project-card-header">
-              <p className="detail-label">Featured Project</p>
-              <h3>{featuredProject.title}</h3>
-              <p>{featuredProject.description}</p>
+        <div className="featured-project-layout">
+          <div className="featured-project-visual">
+            <div className="featured-project-thumbnail">
+              <img src={featuredProject.thumbnail} alt={featuredProject.thumbnailAlt} />
             </div>
-          </div>
-
-          <div className="featured-project-summary">
-            {featuredProject.summary.map((item) => (
-              <p key={item}>{item}</p>
-            ))}
-          </div>
-        </div>
-
-        <div className="featured-project-body">
-          <div className="project-card-block">
-            <span className="detail-label">Tech Stack</span>
+            <div className="featured-project-intro">
+              <p className="detail-label">Featured Game</p>
+              <h3>{featuredProject.title}</h3>
+              <p className="featured-project-description">{featuredProject.description}</p>
+            </div>
             <div className="tag-row">
               {featuredProject.stack.map((item) => (
-                <span className="tag-pill" key={item}>
-                  {item}
-                </span>
+                <span className="tag-pill" key={item}>{item}</span>
               ))}
             </div>
+            <div className="featured-project-actions">
+              {playLink ? (
+                <a className="text-link featured-project-play-link" href={playLink.href} target="_blank" rel="noreferrer" aria-label={`Play ${featuredProject.title} on Roblox`}>
+                  <span>{playLink.label}</span>
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M6 14 14 6m-5 0h5v5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              ) : (
+                <span className="featured-project-coming-soon">Coming Soon</span>
+              )}
+            </div>
           </div>
-
-          <div className="project-card-block">
-            <span className="detail-label">What I Built</span>
-            <ul className="project-highlights">
-              {featuredProject.highlights.map((highlight) => (
-                <li key={highlight}>{highlight}</li>
-              ))}
-            </ul>
+          <div className="featured-project-details">
+            <div className="featured-project-detail-block">
+              <p className="detail-label">Gameplay</p>
+              <div className="featured-project-gameplay">
+                {featuredProject.summary.map((item) => <p key={item}>{item}</p>)}
+              </div>
+            </div>
+            <div className="featured-project-detail-block">
+              <p className="detail-label">What I Built</p>
+              <ul className="project-highlights">
+                {featuredProject.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+              </ul>
+            </div>
           </div>
-        </div>
-
-        <div className="project-links">
-          {featuredProject.links.map((link) => (
-            <a
-              key={link.label}
-              className="text-link"
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {link.label}
-            </a>
-          ))}
         </div>
       </article>
 
@@ -723,6 +769,103 @@ function ProjectsSection() {
             />
           </svg>
         </a>
+      </div>
+    </section>
+  )
+}
+
+function ClientWorkSection() {
+  const viewportRef = useRef(null)
+  const trackRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [layout, setLayout] = useState({ visibleCount: 3, slideStep: 0 })
+
+  useEffect(() => {
+    const viewport = viewportRef.current
+    const track = trackRef.current
+    if (!viewport || !track) return undefined
+
+    const updateLayout = () => {
+      const visibleCount = window.matchMedia('(max-width: 720px)').matches
+        ? 1
+        : window.matchMedia('(max-width: 960px)').matches
+          ? 2
+          : 3
+      const firstCard = track.querySelector('.client-project-card')
+      const cardGap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0
+      const slideStep = firstCard ? firstCard.getBoundingClientRect().width + cardGap : 0
+      setLayout({ visibleCount, slideStep })
+    }
+
+    const resizeObserver = new ResizeObserver(updateLayout)
+    resizeObserver.observe(viewport)
+    updateLayout()
+    return () => resizeObserver.disconnect()
+  }, [])
+
+  const maxIndex = Math.max(0, clientProjects.length - layout.visibleCount)
+
+  useEffect(() => {
+    setActiveIndex((currentIndex) => Math.min(currentIndex, maxIndex))
+  }, [maxIndex])
+
+  const canGoPrevious = activeIndex > 0
+  const canGoNext = activeIndex < maxIndex
+
+  return (
+    <section className="content-section client-work-section" id="client-work">
+      <SectionHeader
+        eyebrow="CLIENT WORK"
+        title="Client Work"
+        description="I’ve sought opportunities to build for real organizations with real users. These projects required me to translate business needs, operational challenges, and brand identities into practical digital products."
+      />
+
+      <div className="client-carousel" data-reveal>
+        <div className="client-carousel-viewport" ref={viewportRef}>
+          <div
+            className="client-carousel-track"
+            ref={trackRef}
+            style={{ transform: `translate3d(-${activeIndex * layout.slideStep}px, 0, 0)` }}
+          >
+            {clientProjects.map((project) => (
+              <article className="client-project-card" key={project.id}>
+                <div className="client-project-screenshot">
+                  <img src={project.screenshot} alt={project.screenshotAlt} />
+                </div>
+
+                <div className="client-project-content">
+                  <p className="detail-label">{project.contextLabel}</p>
+                  <div className="client-project-summary">
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                  </div>
+                  <div className="tag-row">
+                    {project.stack.map((item) => <span className="tag-pill" key={item}>{item}</span>)}
+                  </div>
+                  <div className="client-project-link">
+                    {project.liveUrl ? (
+                      <a className="text-link client-project-visit" href={project.liveUrl} target="_blank" rel="noreferrer">
+                        <span>Visit Website</span>
+                        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 14 14 6m-5 0h5v5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                      </a>
+                    ) : <span className="client-project-unavailable">Visit Website - TODO: add verified URL</span>}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        {canGoPrevious || canGoNext ? (
+          <div className="client-carousel-controls" aria-label="Client project carousel controls">
+            <button type="button" className="client-carousel-button" onClick={() => setActiveIndex((index) => Math.max(0, index - 1))} disabled={!canGoPrevious} aria-label="Previous client project">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m11.5 5-5 5 5 5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+            <button type="button" className="client-carousel-button" onClick={() => setActiveIndex((index) => Math.min(maxIndex, index + 1))} disabled={!canGoNext} aria-label="Next client project">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8.5 5 5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   )
@@ -830,6 +973,7 @@ export function PortfolioSections() {
       <AboutSection />
       <ExperienceSection />
       <ProjectsSection />
+      <ClientWorkSection />
       <EducationSection />
       <ContactSection />
     </main>
