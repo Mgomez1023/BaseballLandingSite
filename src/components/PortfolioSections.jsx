@@ -7,6 +7,7 @@ import pitchSearchLogo from '../ProjectLogos/PitchSearchLogo.png'
 import proPic from '../ProjectLogos/ProPic.jpeg'
 import CookieClickerLogo from '../ProjectLogos/CookieClicker.jpg'
 import MarketMapLogo from '../ProjectLogos/MarketMapLogo.png'
+import WallBuildingLogo from '../ProjectLogos/Box.png'
 
 const aboutAreas = [
   /* 
@@ -169,6 +170,20 @@ const secondaryProjects = [
     stack: ['C++', 'SFML Grpahics'],
     links: [
       { label: 'GitHub', href: 'https://github.com/Mgomez1023/Cookie-Clicker' },
+    ],
+  },
+  {
+    title: 'Wall Building Simulator',
+    logo: WallBuildingLogo,
+    logoAlt: 'WallBuilder logo',
+    description:
+      'A UPS-inspired 2D wall building game built with TypeScript. Players recieve increasingly random packages, build walls, and aim for high scores.',
+    context:
+      'Working at UPS, I always thought the concept of loading a trailer would actually make a fun game if done right. I built this to be quick, fun, and replayable.',
+    stack: ['C++', 'SFML Grpahics'],
+    links: [
+      { label: 'Demo', href: 'https://wall-building-simulator.vercel.app/' },
+      { label: 'GitHub', href: 'https://github.com/Mgomez1023/WallBuildingSimulator' },
     ],
   },
 ]
