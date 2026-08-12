@@ -215,7 +215,7 @@ const clientProjects = [
     description: 'A full-stack operations platform for a local men\'s baseball league, with public-facing league pages and separate workflows for commissioners and team managers. Generates roughly 1,000 users/week.',
     screenshot: benitoJuarezHomepage,
     screenshotAlt: 'Homepage screenshot of the Benito Juarez Men\'s League platform.',
-    stack: ['React', 'TypeScript', 'Vite', 'FastAPI', 'SQLAlchemy', 'PostgreSQL'],
+    stack: ['React', 'TypeScript', 'Vite', 'FastAPI', 'PostgreSQL'],
     liveUrl: 'https://mens-league-web.vercel.app/',
     contextLabel: '',
   },
@@ -703,7 +703,7 @@ function ProjectsSection() {
               <img src={featuredProject.thumbnail} alt={featuredProject.thumbnailAlt} />
             </div>
             <div className="featured-project-intro">
-              <p className="detail-label">Featured Game</p>
+              <p className="detail-label">Featured Project</p>
               <h3>{featuredProject.title}</h3>
               <p className="featured-project-description">{featuredProject.description}</p>
             </div>
