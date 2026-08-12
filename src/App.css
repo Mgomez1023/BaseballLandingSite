@@ -657,7 +657,11 @@
   user-select: none;
 }
 
-
+.secondary-project-carousel,
+.secondary-project-carousel-track,
+.project-card-secondary {
+  touch-action: pan-y;
+}
 
 .project-card-secondary {
   flex: 0 0 22.5rem;

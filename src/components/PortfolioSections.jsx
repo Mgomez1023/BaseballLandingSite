@@ -510,12 +510,37 @@ function SecondaryProjectCarousel() {
     }
     const finishInteraction = (event) => {
       const interaction = interactionRef.current
+
+      if (interaction.pointerId === null) return
       if (event && event.pointerId !== interaction.pointerId) return
-      if (interaction.locked && viewport.hasPointerCapture(interaction.pointerId)) viewport.releasePointerCapture(interaction.pointerId)
-      if (interaction.dragging && event?.type === 'pointerup') suppressClickRef.current = true
+
+      const pointerId = interaction.pointerId
+      const wasDragging = interaction.dragging
+
+      // Clear state before releasing capture because release can emit
+      // another lostpointercapture event.
+      interactionRef.current = {
+        pointerId: null,
+        startX: 0,
+        startY: 0,
+        lastX: 0,
+        dragging: false,
+        locked: false
+      }
+
       viewport.classList.remove('is-dragging')
-      interactionRef.current = { pointerId: null, startX: 0, startY: 0, lastX: 0, dragging: false, locked: false }
       lastTimeRef.current = null
+
+      if (wasDragging && event?.type === 'pointerup') {
+        suppressClickRef.current = true
+      }
+
+      if (
+        event?.type !== 'lostpointercapture' &&
+        viewport.hasPointerCapture(pointerId)
+      ) {
+        viewport.releasePointerCapture(pointerId)
+      }
     }
     const onPointerDown = (event) => {
       if (!event.isPrimary) return
@@ -531,6 +556,7 @@ function SecondaryProjectCarousel() {
       }
     }
     const onPointerMove = (event) => {
+      console.log('POINTER MOVE', event.clientX, event.clientY)
       const interaction = interactionRef.current
 
       if (event.pointerId !== interaction.pointerId) return
@@ -579,16 +605,22 @@ function SecondaryProjectCarousel() {
       interaction.lastX = event.clientX
       render()
 }
+    const onLostPointerCapture = (event) => {
+      // Ignore bubbled capture-loss events from cards, links, and children.
+      if (event.target !== viewport) return
+
+      finishInteraction(event)
+    }
     const onClickCapture = (event) => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }
     const preventNativeDrag = (event) => event.preventDefault()
-    viewport.addEventListener('pointerdown', onPointerDown); viewport.addEventListener('pointermove', onPointerMove); viewport.addEventListener('pointerup', finishInteraction); viewport.addEventListener('pointercancel', finishInteraction); viewport.addEventListener('lostpointercapture', finishInteraction); viewport.addEventListener('click', onClickCapture, true); viewport.addEventListener('dragstart', preventNativeDrag)
+    viewport.addEventListener('pointerdown', onPointerDown); viewport.addEventListener('pointermove', onPointerMove); viewport.addEventListener('pointerup', finishInteraction); viewport.addEventListener('pointercancel', finishInteraction); viewport.addEventListener('lostpointercapture', onLostPointerCapture); viewport.addEventListener('click', onClickCapture, true); viewport.addEventListener('dragstart', preventNativeDrag)
     motionQuery.addEventListener('change', updateMotionPreference)
     updateMotionPreference(); measure()
     const resizeObserver = new ResizeObserver(measure); resizeObserver.observe(track)
     frameRef.current = requestAnimationFrame(animate)
     return () => {
       cancelAnimationFrame(frameRef.current); resizeObserver.disconnect(); motionQuery.removeEventListener('change', updateMotionPreference)
-      viewport.removeEventListener('pointerdown', onPointerDown); viewport.removeEventListener('pointermove', onPointerMove); viewport.removeEventListener('pointerup', finishInteraction); viewport.removeEventListener('pointercancel', finishInteraction); viewport.removeEventListener('lostpointercapture', finishInteraction); viewport.removeEventListener('click', onClickCapture, true); viewport.removeEventListener('dragstart', preventNativeDrag)
+      viewport.removeEventListener('pointerdown', onPointerDown); viewport.removeEventListener('pointermove', onPointerMove); viewport.removeEventListener('pointerup', finishInteraction); viewport.removeEventListener('pointercancel', finishInteraction); viewport.removeEventListener('lostpointercapture', onLostPointerCapture); viewport.removeEventListener('click', onClickCapture, true); viewport.removeEventListener('dragstart', preventNativeDrag)
     }
   }, [])
 
