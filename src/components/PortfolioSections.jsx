@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import benitoLogo from '../ProjectLogos/BenitoLogo.png'
 import chiLogo from '../ProjectLogos/ChiLogo.png'
 import eatThisLogo from '../ProjectLogos/EatThisLogo.png'
 import nl2sqlLogo from '../ProjectLogos/nl2sqlLogo.png'
@@ -84,8 +83,6 @@ const featuredProject = {
   stack: [
     'Roblox Studio',
     'Luau',
-    'Client-Server Architecture',
-    'DataStoreService',
   ],
   summary: [
     'Players claim and develop their own package-handling facility using collectible workers that generate income.',
