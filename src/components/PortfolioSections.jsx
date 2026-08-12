@@ -518,27 +518,67 @@ function SecondaryProjectCarousel() {
       lastTimeRef.current = null
     }
     const onPointerDown = (event) => {
-      if (event.button !== undefined && event.button !== 0) return
-      interactionRef.current = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, lastX: event.clientX, dragging: false, locked: false }
+      if (!event.isPrimary) return
+      if (event.pointerType === 'mouse' && event.button !== 0) return
+
+      interactionRef.current = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        lastX: event.clientX,
+        dragging: false,
+        locked: false
+      }
     }
     const onPointerMove = (event) => {
       const interaction = interactionRef.current
+
       if (event.pointerId !== interaction.pointerId) return
+
       const deltaX = event.clientX - interaction.startX
       const deltaY = event.clientY - interaction.startY
+      const absoluteX = Math.abs(deltaX)
+      const absoluteY = Math.abs(deltaY)
+
       if (!interaction.locked) {
-        if (Math.abs(deltaY) > Math.abs(deltaX)) { interaction.pointerId = null; return }
-        if (Math.abs(deltaX) < 8) return
+        const movementDistance = Math.hypot(deltaX, deltaY)
+        const directionThreshold = 10
+        const directionBias = 1.15
+
+        // Ignore normal finger jitter until the gesture is intentional.
+        if (movementDistance < directionThreshold) return
+
+        // Clearly vertical: abandon carousel control and let the page scroll.
+        if (absoluteY > absoluteX * directionBias) {
+          interaction.pointerId = null
+          lastTimeRef.current = null
+          return
+        }
+
+        // Direction is still ambiguous. Wait for another movement event.
+        if (absoluteX <= absoluteY * directionBias) return
+
+        // Clearly horizontal: begin controlling the carousel.
         interaction.locked = true
         interaction.dragging = true
+
         viewport.setPointerCapture(event.pointerId)
         viewport.classList.add('is-dragging')
       }
-      event.preventDefault()
-      offsetRef.current = normalize(offsetRef.current + event.clientX - interaction.lastX)
+
+      if (event.cancelable) {
+        event.preventDefault()
+      }
+
+      const movementX = event.clientX - interaction.lastX
+
+      offsetRef.current = normalize(
+        offsetRef.current + movementX
+      )
+
       interaction.lastX = event.clientX
       render()
-    }
+}
     const onClickCapture = (event) => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }
     const preventNativeDrag = (event) => event.preventDefault()
     viewport.addEventListener('pointerdown', onPointerDown); viewport.addEventListener('pointermove', onPointerMove); viewport.addEventListener('pointerup', finishInteraction); viewport.addEventListener('pointercancel', finishInteraction); viewport.addEventListener('lostpointercapture', finishInteraction); viewport.addEventListener('click', onClickCapture, true); viewport.addEventListener('dragstart', preventNativeDrag)
