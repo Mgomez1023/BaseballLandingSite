@@ -179,7 +179,7 @@ const secondaryProjects = [
     description:
       'A UPS-inspired 2D wall building game built with TypeScript. Players recieve increasingly random packages, build walls, and aim for high scores.',
     context:
-      'Working at UPS, I always thought the concept of loading a trailer would actually make a fun game if done right. I built this to be quick, fun, and replayable.',
+      'Working at UPS, I always thought the concept of loading a trailer would actually make a fun game. I built this to be quick, fun, and replayable.',
     stack: ['C++', 'SFML Grpahics'],
     links: [
       { label: 'Demo', href: 'https://wall-building-simulator.vercel.app/' },
@@ -474,6 +474,91 @@ function ExperienceSection() {
   )
 }
 
+function SecondaryProjectCarousel() {
+  const viewportRef = useRef(null)
+  const trackRef = useRef(null)
+  const offsetRef = useRef(0)
+  const loopWidthRef = useRef(0)
+  const frameRef = useRef(null)
+  const lastTimeRef = useRef(null)
+  const reducedMotionRef = useRef(false)
+  const interactionRef = useRef({ pointerId: null, startX: 0, startY: 0, lastX: 0, dragging: false, locked: false })
+  const suppressClickRef = useRef(false)
+
+  useEffect(() => {
+    const viewport = viewportRef.current
+    const track = trackRef.current
+    if (!viewport || !track) return undefined
+    const normalize = (offset) => { const width = loopWidthRef.current; if (!width) return offset; const remainder = offset % width; return remainder > 0 ? remainder - width : remainder }
+    const render = () => { track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)` }
+    const measure = () => {
+      const first = track.querySelector('.project-card-secondary')
+      const clone = track.querySelector('.project-card-secondary-clone')
+      if (!first || !clone) return
+      loopWidthRef.current = clone.offsetLeft - first.offsetLeft
+      offsetRef.current = normalize(offsetRef.current)
+      render()
+    }
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updateMotionPreference = () => { reducedMotionRef.current = motionQuery.matches; lastTimeRef.current = null }
+    const animate = (time) => {
+      if (!reducedMotionRef.current && interactionRef.current.pointerId === null && loopWidthRef.current) {
+        if (lastTimeRef.current !== null) { const elapsed = Math.min(time - lastTimeRef.current, 100); offsetRef.current = normalize(offsetRef.current - (loopWidthRef.current * elapsed) / 48000); render() }
+        lastTimeRef.current = time
+      } else lastTimeRef.current = null
+      frameRef.current = requestAnimationFrame(animate)
+    }
+    const finishInteraction = (event) => {
+      const interaction = interactionRef.current
+      if (event && event.pointerId !== interaction.pointerId) return
+      if (interaction.locked && viewport.hasPointerCapture(interaction.pointerId)) viewport.releasePointerCapture(interaction.pointerId)
+      if (interaction.dragging && event?.type === 'pointerup') suppressClickRef.current = true
+      viewport.classList.remove('is-dragging')
+      interactionRef.current = { pointerId: null, startX: 0, startY: 0, lastX: 0, dragging: false, locked: false }
+      lastTimeRef.current = null
+    }
+    const onPointerDown = (event) => {
+      if (event.button !== undefined && event.button !== 0) return
+      interactionRef.current = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, lastX: event.clientX, dragging: false, locked: false }
+    }
+    const onPointerMove = (event) => {
+      const interaction = interactionRef.current
+      if (event.pointerId !== interaction.pointerId) return
+      const deltaX = event.clientX - interaction.startX
+      const deltaY = event.clientY - interaction.startY
+      if (!interaction.locked) {
+        if (Math.abs(deltaY) > Math.abs(deltaX)) { interaction.pointerId = null; return }
+        if (Math.abs(deltaX) < 8) return
+        interaction.locked = true
+        interaction.dragging = true
+        viewport.setPointerCapture(event.pointerId)
+        viewport.classList.add('is-dragging')
+      }
+      event.preventDefault()
+      offsetRef.current = normalize(offsetRef.current + event.clientX - interaction.lastX)
+      interaction.lastX = event.clientX
+      render()
+    }
+    const onClickCapture = (event) => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }
+    const preventNativeDrag = (event) => event.preventDefault()
+    viewport.addEventListener('pointerdown', onPointerDown); viewport.addEventListener('pointermove', onPointerMove); viewport.addEventListener('pointerup', finishInteraction); viewport.addEventListener('pointercancel', finishInteraction); viewport.addEventListener('lostpointercapture', finishInteraction); viewport.addEventListener('click', onClickCapture, true); viewport.addEventListener('dragstart', preventNativeDrag)
+    motionQuery.addEventListener('change', updateMotionPreference)
+    updateMotionPreference(); measure()
+    const resizeObserver = new ResizeObserver(measure); resizeObserver.observe(track)
+    frameRef.current = requestAnimationFrame(animate)
+    return () => {
+      cancelAnimationFrame(frameRef.current); resizeObserver.disconnect(); motionQuery.removeEventListener('change', updateMotionPreference)
+      viewport.removeEventListener('pointerdown', onPointerDown); viewport.removeEventListener('pointermove', onPointerMove); viewport.removeEventListener('pointerup', finishInteraction); viewport.removeEventListener('pointercancel', finishInteraction); viewport.removeEventListener('lostpointercapture', finishInteraction); viewport.removeEventListener('click', onClickCapture, true); viewport.removeEventListener('dragstart', preventNativeDrag)
+    }
+  }, [])
+
+  return <div className="secondary-project-carousel" data-reveal ref={viewportRef} aria-label="Secondary projects carousel"><div className="secondary-project-carousel-track" ref={trackRef}>{[...secondaryProjects, ...secondaryProjects].map((project, index) => {
+    const isClone = index >= secondaryProjects.length
+    const originalIndex = index % secondaryProjects.length
+    return <article className={`project-card project-card-secondary${isClone ? ' project-card-secondary-clone' : ''}`} key={`${project.title}-${isClone ? 'clone' : 'original'}`} aria-hidden={isClone ? 'true' : undefined} data-reveal={isClone ? undefined : ''} style={isClone ? undefined : { '--reveal-delay': `${0.08 + 0.06 * originalIndex}s` }}><div className="project-title-row"><ProjectLogo logo={project.logo} logoAlt={project.logoAlt} placeholder={project.placeholder} /><div className="project-card-header"><h3>{project.title}</h3><p>{project.description}</p></div></div><div className="project-card-block"><span className="detail-label">Context</span><p className="project-context">{project.context}</p></div><div className="project-card-block"><span className="detail-label">Tech Stack</span><div className="tag-row">{project.stack.map((item) => <span className="tag-pill" key={item}>{item}</span>)}</div></div><div className="project-links">{project.links.map((link) => <a key={link.label} className="text-link" href={link.href} target="_blank" rel="noreferrer" tabIndex={isClone ? -1 : undefined}>{link.label}</a>)}</div></article>
+  })}</div></div>
+}
+
 function ProjectsSection() {
   return (
     <section className="content-section" id="projects">
@@ -542,73 +627,7 @@ function ProjectsSection() {
         </div>
       </article>
 
-      <div className="secondary-project-carousel" data-reveal>
-        <div className="secondary-project-carousel-track">
-          {[...secondaryProjects, ...secondaryProjects].map((project, index) => {
-            const isClone = index >= secondaryProjects.length
-            const originalIndex = index % secondaryProjects.length
-
-            return (
-              <article
-                className={`project-card project-card-secondary${isClone ? ' project-card-secondary-clone' : ''}`}
-                key={`${project.title}-${isClone ? 'clone' : 'original'}`}
-                aria-hidden={isClone ? 'true' : undefined}
-                data-reveal={isClone ? undefined : ''}
-                style={
-                  isClone
-                    ? undefined
-                    : { '--reveal-delay': `${0.08 + 0.06 * originalIndex}s` }
-                }
-              >
-                <div className="project-title-row">
-                  <ProjectLogo
-                    logo={project.logo}
-                    logoAlt={project.logoAlt}
-                    placeholder={project.placeholder}
-                  />
-
-                  <div className="project-card-header">
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                  </div>
-                </div>
-
-                <div className="project-card-block">
-                  <span className="detail-label">Context</span>
-                  <p className="project-context">{project.context}</p>
-                </div>
-
-                <div className="project-card-block">
-                  <span className="detail-label">Tech Stack</span>
-                  <div className="tag-row">
-                    {project.stack.map((item) => (
-                      <span className="tag-pill" key={item}>
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="project-links">
-                  {project.links.map((link) => (
-                    <a
-                      key={link.label}
-                      className="text-link"
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      tabIndex={isClone ? -1 : undefined}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </article>
-            )
-          })}
-        </div>
-      </div>
-
+      <SecondaryProjectCarousel />
       <div className="projects-footer" data-reveal style={{ '--reveal-delay': '0.12s' }}>
         <a
           className="projects-github-button"

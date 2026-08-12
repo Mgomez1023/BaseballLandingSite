@@ -615,7 +615,8 @@
   position: relative;
   overflow: hidden;
   padding: 0.25rem 0;
-  scroll-snap-type: x mandatory;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
 }
 
 .secondary-project-carousel::before,
@@ -644,14 +645,19 @@
   align-items: stretch;
   gap: 1.25rem;
   width: max-content;
-  animation: secondaryProjectCarouselScroll 48s linear infinite;
   will-change: transform;
 }
-
-.secondary-project-carousel:hover .secondary-project-carousel-track,
-.secondary-project-carousel:focus-within .secondary-project-carousel-track {
-  animation-play-state: paused;
+.secondary-project-carousel.is-dragging {
+  cursor: grabbing;
 }
+
+.secondary-project-carousel.is-dragging,
+.secondary-project-carousel.is-dragging * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+
 
 .project-card-secondary {
   flex: 0 0 22.5rem;
@@ -663,12 +669,6 @@
 
 .project-card-secondary.project-card-secondary-clone {
   aria-hidden: true;
-}
-
-@keyframes secondaryProjectCarouselScroll {
-  to {
-    transform: translateX(-50%);
-  }
 }
 
 .project-title-row {
@@ -1157,16 +1157,4 @@
     animation: none;
   }
 
-  .secondary-project-carousel {
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-  }
-
-  .secondary-project-carousel-track {
-    animation: none;
-  }
-
-  .project-card-secondary.project-card-secondary-clone {
-    display: none;
-  }
 }
