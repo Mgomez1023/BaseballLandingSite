@@ -3,7 +3,8 @@ const fieldGeometry = {
   firstBase: { x: 486, y: 384 },
   secondBase: { x: 350, y: 248 },
   thirdBase: { x: 214, y: 384 },
-  mound: { x: 350, y: 384, r: 38 },
+  mound: { x: 350, y: 384, r: 44 },
+  monogramSize: 58,
   foulLineExtension: 200,
   outfieldArcRadiusScale: 0.8,
   title: { x: 350, y: 20, subtitleOffsetY: 30 },
@@ -120,11 +121,25 @@ export function BaseballField() {
       </desc>
 
       <defs>
-        <filter id="field-glow" x="-35%" y="-35%" width="170%" height="170%">
-          <feGaussianBlur stdDeviation="2.2" result="glow" />
+        {/*
+          Recolors the monogram PNG into the two navy tokens, like cap embroidery:
+          the M (low green channel) becomes --navy, the G (high green) becomes --muted.
+        */}
+        <filter id="monogram-tint" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
+          <feColorMatrix
+            in="SourceGraphic"
+            type="matrix"
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 4 0 0 -2"
+            result="g-raw"
+          />
+          <feComposite in="g-raw" in2="SourceAlpha" operator="in" result="g-mask" />
+          <feFlood className="monogram-tint-navy" result="navy" />
+          <feComposite in="navy" in2="SourceAlpha" operator="in" result="whole" />
+          <feFlood className="monogram-tint-soft" result="soft" />
+          <feComposite in="soft" in2="g-mask" operator="in" result="g-letter" />
           <feMerge>
-            <feMergeNode in="glow" />
-            <feMergeNode in="SourceGraphic" />
+            <feMergeNode in="whole" />
+            <feMergeNode in="g-letter" />
           </feMerge>
         </filter>
       </defs>
@@ -133,14 +148,12 @@ export function BaseballField() {
         className="field-arc"
         d={fieldOutlinePath}
         pathLength="130"
-        filter="url(#field-glow)"
       />
 
       <path
         className="field-diamond"
         d={`M ${fieldGeometry.homePlate.x} ${fieldGeometry.homePlate.y} L ${fieldGeometry.firstBase.x} ${fieldGeometry.firstBase.y} L ${fieldGeometry.secondBase.x} ${fieldGeometry.secondBase.y} L ${fieldGeometry.thirdBase.x} ${fieldGeometry.thirdBase.y} Z`}
         pathLength="100"
-        filter="url(#field-glow)"
       />
 
       <circle
@@ -150,14 +163,15 @@ export function BaseballField() {
         r={fieldGeometry.mound.r}
       />
 
-      <rect
-        className="mound-rectangle"
-        x={fieldGeometry.mound.x - 14}
-        y={fieldGeometry.mound.y - 8}
-        width="28"
-        height="15"
-        rx="2"
-        ry="2"
+      <image
+        className="mound-monogram"
+        href="/LogoTransparent.png"
+        x={fieldGeometry.mound.x - fieldGeometry.monogramSize / 2}
+        y={fieldGeometry.mound.y - fieldGeometry.monogramSize / 2}
+        width={fieldGeometry.monogramSize}
+        height={fieldGeometry.monogramSize}
+        filter="url(#monogram-tint)"
+        aria-hidden="true"
       />
 
       <text
@@ -195,13 +209,9 @@ export function BaseballField() {
                     className="base-underlay"
                     points={getHomePlatePoints(base.x, base.y)}
                   />
-                  <polygon 
-                    className="base-shape home-plate-shape" 
-                    x={base.x}
-                    y={base.y}  
-                    points={getHomePlatePoints(base.x, base.y)} 
-                    rx="2"
-                    ry="2"
+                  <polygon
+                    className="base-shape home-plate-shape"
+                    points={getHomePlatePoints(base.x, base.y)}
                   />
                 </>
               ) : (

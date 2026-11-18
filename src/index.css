@@ -1,9 +1,29 @@
+/*
+  "The Hat" palette. These six tokens are the only colors on the site.
+  Everything else is derived from them (opacity or color-mix), never a new hue.
+*/
 :root {
-  font-family: "Sora", "Segoe UI", sans-serif;
+  --cream: #F2ECDC;      /* page background */
+  --cream-deep: #E9E1CC; /* cards */
+  --navy: #17233F;       /* text, lines, buttons */
+  --navy-soft: #2A3A5F;  /* hover states, secondary lines */
+  --muted: #5B6479;      /* subtext (5.0:1 on cream, 4.6:1 on cream-deep) */
+  --base: #FFFFFF;       /* bases on the diamond */
+
+  /* Derived from the tokens above */
+  --rule: color-mix(in srgb, var(--navy) 16%, transparent);
+  --rule-strong: color-mix(in srgb, var(--navy) 32%, transparent);
+  --wash: color-mix(in srgb, var(--navy) 6%, transparent);
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
-  color: #ffffff;
-  background-color: #050505;
+  color: var(--navy);
+  background-color: var(--cream);
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -27,11 +47,8 @@ body,
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at top, rgba(255, 196, 119, 0.243), transparent 22%),
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.04), transparent 18%),
-    linear-gradient(180deg, #050505 0%, #0b0b0d 45%, #050505 100%);
-  color: #ffffff;
+  background: var(--cream);
+  color: var(--navy);
   overflow-x: hidden;
   overscroll-behavior-y: contain;
 }
@@ -39,6 +56,16 @@ body {
 button,
 a {
   color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--navy);
+  color: var(--cream);
 }
 
 @media (prefers-reduced-motion: reduce) {
