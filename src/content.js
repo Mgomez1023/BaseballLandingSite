@@ -12,62 +12,60 @@ import wallBuildingLogo from './ProjectLogos/Box.png'
 
 // Baseball cards, newest and strongest first.
 // Front: image, kind, name, tagline, year. Back: the stat line (stack, role, result, links).
-// `year: null` means the year is not on the resume yet; the card leaves it off rather than guess.
+// The four newest cards use only the project facts listed in CLAUDE.md.
+// `year: null` means the year is not on record yet; the card leaves it off rather than guess.
 export const projects = [
   {
     id: 'pitch-whiff-model',
     name: 'Pitch Whiff Model',
     kind: 'Machine learning',
-    year: '2026',
+    year: 'Nov. 2026',
     tagline:
-      'Tests whether pitch sequencing improves whiff prediction on a full season of MLB Statcast data.',
+      'ML pipeline on a full season of MLB Statcast data, testing whether pitch sequencing improves whiff prediction.',
     initials: 'PW',
-    stack: ['Python', 'scikit-learn', 'FastAPI', 'Docker', 'GitHub Actions', 'AWS'],
-    role: 'Built the ML pipeline and shipped it as a tested Python package behind a FastAPI endpoint, deployed to AWS (ECR, ECS Fargate).',
-    result: '0.768 ROC AUC on a time-based holdout; a pre-registered rule kept the simpler model. 34 pytest tests.',
+    stack: ['FastAPI', 'Docker', 'GitHub Actions', 'AWS'],
+    role: 'ML pipeline served through FastAPI, containerized with Docker, with GitHub Actions CI.',
+    result: '0.768 ROC AUC on a time-based holdout. Deployed on AWS (ECR, ECS Fargate).',
     links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/pitch-sequencing-model' }],
   },
   {
     id: 'benito-juarez-platform',
     name: "Benito Juarez Men's League Platform",
     kind: 'League platform',
-    year: '2026 – Present',
-    tagline:
-      'Website for a 10-team, 150+ player amateur baseball league, in English and Spanish.',
+    year: 'Feb. 2026 – Present',
+    tagline: 'Site for a 10-team, 150+ player amateur baseball league, in English and Spanish.',
     image: benitoJuarezHomepage,
     imageAlt: "Homepage of the Benito Juarez Men's League website.",
     imageFit: 'cover',
     stack: ['React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Vercel'],
-    role: 'Built and run the site: schedules, standings, rosters, JWT auth with admin and team-manager roles, and CSV game import.',
-    result: '1,000+ weekly visitors in season; about 20 team managers; A+ security-header rating.',
+    role: 'Schedules, standings, rosters, JWT auth, CSV game import, and English/Spanish support.',
+    result: 'Live site for a 10-team, 150+ player amateur league.',
     links: [{ label: 'Live site', href: 'https://mens-league-web.vercel.app/' }],
   },
   {
     id: 'destiny-copilot',
     name: 'Destiny Copilot',
     kind: 'AI app',
-    year: '2026 – Present',
-    tagline:
-      "AI companion for Destiny 2 that answers build, quest, and loadout questions from a player's live account.",
+    year: 'Sep. 2026 – Present',
+    tagline: 'AI companion for Destiny 2, with Bungie OAuth sign-in.',
     initials: 'DC',
-    stack: ['Python', 'FastAPI', 'React', 'TypeScript', 'OpenAI API', 'GitHub Actions'],
-    role: 'Built and deployed it: Bungie OAuth sign-in, a tool-calling FastAPI backend, and validators that flag answers the account data does not support.',
-    result: 'Used by about 20 players; 1,500+ tests in GitHub Actions CI.',
+    stack: ['FastAPI', 'Bungie OAuth', 'GitHub Actions'],
+    role: 'Bungie OAuth sign-in, a tool-calling FastAPI backend, and GitHub Actions CI.',
+    result: 'Ongoing since Sep. 2026.',
     links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/DestinyCopilot' }],
   },
   {
     id: 'sell-plushies',
     name: 'Sell Plushies',
     kind: 'Roblox game',
-    year: '2026 – Present',
-    tagline:
-      'Multiplayer idle-collector Roblox game with 18-tier progression, machine merging, and rebirths.',
+    year: 'Oct. 2026 – Present',
+    tagline: 'Roblox idle-collector game with a server-authoritative economy.',
     initials: 'SP',
-    stack: ['Roblox Studio', 'Luau', 'Node.js'],
-    role: 'Building the game and its server-authoritative economy, with versioned player saves and migrations.',
-    result: 'Release in progress; automated test scripts cover the core systems.',
+    stack: ['Roblox', 'Luau'],
+    role: 'Server-authoritative game economy, written in Luau.',
+    result: 'Ongoing since Oct. 2026.',
     links: [],
-    linkNote: 'Release in progress',
+    linkNote: 'No public link yet',
   },
   {
     id: 'build-a-wall',
