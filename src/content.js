@@ -5,33 +5,54 @@ import maromPaintingHomepage from './HomePages/MaromPaintingHomepage.png'
 import mgmFloorsHomepage from './HomePages/MGMFloorsHomepage.png'
 import benitoJuarezHomepage from './HomePages/BenitoJuarezHomepage.png'
 import buildAWallThumbnail from './HomePages/Thumbnail.png'
-import chiLogo from './ProjectLogos/ChiLogo.png'
 import cookieClickerLogo from './ProjectLogos/CookieClicker.jpg'
 import pitchSearchLogo from './ProjectLogos/PitchSearchLogo.png'
 import wallBuildingLogo from './ProjectLogos/Box.png'
 
-// Baseball cards, newest and strongest first.
-// Front: image, kind, name, tagline, year. Back: the stat line (stack, role, result, links).
-// The four newest cards use only the project facts listed in CLAUDE.md.
-// `year: null` means the year is not on record yet; the card leaves it off rather than guess.
-export const projects = [
+// Link types decide the button label. Never add an AWS URL.
+export const linkLabels = {
+  github: 'GitHub',
+  live: 'Live site',
+  roblox: 'Play on Roblox',
+  demo: 'Live demo',
+}
+
+// Projects are baseball cards. Facts come only from CLAUDE.md (or, for the
+// Minor leagues, copy that was already on the site). `year: null` means the
+// year is not on record: the card leaves it off rather than guess.
+//
+// Card fields
+//   name / shortName   full name in the overlay, short name on the peek strip
+//   initials           the small mark on the strip (and the graphic when there is no image)
+//   tagline            the one-liner on the overlay front
+//   stack              tags on the front, Stack on the stat line
+//   role, result       stat line rows; omitted when there is nothing on record
+//   links              [{ type, href }], labeled by type
+//   writeup            optional write-up URL
+//   buildsOn           optional extra stat line row
+
+// The fan: five cards, strongest first (CLAUDE.md order).
+export const featuredProjects = [
   {
     id: 'pitch-whiff-model',
     name: 'Pitch Whiff Model',
-    kind: 'Machine learning',
+    shortName: 'Pitch Whiff',
+    initials: 'PW',
     year: 'Nov. 2026',
     tagline:
       'ML pipeline on a full season of MLB Statcast data, testing whether pitch sequencing improves whiff prediction.',
-    initials: 'PW',
     stack: ['FastAPI', 'Docker', 'GitHub Actions', 'AWS'],
     role: 'ML pipeline served through FastAPI, containerized with Docker, with GitHub Actions CI.',
     result: '0.768 ROC AUC on a time-based holdout. Deployed on AWS (ECR, ECS Fargate).',
-    links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/pitch-sequencing-model' }],
+    buildsOn: 'PitchSearch (in the Minor leagues below)',
+    links: [{ type: 'github', href: 'https://github.com/Mgomez1023/pitch-sequencing-model' }],
+    writeup: 'https://github.com/Mgomez1023/pitch-sequencing-model#readme',
   },
   {
     id: 'benito-juarez-platform',
     name: "Benito Juarez Men's League Platform",
-    kind: 'League platform',
+    shortName: 'Benito Juarez League',
+    initials: 'BJ',
     year: 'Feb. 2026 – Present',
     tagline: 'Site for a 10-team, 150+ player amateur baseball league, in English and Spanish.',
     image: benitoJuarezHomepage,
@@ -40,82 +61,86 @@ export const projects = [
     stack: ['React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Vercel'],
     role: 'Schedules, standings, rosters, JWT auth, CSV game import, and English/Spanish support.',
     result: 'Live site for a 10-team, 150+ player amateur league.',
-    links: [{ label: 'Live site', href: 'https://mens-league-web.vercel.app/' }],
+    links: [{ type: 'live', href: 'https://mens-league-web.vercel.app/' }],
   },
   {
     id: 'destiny-copilot',
     name: 'Destiny Copilot',
-    kind: 'AI app',
+    shortName: 'Destiny Copilot',
+    initials: 'DC',
     year: 'Sep. 2026 – Present',
     tagline: 'AI companion for Destiny 2, with Bungie OAuth sign-in.',
-    initials: 'DC',
     stack: ['FastAPI', 'Bungie OAuth', 'GitHub Actions'],
     role: 'Bungie OAuth sign-in, a tool-calling FastAPI backend, and GitHub Actions CI.',
     result: 'Ongoing since Sep. 2026.',
-    links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/DestinyCopilot' }],
+    links: [{ type: 'github', href: 'https://github.com/Mgomez1023/DestinyCopilot' }],
   },
   {
     id: 'sell-plushies',
     name: 'Sell Plushies',
-    kind: 'Roblox game',
+    shortName: 'Sell Plushies',
+    initials: 'SP',
     year: 'Oct. 2026 – Present',
     tagline: 'Roblox idle-collector game with a server-authoritative economy.',
-    initials: 'SP',
     stack: ['Roblox', 'Luau'],
     role: 'Server-authoritative game economy, written in Luau.',
     result: 'Ongoing since Oct. 2026.',
     links: [],
-    linkNote: 'No public link yet',
   },
+  {
+    // CLAUDE.md lists only the name. Tech, role and results stay empty until
+    // Martin supplies them. The repo link was already on the live site.
+    id: 'loaner-vehicle-system',
+    name: 'Loaner Vehicle Management System',
+    shortName: 'Loaner Vehicles',
+    initials: 'LV',
+    year: null,
+    tagline: 'A system for managing loaner vehicles.',
+    stack: [],
+    links: [{ type: 'github', href: 'https://github.com/Mgomez1023/Loaner-Vehicle-Project' }],
+  },
+]
+
+// The Minor leagues row: older projects, copy as it was on the site.
+export const minorLeagueProjects = [
   {
     id: 'build-a-wall',
     name: 'Build a Wall!',
-    kind: 'Roblox game',
+    shortName: 'Build a Wall!',
+    initials: 'BW',
     year: null,
     tagline: 'Roblox package-handling tycoon inspired by working at UPS.',
     image: buildAWallThumbnail,
     imageAlt: 'Build a Wall! game art: a player stacking packages into a wall in a warehouse.',
     imageFit: 'cover',
     stack: ['Roblox Studio', 'Luau'],
-    role: 'Built server-authoritative systems for base claiming, purchases, worker installation, package routing, and progression.',
+    role: 'Server-authoritative systems for base claiming, purchases, worker installation, package routing, and progression.',
     result: 'Playable on Roblox, with persistent player profiles, challenges, and rebirths.',
-    links: [{ label: 'Play on Roblox', href: 'https://www.roblox.com/games/75842793514825/Build-a-Wall' }],
+    links: [{ type: 'roblox', href: 'https://www.roblox.com/games/75842793514825/Build-a-Wall' }],
   },
   {
     id: 'pitchsearch',
     name: 'PitchSearch',
-    kind: 'Baseball analytics',
+    shortName: 'PitchSearch',
+    initials: 'PS',
     year: null,
     tagline: 'Pitch-level MLB analytics tool for exploring pitch tendencies and player breakdowns.',
     image: pitchSearchLogo,
     imageAlt: 'PitchSearch logo.',
     imageFit: 'contain',
     stack: ['React', 'TypeScript', 'FastAPI', 'SQLite', 'Docker', 'Vercel'],
-    role: 'Built it as a Washington Nationals interview project.',
+    role: 'Built as a Washington Nationals interview project.',
     result: 'Live demo with pitch filters and player-level breakdowns.',
     links: [
-      { label: 'Demo', href: 'https://pitch-search.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/Mgomez1023/PitchSearch' },
+      { type: 'demo', href: 'https://pitch-search.vercel.app/' },
+      { type: 'github', href: 'https://github.com/Mgomez1023/PitchSearch' },
     ],
-  },
-  {
-    id: 'loaner-vehicle-system',
-    name: 'Loaner Vehicle Management System',
-    kind: 'Internship project',
-    year: '2024',
-    tagline: 'Digital loaner-vehicle checkout and return for Chicago Tire and Auto.',
-    image: chiLogo,
-    imageAlt: 'Chicago Tire and Auto Repair logo.',
-    imageFit: 'contain',
-    stack: ['WordPress', 'Elementor Pro', 'jQuery', 'Google Apps Script', 'Google Sheets'],
-    role: 'Built it during my Software Developer internship at Chicago Tire and Auto.',
-    result: 'Replaced paper intake with QR forms, e-signatures, and automated document delivery.',
-    links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/Loaner-Vehicle-Project' }],
   },
   {
     id: 'cookie-clicker',
     name: 'Cookie Clicker in C++',
-    kind: 'C++ game',
+    shortName: 'Cookie Clicker',
+    initials: 'CC',
     year: null,
     tagline: 'The Cookie Clicker game remade in C++ with the SFML graphics library.',
     image: cookieClickerLogo,
@@ -124,23 +149,24 @@ export const projects = [
     stack: ['C++', 'SFML'],
     role: 'Final project for my Advanced Computer Science class.',
     result: 'Presented in a live classroom demonstration.',
-    links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/Cookie-Clicker' }],
+    links: [{ type: 'github', href: 'https://github.com/Mgomez1023/Cookie-Clicker' }],
   },
   {
     id: 'wall-building-simulator',
     name: 'Wall Building Simulator',
-    kind: 'Browser game',
+    shortName: 'Wall Building Sim',
+    initials: 'WB',
     year: null,
     tagline: 'UPS-inspired 2D game: stack increasingly random packages into a wall for a high score.',
     image: wallBuildingLogo,
     imageAlt: 'A cardboard package on a yellow background.',
     imageFit: 'cover',
     stack: ['TypeScript'],
-    role: 'Built it to turn loading a trailer into a quick, replayable game.',
+    role: 'Built to turn loading a trailer into a quick, replayable game.',
     result: 'Playable in the browser.',
     links: [
-      { label: 'Demo', href: 'https://wall-building-simulator.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/Mgomez1023/WallBuildingSimulator' },
+      { type: 'demo', href: 'https://wall-building-simulator.vercel.app/' },
+      { type: 'github', href: 'https://github.com/Mgomez1023/WallBuildingSimulator' },
     ],
   },
 ]

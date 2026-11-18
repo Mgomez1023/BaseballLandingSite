@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import proPic from '../ProjectLogos/ProPic.jpeg'
-import { BaseballCard } from './BaseballCard.jsx'
+import { ProjectSpread } from './ProjectSpread.jsx'
 import {
   clientProjects,
   contactLinks,
   coursework,
   educationEntries,
   experienceEntries,
-  projects,
 } from '../content.js'
 
 function useScrollReveal() {
@@ -138,236 +137,15 @@ function ExperienceSection() {
   )
 }
 
-const IDLE_INTERACTION = { pointerId: null, startX: 0, startY: 0, lastX: 0, dragging: false, locked: false }
-
-// The rolling view of all projects. It drifts on its own, can be dragged,
-// and pauses while hovered, focused, or while any card shows its stat line.
-function ProjectCarousel() {
-  const viewportRef = useRef(null)
-  const trackRef = useRef(null)
-  const offsetRef = useRef(0)
-  const loopWidthRef = useRef(0)
-  const frameRef = useRef(null)
-  const lastTimeRef = useRef(null)
-  const reducedMotionRef = useRef(false)
-  const pauseRef = useRef({ hover: false, focus: false })
-  const interactionRef = useRef({ ...IDLE_INTERACTION })
-  const suppressClickRef = useRef(false)
-
-  useEffect(() => {
-    const viewport = viewportRef.current
-    const track = trackRef.current
-    if (!viewport || !track) return undefined
-
-    const normalize = (offset) => {
-      const width = loopWidthRef.current
-      if (!width) return offset
-      const remainder = offset % width
-      return remainder > 0 ? remainder - width : remainder
-    }
-    const render = () => {
-      track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`
-    }
-    const measure = () => {
-      const first = track.querySelector('.carousel-slot')
-      const clone = track.querySelector('.carousel-slot-clone')
-      if (!first || !clone) return
-      loopWidthRef.current = clone.offsetLeft - first.offsetLeft
-      offsetRef.current = normalize(offsetRef.current)
-      render()
-    }
-    const isPaused = () =>
-      reducedMotionRef.current ||
-      interactionRef.current.pointerId !== null ||
-      pauseRef.current.hover ||
-      pauseRef.current.focus ||
-      track.querySelector('.bb-card.is-flipped') !== null
-
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const updateMotionPreference = () => {
-      reducedMotionRef.current = motionQuery.matches
-      lastTimeRef.current = null
-    }
-    const animate = (time) => {
-      if (!isPaused() && loopWidthRef.current) {
-        if (lastTimeRef.current !== null) {
-          const elapsed = Math.min(time - lastTimeRef.current, 100)
-          offsetRef.current = normalize(offsetRef.current - (loopWidthRef.current * elapsed) / 64000)
-          render()
-        }
-        lastTimeRef.current = time
-      } else {
-        lastTimeRef.current = null
-      }
-      frameRef.current = requestAnimationFrame(animate)
-    }
-
-    const finishInteraction = (event) => {
-      const interaction = interactionRef.current
-      if (interaction.pointerId === null) return
-      if (event && event.pointerId !== interaction.pointerId) return
-
-      const { pointerId, dragging: wasDragging } = interaction
-      // Clear state before releasing capture: release can emit another lostpointercapture.
-      interactionRef.current = { ...IDLE_INTERACTION }
-      viewport.classList.remove('is-dragging')
-      lastTimeRef.current = null
-
-      if (wasDragging && event?.type === 'pointerup') suppressClickRef.current = true
-      if (event?.type !== 'lostpointercapture' && viewport.hasPointerCapture(pointerId)) {
-        viewport.releasePointerCapture(pointerId)
-      }
-    }
-    const onPointerDown = (event) => {
-      if (!event.isPrimary) return
-      if (event.pointerType === 'mouse' && event.button !== 0) return
-      interactionRef.current = {
-        ...IDLE_INTERACTION,
-        pointerId: event.pointerId,
-        startX: event.clientX,
-        startY: event.clientY,
-        lastX: event.clientX,
-      }
-    }
-    const onPointerMove = (event) => {
-      const interaction = interactionRef.current
-      if (event.pointerId !== interaction.pointerId) return
-
-      const deltaX = event.clientX - interaction.startX
-      const deltaY = event.clientY - interaction.startY
-
-      if (!interaction.locked) {
-        const directionBias = 1.15
-        // Ignore finger jitter until the gesture is intentional.
-        if (Math.hypot(deltaX, deltaY) < 10) return
-        // Clearly vertical: let the page scroll.
-        if (Math.abs(deltaY) > Math.abs(deltaX) * directionBias) {
-          interaction.pointerId = null
-          lastTimeRef.current = null
-          return
-        }
-        // Still ambiguous: wait for the next move.
-        if (Math.abs(deltaX) <= Math.abs(deltaY) * directionBias) return
-
-        interaction.locked = true
-        interaction.dragging = true
-        viewport.setPointerCapture(event.pointerId)
-        viewport.classList.add('is-dragging')
-      }
-
-      if (event.cancelable) event.preventDefault()
-      offsetRef.current = normalize(offsetRef.current + event.clientX - interaction.lastX)
-      interaction.lastX = event.clientX
-      render()
-    }
-    const onLostPointerCapture = (event) => {
-      // Ignore bubbled capture-loss events from cards and links.
-      if (event.target !== viewport) return
-      finishInteraction(event)
-    }
-    const onClickCapture = (event) => {
-      if (!suppressClickRef.current) return
-      event.preventDefault()
-      event.stopPropagation()
-      suppressClickRef.current = false
-    }
-    const preventNativeDrag = (event) => event.preventDefault()
-
-    const onPointerEnter = (event) => {
-      if (event.pointerType === 'mouse') pauseRef.current.hover = true
-    }
-    const onPointerLeave = () => {
-      pauseRef.current.hover = false
-    }
-
-    // Keyboard users: bring the focused card fully into view.
-    const revealFocusedSlot = (slot) => {
-      viewport.scrollLeft = 0
-      const viewportWidth = viewport.clientWidth
-      const left = slot.offsetLeft + offsetRef.current
-      if (left >= 0 && left + slot.offsetWidth <= viewportWidth) return
-      const centered = -slot.offsetLeft + (viewportWidth - slot.offsetWidth) / 2
-      const minimum = -(track.scrollWidth - viewportWidth)
-      offsetRef.current = Math.min(0, Math.max(minimum, centered))
-      render()
-    }
-    const onFocusIn = (event) => {
-      pauseRef.current.focus = true
-      const slot = event.target.closest('.carousel-slot')
-      if (!slot) return
-      revealFocusedSlot(slot)
-      requestAnimationFrame(() => revealFocusedSlot(slot))
-    }
-    const onFocusOut = (event) => {
-      if (!viewport.contains(event.relatedTarget)) pauseRef.current.focus = false
-    }
-
-    const listeners = [
-      ['pointerdown', onPointerDown],
-      ['pointermove', onPointerMove],
-      ['pointerup', finishInteraction],
-      ['pointercancel', finishInteraction],
-      ['lostpointercapture', onLostPointerCapture],
-      ['dragstart', preventNativeDrag],
-      ['pointerenter', onPointerEnter],
-      ['pointerleave', onPointerLeave],
-      ['focusin', onFocusIn],
-      ['focusout', onFocusOut],
-    ]
-    listeners.forEach(([type, handler]) => viewport.addEventListener(type, handler))
-    viewport.addEventListener('click', onClickCapture, true)
-    motionQuery.addEventListener('change', updateMotionPreference)
-
-    updateMotionPreference()
-    measure()
-    const resizeObserver = new ResizeObserver(measure)
-    resizeObserver.observe(track)
-    frameRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      cancelAnimationFrame(frameRef.current)
-      resizeObserver.disconnect()
-      motionQuery.removeEventListener('change', updateMotionPreference)
-      listeners.forEach(([type, handler]) => viewport.removeEventListener(type, handler))
-      viewport.removeEventListener('click', onClickCapture, true)
-    }
-  }, [])
-
-  return (
-    <div
-      className="project-carousel"
-      data-reveal
-      ref={viewportRef}
-      role="region"
-      aria-label="Projects, newest first"
-    >
-      <div className="project-carousel-track" ref={trackRef}>
-        {[...projects, ...projects].map((project, index) => {
-          const isClone = index >= projects.length
-          return (
-            <div
-              className={`carousel-slot${isClone ? ' carousel-slot-clone' : ''}`}
-              key={`${project.id}-${isClone ? 'clone' : 'original'}`}
-              aria-hidden={isClone ? 'true' : undefined}
-            >
-              <BaseballCard project={project} isClone={isClone} />
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
 function ProjectsSection() {
   return (
     <section className="content-section" id="projects">
       <SectionHeader
         title="Projects"
-        description="Newest first. Click or tap a card, or press its Stats button, to flip it over for the stat line."
+        description="Strongest first. Pick a card to pull it out, then flip it over for the stat line."
       />
 
-      <ProjectCarousel />
+      <ProjectSpread />
 
       <div className="projects-footer" data-reveal style={{ '--reveal-delay': '0.12s' }}>
         <a
