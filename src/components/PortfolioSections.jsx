@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import chiLogo from '../ProjectLogos/ChiLogo.png'
 import eatThisLogo from '../ProjectLogos/EatThisLogo.png'
 import nl2sqlLogo from '../ProjectLogos/nl2sqlLogo.png'
@@ -7,71 +7,14 @@ import proPic from '../ProjectLogos/ProPic.jpeg'
 import CookieClickerLogo from '../ProjectLogos/CookieClicker.jpg'
 import MarketMapLogo from '../ProjectLogos/MarketMapLogo.png'
 import WallBuildingLogo from '../ProjectLogos/Box.png'
-import benitoJuarezHomepage from '../HomePages/BenitoJuarezHomepage.png'
-import networkXpertsHomepage from '../HomePages/NetworkXpertsHomepage.png'
-import maromPaintingHomepage from '../HomePages/MaromPaintingHomepage.png'
-import MGMFloorsHomepage from '../HomePages/MGMFloorsHomepage.png'
 import RobloxThumbnail from '../HomePages/Thumbnail.png'
-
-const aboutAreas = [
-  /* 
-    {
-      title: 'What I am doing now',
-      description:
-        'I am studying computer science at UIC and spending most of my time outside class building full-stack apps with real data, auth, and admin workflows.',
-    },
-    {
-      title: 'What I keep coming back to',
-      description:
-        'Baseball software, analytics tools, internal products, and AI-assisted interfaces where the output still needs to feel understandable and reliable.',
-    },
-    */
-  ]
-  
-
-const experienceEntries = [
-  {
-    id: 'mens-league-platform-developer',
-    title: 'Benito Juarez Men`s League - Software Developer (Feb 2026 - May 2026)',
-    label: '',
-    summary:
-      'Built software for a live baseball league platform and shipped improvements around real operating needs',
-    tags: ['Full-stack delivery', 'Workflow design', 'Mobile-first UX', 'Production support'],
-    highlights: [
-      'Built and iterated on a full-stack league management platform covering schedules, rosters, standings, and league updates.',
-      'Improved day-to-day workflows by making administrative and game-related actions faster to manage inside one system.',
-      'Focused on mobile-first UX so league staff and users could complete core tasks quickly on real devices.',
-      'Shipped production-ready changes, maintained the live system, and adjusted features around practical user feedback.',
-    ],
-  },
-  {
-    id: 'chicago-tire-and-auto-intern',
-    title: 'Software Engineer Intern \n(May 2024 - Aug 2024)',
-    label: 'Chicago Tire & Auto',
-    summary:
-      'Worked in a live automotive shop environment where attention to detail, adaptability, and steady execution mattered every day.',
-    tags: ['Operations support', 'Detail-oriented work', 'Hands-on execution', 'Team coordination'],
-    highlights: [
-      'Supported technical and operational tasks in a real automotive shop serving active day-to-day customer demand.',
-      "Contributed to the shop's daily workflow by developing a loaner vehicle tracking system",
-      'Built experience working reliably in an environment where team coordination and practical problem-solving mattered.',
-    ],
-  },
-  {
-    id: 'ups-package-handler',
-    title: 'UPS Package Handler (Aug 2022 - Present)',
-    label: '',
-    summary:
-      'Performed in a fast-paced logistics environment that depended on reliability, pace, and consistent execution under pressure.',
-    tags: ['Reliability', 'Execution under pressure', 'Team efficiency', 'Daily throughput'],
-    highlights: [
-      'Worked in a high-volume logistics environment with strict timing and consistent throughput demands.',
-      'Demonstrated reliability and physical work ethic across fast-paced shifts with little room for slowdowns.',
-      'Operated effectively under time pressure while maintaining pace, task accuracy, and day-to-day consistency.',
-      'Held primarily responsible for scanning and sorting bulk packages coming through the dock.',
-    ],
-  },
-]
+import {
+  clientProjects,
+  contactLinks,
+  coursework,
+  educationEntries,
+  experienceEntries,
+} from '../content.js'
 
 const featuredProject = {
   title: 'Build a Wall!',
@@ -198,84 +141,6 @@ const secondaryProjects = [
   },
 ]
 
-const clientProjects = [
-  {
-    id: 'MGMFLoors',
-    title: 'MGM Floors LLC',
-    description: 'A polished marketing website for a Chicagoland flooring contractor, featuring service pages, an interactive installation guide, project galleries, and a streamlined quote experience.',
-    screenshot: MGMFloorsHomepage,
-    screenshotAlt: 'Homepage screenshot for MGM Floors LLC.',
-    stack: ['JavaScript', 'HTML','CSS'],
-    liveUrl: 'https://mgmflooring.vercel.app/',
-    contextLabel: '',
-  },
-  {
-    id: 'benito-juarez-platform',
-    title: 'Benito Juarez Platform',
-    description: 'A full-stack operations platform for a local men\'s baseball league, with public-facing league pages and separate workflows for commissioners and team managers. Serves 1,000+ weekly visitors in season.',
-    screenshot: benitoJuarezHomepage,
-    screenshotAlt: 'Homepage screenshot of the Benito Juarez Men\'s League platform.',
-    stack: ['React', 'TypeScript', 'Vite', 'FastAPI', 'PostgreSQL'],
-    liveUrl: 'https://mens-league-web.vercel.app/',
-    contextLabel: '',
-  },
-  {
-    id: 'network-xperts-group',
-    title: 'Network Xperts Group',
-    description: 'A responsive business website for an IT consulting company, built around a bold visual identity with service information, pricing, company details, and lead-generation forms.',
-    screenshot: networkXpertsHomepage,
-    screenshotAlt: 'Homepage screenshot for Network Xperts Group.',
-    stack: ['React', 'TypeScript', 'Vite'],
-    liveUrl: "https://www.networkxpertsgroup.com/",
-    contextLabel: '',
-  },
-  {
-    id: 'marom-painting',
-    title: 'Marom Painting',
-    description: 'A React website made for a local painting business. This site includes a hero, services, about, contact form, and a more detailed portfolio with CRUD features backed by PostgreSQL.',
-    screenshot: maromPaintingHomepage,
-    screenshotAlt: 'Homepage screenshot for Marom Painting.',
-    stack: ['React', 'TypeScript', 'Vite', 'PostgreSQL'],
-    liveUrl: 'https://marompainting.org/',
-    contextLabel: '',
-  },
-]
-
-const educationEntries = [
-  {
-    school: 'University of Illinois Chicago',
-    degree: 'B.S. in Computer Science',
-    location: 'Chicago, IL',
-    timeline: 'Aug. 2025 – Present',
-    expectedGraduation: 'May 2028',
-  },
-  {
-    school: 'Moraine Valley Community College',
-    degree: 'Associate in Science',
-    location: 'Palos Hills, IL',
-    timeline: 'Aug. 2023 – May 2025',
-    expectedGraduation: 'Graduated',
-  },
-]
-
-const coursework = [
-  'Systems Programming',
-  'Computer Security',
-  'Cryptography',
-  'Data Structures & Algorithms',
-]
-
-const contactLinks = [
-  { label: 'Email', value: 'mgome20@uic.edu', href: 'mailto:mgome20@uic.edu' },
-  { label: 'GitHub', value: 'github.com/Mgomez1023', href: 'https://github.com/Mgomez1023' },
-  {
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/martin-gomez-',
-    href: 'https://www.linkedin.com/in/martin-gomez-',
-  },
-  { label: 'Resume', value: 'MartinGomez_Resume.pdf', href: '/MartinGomez_Resume.pdf' },
-]
-
 function useScrollReveal() {
   const contentRef = useRef(null)
 
@@ -322,7 +187,7 @@ function useScrollReveal() {
   return contentRef
 }
 
-function SectionHeader({ eyebrow, title, description }) {
+function SectionHeader({ title, description }) {
   return (
     <div className="section-header" data-reveal>
       <h2 className="section-title">{title}</h2>
@@ -374,153 +239,51 @@ function AboutSection() {
             <img className="about-photo" src={proPic} alt="Martin Gomez" />
           </div>
         </div>
-
-        <div className="info-grid">
-          {aboutAreas.map((area, index) => (
-            <article
-              className="info-card"
-              key={area.title}
-              data-reveal
-              style={{ '--reveal-delay': `${0.06 * index}s` }}
-            >
-              <h3>{area.title}</h3>
-              <p>{area.description}</p>
-            </article>
-          ))}
-        </div>
       </div>
     </section>
   )
 }
 
 function ExperienceSection() {
-  const [activeExperienceIndex, setActiveExperienceIndex] = useState(0)
-  const experienceTabRefs = useRef([])
-  const experiencePanelId = useId()
-  const activeExperience = experienceEntries[activeExperienceIndex]
-  const timelineProgress = `${(activeExperienceIndex / (experienceEntries.length - 1)) * 100}%`
-
-  const focusExperienceTab = (nextIndex) => {
-    const clampedIndex = Math.min(Math.max(nextIndex, 0), experienceEntries.length - 1)
-    const nextTab = experienceTabRefs.current[clampedIndex]
-
-    setActiveExperienceIndex(clampedIndex)
-    nextTab?.focus()
-  }
-
-  const handleTimelineKeyDown = (event, index) => {
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
-        event.preventDefault()
-        focusExperienceTab(index + 1)
-        break
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        event.preventDefault()
-        focusExperienceTab(index - 1)
-        break
-      case 'Home':
-        event.preventDefault()
-        focusExperienceTab(0)
-        break
-      case 'End':
-        event.preventDefault()
-        focusExperienceTab(experienceEntries.length - 1)
-        break
-      default:
-        break
-    }
-  }
-
   return (
     <section className="content-section" id="experience">
-      <SectionHeader
-        title="Experience"
-        description=""
-      />
+      <SectionHeader title="Experience" />
 
-      <div className="experience-showcase" data-reveal>
-        <div className="experience-timeline-shell">
-          <div
-            className="experience-timeline"
-            role="tablist"
-            aria-label="Experience timeline"
-          >
-            <div className="experience-timeline-track" aria-hidden="true">
-              <span
-                className="experience-timeline-progress"
-                style={{ width: timelineProgress }}
-              />
-            </div>
-
-            {experienceEntries.map((experience, index) => {
-              const isActive = index === activeExperienceIndex
-              const tabId = `${experiencePanelId}-tab-${experience.id}`
-
-              return (
-                <button
-                  className={`experience-timeline-button${isActive ? ' experience-timeline-button-active' : ''}`}
-                  type="button"
-                  key={experience.id}
-                  id={tabId}
-                  ref={(node) => {
-                    experienceTabRefs.current[index] = node
-                  }}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-controls={experiencePanelId}
-                  tabIndex={isActive ? 0 : -1}
-                  onClick={() => setActiveExperienceIndex(index)}
-                  onKeyDown={(event) => handleTimelineKeyDown(event, index)}
-                >
-                  <span className="experience-timeline-dot" aria-hidden="true" />
-                  <span className="experience-timeline-step">{`0${index + 1}`}</span>
-                  <span className="experience-timeline-title">{experience.title}</span>
-                  <span className="experience-timeline-meta">{experience.label}</span>
-                </button>
-              )
-            })}
-          </div>
+      <div className="lineup-card stitched" data-reveal>
+        <div className="lineup-head" aria-hidden="true">
+          <span>No.</span>
+          <span>Role</span>
+          <span className="lineup-head-dates">Dates</span>
         </div>
 
-        <div className="experience-panel-shell">
-          <article
-            className="experience-card"
-            key={activeExperience.id}
-            id={experiencePanelId}
-            role="tabpanel"
-            aria-labelledby={`${experiencePanelId}-tab-${activeExperience.id}`}
-          >
-            <div className="experience-card-top">
-              <div className="experience-card-header">
-                <p className="detail-label">Selected Role</p>
-                <h3>{activeExperience.title}</h3>
-                <p>{activeExperience.summary}</p>
-              </div>
-
-              <div className="experience-card-aside">
-                <p className="detail-label">Focus</p>
-                <div className="tag-row">
-                  {activeExperience.tags.map((tag) => (
-                    <span className="tag-pill" key={tag}>
-                      {tag}
-                    </span>
+        <ol className="lineup-list" role="list">
+          {experienceEntries.map((entry, index) => (
+            <li className="lineup-row" key={entry.id}>
+              <span className="lineup-number" aria-hidden="true">{index + 1}</span>
+              <div className="lineup-main">
+                <h3 className="lineup-title">
+                  <span className="visually-hidden">{`${index + 1}. `}</span>
+                  {entry.title}
+                </h3>
+                <p className="lineup-org">
+                  {entry.org}
+                  <span className="lineup-location">{entry.location}</span>
+                </p>
+                <ul className="lineup-notes">
+                  {entry.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
                   ))}
-                </div>
+                </ul>
+                {entry.link ? (
+                  <a className="text-link lineup-link" href={entry.link.href}>
+                    {entry.link.label}
+                  </a>
+                ) : null}
               </div>
-            </div>
-
-            <div className="project-card-block">
-              <span className="detail-label">Highlights</span>
-              <ul className="project-highlights experience-highlights">
-                {activeExperience.highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
-        </div>
+              <p className="lineup-dates">{entry.dates}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )
@@ -810,7 +573,6 @@ function ClientWorkSection() {
   return (
     <section className="content-section client-work-section" id="client-work">
       <SectionHeader
-        eyebrow="CLIENT WORK"
         title="Client Work"
         description="I’ve sought opportunities to build for real organizations with real users. These projects required me to translate business needs, operational challenges, and brand identities into practical digital products."
       />
@@ -829,7 +591,6 @@ function ClientWorkSection() {
                 </div>
 
                 <div className="client-project-content">
-                  <p className="detail-label">{project.contextLabel}</p>
                   <div className="client-project-summary">
                     <h3>{project.title}</h3>
                     <p>{project.description}</p>
@@ -843,7 +604,7 @@ function ClientWorkSection() {
                         <span>Visit Website</span>
                         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 14 14 6m-5 0h5v5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
                       </a>
-                    ) : <span className="client-project-unavailable">Visit Website - TODO: add verified URL</span>}
+                    ) : null}
                   </div>
                 </div>
               </article>
@@ -901,8 +662,8 @@ function EducationSection() {
                 </div>
 
                 <div>
-                  <p className="detail-label">Expected Graduation</p>
-                  <p>{entry.expectedGraduation}</p>
+                  <p className="detail-label">Status</p>
+                  <p>{entry.status}</p>
                 </div>
               </div>
             </div>
@@ -931,7 +692,7 @@ function ContactSection() {
     <section className="content-section content-section-last" id="contact">
       <SectionHeader
         title="Contact"
-        description="I am looking for software engineering internships and early-career roles where I can contribute on real product work, especially across frontend and full-stack development."
+        description="I am looking for software engineering and baseball-systems internships where I can contribute to real product work."
       />
 
       <div className="contact-layout">
