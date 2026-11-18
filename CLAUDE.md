@@ -39,16 +39,23 @@ Personal portfolio for Martin Gomez, a UIC computer science student applying for
 
 - Keep the chalk-line diamond reveal and diamond navigation as the entry point.
 - Experience is shown as a **lineup card** (batting order, numbered 1 to 3).
-- Projects are a **fanned card spread** of baseball cards, newest first, Pitch Whiff Model leading.
-  The scrolling carousel is retired.
+- Projects are a **fanned card spread** of baseball cards, strongest first (the order in the Projects list
+  below), Pitch Whiff Model leading. The scrolling carousel is retired.
+  - Only five cards are fanned: Pitch Whiff Model, Benito Juarez, Destiny Copilot, Sell Plushies, Loaner
+    Vehicle Management System. Everything else (Build a Wall!, PitchSearch, Cookie Clicker, Wall Building
+    Simulator) sits in a **"Minor leagues"** row below the fan.
+  - Fan poses are subtle: ±1–2° rotation and small vertical offsets.
+  - Strips show a short name; the overlay shows the full name.
+  - Years: only the dates listed in this file. Leave a year off rather than guess.
   - Desktop: horizontal fan. Each covered card shows a **peek strip** (project name, year, small mark).
     Rotation and offset are fixed per card via `:nth-child`, never random. Hover/focus on a card moves its
     neighbors aside.
   - Mobile (390px): vertical stack with the same peek-strip idea; tap pulls a card out.
   - Click/tap: the card lifts to center in an overlay (focus trapped, Esc closes, focus returns to the card).
-    The front shows name, one-liner, and tags; flipping shows the **stat line** (Stack, Role, Result, Link)
-    using only facts from the content section below. Buttons: the project link (GitHub or equivalent), and a
-    write-up link only if one exists.
+    The front shows the graphic/screenshot, year, name, one-liner, and tags; flipping shows the **stat line**
+    (Stack, Role, Result, Link) using only facts from the content section below. Buttons are labeled by link
+    type (GitHub, Live site, Play on Roblox, Live demo); no link, no button. A write-up button only if one
+    exists. Never link an AWS URL.
   - Flip uses a real <button> with aria-pressed; pure CSS 3D transform with backface-visibility. With
     prefers-reduced-motion, crossfade instead of rotating, and no lift or fan animation.
   - Accessibility: real buttons, arrow-key navigation across the spread, visible focus.
@@ -77,6 +84,8 @@ Personal portfolio for Martin Gomez, a UIC computer science student applying for
 - Destiny Copilot (Sep. 2026 to present): AI companion for Destiny 2 with Bungie OAuth, tool-calling FastAPI backend, GitHub Actions CI. Repo: https://github.com/Mgomez1023/DestinyCopilot
 - Sell Plushies (Oct. 2026 to present): Roblox idle-collector game, server-authoritative economy, Luau.
 - Older projects already on the site (Build a Wall!, PitchSearch, Loaner Vehicle Management System, Cookie Clicker in C++, Wall Building Simulator) may stay, but below the newer ones.
+- Pitch Whiff Model builds on PitchSearch; say so on its stat line. Its write-up is the repo README: https://github.com/Mgomez1023/pitch-sequencing-model#readme
+- Loaner Vehicle Management System: take tech and details only from this file or what Martin pastes. No demo button, no invented results.
 
 **Contact:** mgome20@uic.edu, linkedin.com/in/martin-gomez-, github.com/Mgomez1023. Do not add a phone number to the site unless it is already there.
 
