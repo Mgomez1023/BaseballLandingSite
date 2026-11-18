@@ -446,7 +446,7 @@ function ClientWorkSection() {
             style={{ transform: `translate3d(-${activeIndex * layout.slideStep}px, 0, 0)` }}
           >
             {clientProjects.map((project) => (
-              <article className="client-project-card" key={project.id}>
+              <article className="client-project-card stitched" key={project.id}>
                 <div className="client-project-screenshot">
                   <img src={project.screenshot} alt={project.screenshotAlt} />
                 </div>
@@ -499,7 +499,7 @@ function EducationSection() {
       <div className="education-grid">
         {educationEntries.map((entry, index) => (
           <article
-            className="education-card"
+            className="education-card stitched"
             key={entry.school}
             data-reveal
             style={{ '--reveal-delay': `${0.05 * index}s` }}
@@ -532,7 +532,7 @@ function EducationSection() {
         ))}
       </div>
 
-      <article className="education-card education-coursework-card" data-reveal>
+      <article className="education-card education-coursework-card stitched" data-reveal>
         <div className="education-coursework">
           <p className="detail-label">Relevant Coursework</p>
           <div className="tag-row">
@@ -557,13 +557,8 @@ function ContactSection() {
       />
 
       <div className="contact-layout">
-        <div className="contact-copy" data-reveal>
-          <p>
-            
-          </p>
-        </div>
 
-        <div className="contact-card" data-reveal style={{ '--reveal-delay': '0.06s' }}>
+        <div className="contact-card stitched" data-reveal style={{ '--reveal-delay': '0.06s' }}>
           {contactLinks.map((link) => (
             <a
               key={link.label}

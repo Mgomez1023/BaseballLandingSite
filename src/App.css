@@ -182,7 +182,7 @@
 
 .content-section {
   padding: clamp(3.5rem, 8vw, 6rem) 0;
-  border-top: 1px solid var(--rule);
+  border-top: 1.5px dashed var(--rule-strong);
   scroll-margin-top: 1rem;
 }
 
@@ -215,16 +215,18 @@
 .section-title {
   margin: 0;
   color: var(--navy);
-  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
-  line-height: 1.08;
-  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 
 .section-description {
   margin: 0;
   color: var(--navy-soft);
-  line-height: 1.8;
-  max-width: 38rem;
+  line-height: 1.75;
+  max-width: 40rem;
 }
 
 .about-layout {
@@ -263,26 +265,27 @@
   height: 100%;
   object-fit: cover;
   border-radius: 999px;
-  border: 1px solid var(--rule);
+  border: 2px solid var(--navy);
+  outline: 1.5px dashed var(--navy);
+  outline-offset: 5px;
 
 }
 
 .education-card,
 .contact-card {
   background: var(--cream-deep);
-  border: 1px solid var(--rule);
-  border-radius: 1.25rem;
+  border-radius: 14px;
 
 }
 
 .education-overview h3 {
   margin: 0 0 0.7rem;
   color: var(--navy);
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.2;
 }
 
-.contact-copy p,
 .education-meta p:last-child {
   margin: 0;
   color: var(--navy-soft);
@@ -309,32 +312,30 @@
   align-items: center;
   min-height: 2rem;
   padding: 0.35rem 0.75rem;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-strong);
   border-radius: 999px;
   background: transparent;
-  color: var(--navy-soft);
-  font-size: 0.88rem;
+  color: var(--navy);
+  font-size: 0.84rem;
   line-height: 1.2;
 }
 
 .text-link {
   color: var(--navy);
   text-decoration: none;
-  border-bottom: 1px solid var(--rule-strong);
-  padding-bottom: 0.18rem;
-  transition: color 180ms ease, border-color 180ms ease;
+  font-weight: 600;
+  border-bottom: 1.5px solid var(--navy);
+  padding-bottom: 0.15rem;
 }
 
-.text-link:hover,
-.text-link:focus-visible {
-  color: var(--navy-soft);
-  border-color: var(--navy);
+.text-link:hover {
+  border-bottom-style: dashed;
 }
 
 .projects-footer {
   display: flex;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .client-carousel {
@@ -361,10 +362,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  overflow: hidden;
-  background: var(--cream-deep);
-  border: 1px solid var(--rule);
-  border-radius: 1.25rem;
+  padding: 0.9rem;
 
 }
 
@@ -373,16 +371,9 @@
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--cream);
-  border-bottom: 1px solid var(--rule);
+  border: 1.5px solid var(--navy);
+  border-radius: 8px;
 
-}
-
-.client-project-screenshot::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: transparent;
-  pointer-events: none;
 }
 
 .client-project-screenshot img {
@@ -397,8 +388,8 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 1.1rem;
-  padding: 1.35rem;
+  gap: 1rem;
+  padding: 1rem 0.4rem 0.4rem;
 }
 
 .client-project-summary {
@@ -409,8 +400,9 @@
 .client-project-summary h3 {
   margin: 0;
   color: var(--navy);
-  font-size: 1.12rem;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.2;
 }
 
 .client-project-summary p {
@@ -447,12 +439,12 @@
   height: 2.75rem;
   padding: 0;
   place-items: center;
-  border: 1px solid var(--rule);
+  border: 1.5px solid var(--navy);
   border-radius: 999px;
-  background: var(--wash);
+  background: var(--cream);
   color: var(--navy);
   cursor: pointer;
-  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
 .client-carousel-button svg {
@@ -462,15 +454,8 @@
 
 .client-carousel-button:hover:not(:disabled),
 .client-carousel-button:focus-visible {
-  background: var(--wash);
-  border-color: var(--rule-strong);
-  color: var(--navy-soft);
-  transform: translateY(-1px);
-}
-
-.client-carousel-button:focus-visible {
-  outline: 2px solid var(--navy);
-  outline-offset: 3px;
+  background: var(--navy);
+  color: var(--cream);
 }
 
 .client-carousel-button:disabled {
@@ -520,15 +505,10 @@
   align-items: start;
 }
 
-.contact-copy {
-  display: none;
-  padding-top: 0.2rem;
-}
-
 .contact-card {
   justify-self: center;
   width: min(100%, 42rem);
-  overflow: hidden;
+  padding: 0.75rem;
 }
 
 .contact-row {
@@ -536,11 +516,13 @@
   justify-content: space-between;
   gap: 1rem;
   align-items: baseline;
-  padding: 1.1rem 1.25rem;
+  padding: 1.1rem 1.1rem;
   color: var(--navy);
+  font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid var(--rule);
-  transition: background-color 180ms ease, color 180ms ease;
+  border-bottom: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  transition: background-color 180ms ease;
 }
 
 .contact-row:last-child {
@@ -550,11 +532,16 @@
 .contact-row:hover,
 .contact-row:focus-visible {
   background: var(--wash);
-  color: var(--navy-soft);
+}
+
+.contact-row:hover .contact-value {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .contact-value {
   color: var(--navy-soft);
+  font-weight: 400;
   text-align: right;
   word-break: break-word;
 }
@@ -1091,10 +1078,6 @@
 
   .client-project-card {
     flex-basis: 100%;
-  }
-
-  .client-project-content {
-    padding: 1.25rem;
   }
 
   .client-carousel-controls {
