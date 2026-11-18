@@ -1,145 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
-import chiLogo from '../ProjectLogos/ChiLogo.png'
-import eatThisLogo from '../ProjectLogos/EatThisLogo.png'
-import nl2sqlLogo from '../ProjectLogos/nl2sqlLogo.png'
-import pitchSearchLogo from '../ProjectLogos/PitchSearchLogo.png'
 import proPic from '../ProjectLogos/ProPic.jpeg'
-import CookieClickerLogo from '../ProjectLogos/CookieClicker.jpg'
-import MarketMapLogo from '../ProjectLogos/MarketMapLogo.png'
-import WallBuildingLogo from '../ProjectLogos/Box.png'
-import RobloxThumbnail from '../HomePages/Thumbnail.png'
+import { BaseballCard } from './BaseballCard.jsx'
 import {
   clientProjects,
   contactLinks,
   coursework,
   educationEntries,
   experienceEntries,
+  projects,
 } from '../content.js'
-
-const featuredProject = {
-  title: 'Build a Wall!',
-  thumbnail: RobloxThumbnail,
-  thumbnailAlt:
-    'Build a Wall Roblox game showing a player building a package wall in an industrial facility',
-  description:
-    'A Roblox package-handling tycoon inspired by my experience working at UPS. Players claim a facility, install workers, route packages, earn cash, complete challenges, and upgrade their operation.',
-  stack: [
-    'Roblox Studio',
-    'Luau',
-  ],
-  summary: [
-    'Players claim and develop their own package-handling facility using collectible workers that generate income.',
-    'Progression combines worker upgrades, backpack and movement upgrades, challenges, minigames, and rebirths.',
-    'The game includes a hands-on wall-building minigame inspired by the real process of loading package trailers.',
-  ],
-  highlights: [
-    'Built server-authoritative systems for base claiming, purchases, worker installation, package routing, and progression.',
-    'Created persistent player profiles for cash, upgrades, inventory, challenges, rewards, and rebirth progress.',
-    'Designed custom industrial UI, responsive controls, minigames, visual package systems, and performance-conscious client effects.',
-  ],
-  links: [
-    {
-      label: 'Play Game',
-      href: 'https://www.roblox.com/games/75842793514825/Build-a-Wall',
-    },
-  ],
-}
-
-const secondaryProjects = [
-  {
-    title: 'Loaner Vehicle Management System',
-    logo: chiLogo,
-    logoAlt: 'Chicago Tire and Auto logo',
-    description:
-      'A workflow system for Chicago Tire and Auto that digitized loaner vehicle checkout and return for both staff and customers.',
-    context:
-      'Built during an internship to replace paper-heavy tracking with QR-accessible forms, signature capture, and automatic contract delivery.',
-    stack: ['WordPress', 'Elementor Pro', 'jQuery', 'Google Apps Script', 'Google Sheets'],
-    links: [{ label: 'GitHub', href: 'https://github.com/Mgomez1023/Loaner-Vehicle-Project' }],
-  },
-  {
-    title: 'AI Market Map',
-    logo: MarketMapLogo,
-    logoAlt: 'Market Map logo',
-    description:
-      'Allows users to generate an accurate graph designed to visualize oppurtunites with a prompt. Uses Tavily API for real-time web searches and OpenAI\'s mini model for quick interpretation.',
-    context:
-      'This project was built for UIC\'s CS Expo in which students were able to show off their projects in a science fair like fashion.',
-    stack: ['React', 'TypeScript', 'FastAPI', 'Tavily API', 'OpenAI API' ],
-    links: [
-      { label: 'GitHub', href: 'https://github.com/Mgomez1023/Cookie-Clicker' },
-    ],
-  },
-  {
-    title: 'NL to SQL Explorer',
-    logo: nl2sqlLogo,
-    logoAlt: 'NL to SQL Explorer logo',
-    description:
-      'A full-stack analytics app that turns plain-English questions into validated SQL over uploaded datasets.',
-    context:
-      'I built this around transparency: users can inspect the schema, review the generated query, and see the results without the AI feeling like a black box.',
-    stack: ['React', 'TypeScript', 'FastAPI', 'SQL', 'OpenAI API', 'Vercel'],
-    links: [
-      { label: 'Demo', href: 'https://nl2sql-frontend-jet.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/Mgomez1023/NL2SQL' },
-    ],
-  },
-  {
-    title: 'PitchSearch',
-    logo: pitchSearchLogo,
-    logoAlt: 'PitchSearch logo',
-    description:
-      'A pitch-level MLB analytics tool for exploring pitch tendencies, filters, and player-level breakdowns.',
-    context:
-      'This started as a Washington Nationals interview project, so I focused on making the baseball data usable quickly instead of overcomplicating the interface.',
-    stack: ['React', 'TypeScript', 'FastAPI', 'SQLite', 'Docker', 'Vercel'],
-    links: [
-      { label: 'Demo', href: 'https://pitch-search.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/Mgomez1023/PitchSearch' },
-    ],
-  },
-  {
-    title: 'EatThis - Food Picker',
-    logo: eatThisLogo,
-    logoAlt: 'EatThis logo',
-    description:
-      'A restaurant discovery app built to make the question of where to eat faster and less annoying.',
-    context:
-      'The project is intentionally lightweight: simple local search, cleaner place details, and a shorter path from browsing to picking a spot.',
-    stack: ['React', 'Vite', 'Google Places API', 'Tailwind CSS', 'Vercel'],
-    links: [
-      { label: 'Demo', href: 'https://eat-this-app-mgomez1023s-projects.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/Mgomez1023/EatThis-App' },
-    ],
-  },
-  {
-    title: 'Cookie Clicker in C++',
-    logo: CookieClickerLogo,
-    logoAlt: 'CookieClicker logo',
-    description:
-      'The popular Cookie Clicker game remade in C++ using the SFML graphics library.',
-    context:
-      'This project was built as my final project for my Advanced Computer Science class. I presented this project through a live classroom demonstration.',
-    stack: ['C++', 'SFML'],
-    links: [
-      { label: 'GitHub', href: 'https://github.com/Mgomez1023/Cookie-Clicker' },
-    ],
-  },
-  {
-    title: 'Wall Building Simulator',
-    logo: WallBuildingLogo,
-    logoAlt: 'WallBuilder logo',
-    description:
-      'A UPS-inspired 2D wall building game built with TypeScript. Players receive increasingly random packages, build walls, and aim for high scores.',
-    context:
-      'Working at UPS, I always thought the concept of loading a trailer would actually make a fun game. I built this to be quick, fun, and replayable.',
-    stack: ['TypeScript'],
-    links: [
-      { label: 'Demo', href: 'https://wall-building-simulator.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/Mgomez1023/WallBuildingSimulator' },
-    ],
-  },
-]
 
 function useScrollReveal() {
   const contentRef = useRef(null)
@@ -192,26 +61,6 @@ function SectionHeader({ title, description }) {
     <div className="section-header" data-reveal>
       <h2 className="section-title">{title}</h2>
       {description ? <p className="section-description">{description}</p> : null}
-    </div>
-  )
-}
-
-function ProjectLogo({ logo, logoAlt, placeholder, featured = false }) {
-  const frameClassName = featured
-    ? 'project-logo-frame project-logo-frame-featured'
-    : 'project-logo-frame'
-
-  if (logo) {
-    return (
-      <div className={frameClassName}>
-        <img className="project-logo-image" src={logo} alt={logoAlt} />
-      </div>
-    )
-  }
-
-  return (
-    <div className={`${frameClassName} project-logo-frame-placeholder`} aria-label="Project logo placeholder">
-      <span className="project-logo-placeholder">{placeholder}</span>
     </div>
   )
 }
@@ -289,7 +138,11 @@ function ExperienceSection() {
   )
 }
 
-function SecondaryProjectCarousel() {
+const IDLE_INTERACTION = { pointerId: null, startX: 0, startY: 0, lastX: 0, dragging: false, locked: false }
+
+// The rolling view of all projects. It drifts on its own, can be dragged,
+// and pauses while hovered, focused, or while any card shows its stat line.
+function ProjectCarousel() {
   const viewportRef = useRef(null)
   const trackRef = useRef(null)
   const offsetRef = useRef(0)
@@ -297,226 +150,234 @@ function SecondaryProjectCarousel() {
   const frameRef = useRef(null)
   const lastTimeRef = useRef(null)
   const reducedMotionRef = useRef(false)
-  const interactionRef = useRef({ pointerId: null, startX: 0, startY: 0, lastX: 0, dragging: false, locked: false })
+  const pauseRef = useRef({ hover: false, focus: false })
+  const interactionRef = useRef({ ...IDLE_INTERACTION })
   const suppressClickRef = useRef(false)
 
   useEffect(() => {
     const viewport = viewportRef.current
     const track = trackRef.current
     if (!viewport || !track) return undefined
-    const normalize = (offset) => { const width = loopWidthRef.current; if (!width) return offset; const remainder = offset % width; return remainder > 0 ? remainder - width : remainder }
-    const render = () => { track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)` }
+
+    const normalize = (offset) => {
+      const width = loopWidthRef.current
+      if (!width) return offset
+      const remainder = offset % width
+      return remainder > 0 ? remainder - width : remainder
+    }
+    const render = () => {
+      track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`
+    }
     const measure = () => {
-      const first = track.querySelector('.project-card-secondary')
-      const clone = track.querySelector('.project-card-secondary-clone')
+      const first = track.querySelector('.carousel-slot')
+      const clone = track.querySelector('.carousel-slot-clone')
       if (!first || !clone) return
       loopWidthRef.current = clone.offsetLeft - first.offsetLeft
       offsetRef.current = normalize(offsetRef.current)
       render()
     }
+    const isPaused = () =>
+      reducedMotionRef.current ||
+      interactionRef.current.pointerId !== null ||
+      pauseRef.current.hover ||
+      pauseRef.current.focus ||
+      track.querySelector('.bb-card.is-flipped') !== null
+
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const updateMotionPreference = () => { reducedMotionRef.current = motionQuery.matches; lastTimeRef.current = null }
+    const updateMotionPreference = () => {
+      reducedMotionRef.current = motionQuery.matches
+      lastTimeRef.current = null
+    }
     const animate = (time) => {
-      if (!reducedMotionRef.current && interactionRef.current.pointerId === null && loopWidthRef.current) {
-        if (lastTimeRef.current !== null) { const elapsed = Math.min(time - lastTimeRef.current, 100); offsetRef.current = normalize(offsetRef.current - (loopWidthRef.current * elapsed) / 48000); render() }
+      if (!isPaused() && loopWidthRef.current) {
+        if (lastTimeRef.current !== null) {
+          const elapsed = Math.min(time - lastTimeRef.current, 100)
+          offsetRef.current = normalize(offsetRef.current - (loopWidthRef.current * elapsed) / 64000)
+          render()
+        }
         lastTimeRef.current = time
-      } else lastTimeRef.current = null
+      } else {
+        lastTimeRef.current = null
+      }
       frameRef.current = requestAnimationFrame(animate)
     }
+
     const finishInteraction = (event) => {
       const interaction = interactionRef.current
-
       if (interaction.pointerId === null) return
       if (event && event.pointerId !== interaction.pointerId) return
 
-      const pointerId = interaction.pointerId
-      const wasDragging = interaction.dragging
-
-      // Clear state before releasing capture because release can emit
-      // another lostpointercapture event.
-      interactionRef.current = {
-        pointerId: null,
-        startX: 0,
-        startY: 0,
-        lastX: 0,
-        dragging: false,
-        locked: false
-      }
-
+      const { pointerId, dragging: wasDragging } = interaction
+      // Clear state before releasing capture: release can emit another lostpointercapture.
+      interactionRef.current = { ...IDLE_INTERACTION }
       viewport.classList.remove('is-dragging')
       lastTimeRef.current = null
 
-      if (wasDragging && event?.type === 'pointerup') {
-        suppressClickRef.current = true
-      }
-
-      if (
-        event?.type !== 'lostpointercapture' &&
-        viewport.hasPointerCapture(pointerId)
-      ) {
+      if (wasDragging && event?.type === 'pointerup') suppressClickRef.current = true
+      if (event?.type !== 'lostpointercapture' && viewport.hasPointerCapture(pointerId)) {
         viewport.releasePointerCapture(pointerId)
       }
     }
     const onPointerDown = (event) => {
       if (!event.isPrimary) return
       if (event.pointerType === 'mouse' && event.button !== 0) return
-
       interactionRef.current = {
+        ...IDLE_INTERACTION,
         pointerId: event.pointerId,
         startX: event.clientX,
         startY: event.clientY,
         lastX: event.clientX,
-        dragging: false,
-        locked: false
       }
     }
     const onPointerMove = (event) => {
       const interaction = interactionRef.current
-
       if (event.pointerId !== interaction.pointerId) return
 
       const deltaX = event.clientX - interaction.startX
       const deltaY = event.clientY - interaction.startY
-      const absoluteX = Math.abs(deltaX)
-      const absoluteY = Math.abs(deltaY)
 
       if (!interaction.locked) {
-        const movementDistance = Math.hypot(deltaX, deltaY)
-        const directionThreshold = 10
         const directionBias = 1.15
-
-        // Ignore normal finger jitter until the gesture is intentional.
-        if (movementDistance < directionThreshold) return
-
-        // Clearly vertical: abandon carousel control and let the page scroll.
-        if (absoluteY > absoluteX * directionBias) {
+        // Ignore finger jitter until the gesture is intentional.
+        if (Math.hypot(deltaX, deltaY) < 10) return
+        // Clearly vertical: let the page scroll.
+        if (Math.abs(deltaY) > Math.abs(deltaX) * directionBias) {
           interaction.pointerId = null
           lastTimeRef.current = null
           return
         }
+        // Still ambiguous: wait for the next move.
+        if (Math.abs(deltaX) <= Math.abs(deltaY) * directionBias) return
 
-        // Direction is still ambiguous. Wait for another movement event.
-        if (absoluteX <= absoluteY * directionBias) return
-
-        // Clearly horizontal: begin controlling the carousel.
         interaction.locked = true
         interaction.dragging = true
-
         viewport.setPointerCapture(event.pointerId)
         viewport.classList.add('is-dragging')
       }
 
-      if (event.cancelable) {
-        event.preventDefault()
-      }
-
-      const movementX = event.clientX - interaction.lastX
-
-      offsetRef.current = normalize(
-        offsetRef.current + movementX
-      )
-
+      if (event.cancelable) event.preventDefault()
+      offsetRef.current = normalize(offsetRef.current + event.clientX - interaction.lastX)
       interaction.lastX = event.clientX
       render()
-}
+    }
     const onLostPointerCapture = (event) => {
-      // Ignore bubbled capture-loss events from cards, links, and children.
+      // Ignore bubbled capture-loss events from cards and links.
       if (event.target !== viewport) return
-
       finishInteraction(event)
     }
-    const onClickCapture = (event) => { if (suppressClickRef.current) { event.preventDefault(); event.stopPropagation(); suppressClickRef.current = false } }
+    const onClickCapture = (event) => {
+      if (!suppressClickRef.current) return
+      event.preventDefault()
+      event.stopPropagation()
+      suppressClickRef.current = false
+    }
     const preventNativeDrag = (event) => event.preventDefault()
-    viewport.addEventListener('pointerdown', onPointerDown); viewport.addEventListener('pointermove', onPointerMove); viewport.addEventListener('pointerup', finishInteraction); viewport.addEventListener('pointercancel', finishInteraction); viewport.addEventListener('lostpointercapture', onLostPointerCapture); viewport.addEventListener('click', onClickCapture, true); viewport.addEventListener('dragstart', preventNativeDrag)
+
+    const onPointerEnter = (event) => {
+      if (event.pointerType === 'mouse') pauseRef.current.hover = true
+    }
+    const onPointerLeave = () => {
+      pauseRef.current.hover = false
+    }
+
+    // Keyboard users: bring the focused card fully into view.
+    const revealFocusedSlot = (slot) => {
+      viewport.scrollLeft = 0
+      const viewportWidth = viewport.clientWidth
+      const left = slot.offsetLeft + offsetRef.current
+      if (left >= 0 && left + slot.offsetWidth <= viewportWidth) return
+      const centered = -slot.offsetLeft + (viewportWidth - slot.offsetWidth) / 2
+      const minimum = -(track.scrollWidth - viewportWidth)
+      offsetRef.current = Math.min(0, Math.max(minimum, centered))
+      render()
+    }
+    const onFocusIn = (event) => {
+      pauseRef.current.focus = true
+      const slot = event.target.closest('.carousel-slot')
+      if (!slot) return
+      revealFocusedSlot(slot)
+      requestAnimationFrame(() => revealFocusedSlot(slot))
+    }
+    const onFocusOut = (event) => {
+      if (!viewport.contains(event.relatedTarget)) pauseRef.current.focus = false
+    }
+
+    const listeners = [
+      ['pointerdown', onPointerDown],
+      ['pointermove', onPointerMove],
+      ['pointerup', finishInteraction],
+      ['pointercancel', finishInteraction],
+      ['lostpointercapture', onLostPointerCapture],
+      ['dragstart', preventNativeDrag],
+      ['pointerenter', onPointerEnter],
+      ['pointerleave', onPointerLeave],
+      ['focusin', onFocusIn],
+      ['focusout', onFocusOut],
+    ]
+    listeners.forEach(([type, handler]) => viewport.addEventListener(type, handler))
+    viewport.addEventListener('click', onClickCapture, true)
     motionQuery.addEventListener('change', updateMotionPreference)
-    updateMotionPreference(); measure()
-    const resizeObserver = new ResizeObserver(measure); resizeObserver.observe(track)
+
+    updateMotionPreference()
+    measure()
+    const resizeObserver = new ResizeObserver(measure)
+    resizeObserver.observe(track)
     frameRef.current = requestAnimationFrame(animate)
+
     return () => {
-      cancelAnimationFrame(frameRef.current); resizeObserver.disconnect(); motionQuery.removeEventListener('change', updateMotionPreference)
-      viewport.removeEventListener('pointerdown', onPointerDown); viewport.removeEventListener('pointermove', onPointerMove); viewport.removeEventListener('pointerup', finishInteraction); viewport.removeEventListener('pointercancel', finishInteraction); viewport.removeEventListener('lostpointercapture', onLostPointerCapture); viewport.removeEventListener('click', onClickCapture, true); viewport.removeEventListener('dragstart', preventNativeDrag)
+      cancelAnimationFrame(frameRef.current)
+      resizeObserver.disconnect()
+      motionQuery.removeEventListener('change', updateMotionPreference)
+      listeners.forEach(([type, handler]) => viewport.removeEventListener(type, handler))
+      viewport.removeEventListener('click', onClickCapture, true)
     }
   }, [])
 
-  return <div className="secondary-project-carousel" data-reveal ref={viewportRef} aria-label="Secondary projects carousel"><div className="secondary-project-carousel-track" ref={trackRef}>{[...secondaryProjects, ...secondaryProjects].map((project, index) => {
-    const isClone = index >= secondaryProjects.length
-    const originalIndex = index % secondaryProjects.length
-    return <article className={`project-card project-card-secondary${isClone ? ' project-card-secondary-clone' : ''}`} key={`${project.title}-${isClone ? 'clone' : 'original'}`} aria-hidden={isClone ? 'true' : undefined} data-reveal={isClone ? undefined : ''} style={isClone ? undefined : { '--reveal-delay': `${0.08 + 0.06 * originalIndex}s` }}><div className="project-title-row"><ProjectLogo logo={project.logo} logoAlt={project.logoAlt} placeholder={project.placeholder} /><div className="project-card-header"><h3>{project.title}</h3><p>{project.description}</p></div></div><div className="project-card-block"><span className="detail-label">Context</span><p className="project-context">{project.context}</p></div><div className="project-card-block"><span className="detail-label">Tech Stack</span><div className="tag-row">{project.stack.map((item) => <span className="tag-pill" key={item}>{item}</span>)}</div></div><div className="project-links">{project.links.map((link) => <a key={link.label} className="text-link" href={link.href} target="_blank" rel="noreferrer" tabIndex={isClone ? -1 : undefined}>{link.label}</a>)}</div></article>
-  })}</div></div>
+  return (
+    <div
+      className="project-carousel"
+      data-reveal
+      ref={viewportRef}
+      role="region"
+      aria-label="Projects, newest first"
+    >
+      <div className="project-carousel-track" ref={trackRef}>
+        {[...projects, ...projects].map((project, index) => {
+          const isClone = index >= projects.length
+          return (
+            <div
+              className={`carousel-slot${isClone ? ' carousel-slot-clone' : ''}`}
+              key={`${project.id}-${isClone ? 'clone' : 'original'}`}
+              aria-hidden={isClone ? 'true' : undefined}
+            >
+              <BaseballCard project={project} isClone={isClone} />
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
 
 function ProjectsSection() {
-  const playLink = featuredProject.links.find((link) =>
-    link.href && !link.href.startsWith('TODO_')
-  )
-
   return (
     <section className="content-section" id="projects">
       <SectionHeader
         title="Projects"
-        description=""
+        description="Newest first. Click or tap a card, or press its Stats button, to flip it over for the stat line."
       />
 
-      <article className="featured-project-card" data-reveal>
-        <div className="featured-project-layout">
-          <div className="featured-project-visual">
-            <div className="featured-project-thumbnail">
-              <img src={featuredProject.thumbnail} alt={featuredProject.thumbnailAlt} />
-            </div>
-            <div className="featured-project-intro">
-              <p className="detail-label">Featured Project</p>
-              <h3>{featuredProject.title}</h3>
-              <p className="featured-project-description">{featuredProject.description}</p>
-            </div>
-            <div className="tag-row">
-              {featuredProject.stack.map((item) => (
-                <span className="tag-pill" key={item}>{item}</span>
-              ))}
-            </div>
-            <div className="featured-project-actions">
-              {playLink ? (
-                <a className="text-link featured-project-play-link" href={playLink.href} target="_blank" rel="noreferrer" aria-label={`Play ${featuredProject.title} on Roblox`}>
-                  <span>{playLink.label}</span>
-                  <svg viewBox="0 0 20 20" aria-hidden="true">
-                    <path d="M6 14 14 6m-5 0h5v5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-              ) : (
-                <span className="featured-project-coming-soon">Coming Soon</span>
-              )}
-            </div>
-          </div>
-          <div className="featured-project-details">
-            <div className="featured-project-detail-block">
-              <p className="detail-label">Gameplay</p>
-              <div className="featured-project-gameplay">
-                {featuredProject.summary.map((item) => <p key={item}>{item}</p>)}
-              </div>
-            </div>
-            <div className="featured-project-detail-block">
-              <p className="detail-label">What I Built</p>
-              <ul className="project-highlights">
-                {featuredProject.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </article>
+      <ProjectCarousel />
 
-      <SecondaryProjectCarousel />
       <div className="projects-footer" data-reveal style={{ '--reveal-delay': '0.12s' }}>
         <a
-          className="projects-github-button"
+          className="button-solid"
           href="https://github.com/Mgomez1023"
           target="_blank"
           rel="noreferrer"
         >
           <span>More on my GitHub</span>
-          <svg
-            className="projects-github-button-icon"
-            viewBox="0 0 20 20"
-            aria-hidden="true"
-          >
+          <svg className="button-icon" viewBox="0 0 20 20" aria-hidden="true">
             <path
               d="M4.5 10h10m0 0-4-4m4 4-4 4"
               fill="none"

@@ -267,7 +267,6 @@
 
 }
 
-.project-card,
 .education-card,
 .contact-card {
   background: var(--cream-deep);
@@ -276,8 +275,6 @@
 
 }
 
-.project-card h3,
-.featured-project-card h3,
 .education-overview h3 {
   margin: 0 0 0.7rem;
   color: var(--navy);
@@ -285,256 +282,11 @@
   letter-spacing: -0.02em;
 }
 
-.project-card-header p,
 .contact-copy p,
 .education-meta p:last-child {
   margin: 0;
   color: var(--navy-soft);
   line-height: 1.75;
-}
-
-.project-card {
-  display: grid;
-  gap: 1.35rem;
-  padding: 1.5rem;
-}
-
-.featured-project-card {
-  display: grid;
-  gap: 1.5rem;
-  padding: clamp(1.5rem, 3vw, 2rem);
-  margin-bottom: 1.25rem;
-  background: var(--cream-deep);
-  border: 1px solid var(--rule);
-  border-radius: 1.25rem;
-
-}
-
-.featured-project-layout {
-  display: grid;
-  gap: clamp(1.75rem, 3vw, 2.5rem);
-  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
-  align-items: start;
-}
-
-.featured-project-visual,
-.featured-project-details,
-.featured-project-detail-block,
-.featured-project-gameplay {
-  display: grid;
-}
-
-.featured-project-visual {
-  min-width: 0;
-  gap: 1.25rem;
-}
-
-.featured-project-thumbnail {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border: 1px solid var(--rule);
-  border-radius: 1rem;
-  background: var(--cream);
-
-}
-
-.featured-project-thumbnail img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.featured-project-intro {
-  display: grid;
-  gap: 0.7rem;
-}
-
-.featured-project-intro h3 {
-  margin: 0;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.1;
-}
-
-.featured-project-description,
-.featured-project-gameplay p,
-.project-context {
-  margin: 0;
-  color: var(--navy-soft);
-  line-height: 1.75;
-}
-
-.featured-project-actions {
-  display: flex;
-  align-items: center;
-  min-height: 2.25rem;
-  padding-top: 0.1rem;
-}
-
-.featured-project-play-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: var(--navy-soft);
-  font-weight: 700;
-}
-
-.featured-project-play-link svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-.featured-project-coming-soon {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.25rem;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: var(--wash);
-  color: var(--muted);
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.featured-project-details {
-  min-width: 0;
-  gap: 1.75rem;
-  padding-left: clamp(1.25rem, 2.5vw, 2rem);
-  border-left: 1px solid var(--rule);
-}
-
-.featured-project-detail-block {
-  gap: 0.9rem;
-}
-
-.featured-project-gameplay {
-  gap: 0.85rem;
-}
-
-.secondary-project-carousel {
-  position: relative;
-  overflow: hidden;
-  padding: 0.25rem 0;
-  touch-action: pan-y pinch-zoom;
-  cursor: grab;
-}
-
-.secondary-project-carousel::before,
-.secondary-project-carousel::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 4.5rem;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.secondary-project-carousel::before {
-  left: 0;
-  background: var(--cream);
-}
-
-.secondary-project-carousel::after {
-  right: 0;
-  background: var(--cream);
-}
-
-.secondary-project-carousel-track {
-  display: flex;
-  align-items: stretch;
-  gap: 1.25rem;
-  width: max-content;
-  will-change: transform;
-}
-.secondary-project-carousel.is-dragging {
-  cursor: grabbing;
-}
-
-.secondary-project-carousel.is-dragging,
-.secondary-project-carousel.is-dragging * {
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.secondary-project-carousel,
-.secondary-project-carousel-track,
-.project-card-secondary {
-  touch-action: pan-y;
-}
-
-.project-card-secondary {
-  flex: 0 0 22.5rem;
-  width: 22.5rem;
-  min-width: 22.5rem;
-  max-width: 22.5rem;
-  scroll-snap-align: start;
-}
-
-.project-card-secondary.project-card-secondary-clone {
-  aria-hidden: true;
-}
-
-.project-title-row {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-}
-
-.project-title-row-featured {
-  align-items: start;
-}
-
-.project-logo-frame {
-  display: grid;
-  place-items: center;
-  width: 4.1rem;
-  aspect-ratio: 1;
-  padding: 0.55rem;
-  border-radius: 1rem;
-  background: transparent;
-  border: 1px solid var(--rule);
-  overflow: hidden;
-}
-
-.project-logo-frame-featured {
-  width: 5rem;
-  border-radius: 1.1rem;
-}
-
-.project-logo-frame-placeholder {
-  background: transparent;
-}
-
-.project-logo-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 0.7rem;
-}
-
-.project-logo-placeholder {
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.project-card-header {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.project-card-block {
-  display: grid;
-  gap: 0.8rem;
 }
 
 .detail-label {
@@ -565,24 +317,6 @@
   line-height: 1.2;
 }
 
-.project-highlights {
-  margin: 0;
-  padding-left: 1.15rem;
-  color: var(--navy-soft);
-  line-height: 1.7;
-}
-
-.project-highlights li + li {
-  margin-top: 0.55rem;
-}
-
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-top: 0.2rem;
-}
-
 .text-link {
   color: var(--navy);
   text-decoration: none;
@@ -601,39 +335,6 @@
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
-}
-
-.projects-github-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  min-height: 2.9rem;
-  padding: 0.75rem 1.15rem;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: var(--wash);
-  color: var(--navy);
-  text-decoration: none;
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.projects-github-button:hover,
-.projects-github-button:focus-visible {
-  background: var(--wash);
-  border-color: var(--rule-strong);
-  color: var(--navy-soft);
-  transform: translateY(-1px);
-}
-
-.projects-github-button-icon {
-  width: 1rem;
-  height: 1rem;
-  flex: 0 0 auto;
 }
 
 .client-carousel {
@@ -1042,20 +743,339 @@
   }
 }
 
+/* Projects: a rolling row of baseball cards. */
+.project-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 0.25rem 0;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+}
+
+.project-carousel.is-dragging {
+  cursor: grabbing;
+}
+
+.project-carousel.is-dragging,
+.project-carousel.is-dragging * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.project-carousel-track {
+  display: flex;
+  align-items: stretch;
+  gap: 1.25rem;
+  width: max-content;
+  will-change: transform;
+}
+
+.carousel-slot {
+  display: flex;
+  flex: 0 0 18.5rem;
+  width: 18.5rem;
+}
+
+.bb-card {
+  position: relative;
+  flex: 1;
+  perspective: 1600px;
+  cursor: pointer;
+}
+
+.bb-card-inner {
+  display: grid;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.bb-card.is-flipped .bb-card-inner {
+  transform: rotateY(180deg);
+}
+
+.bb-card-face {
+  position: relative;
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1rem 1rem 4.25rem;
+  background: var(--cream-deep);
+  border-radius: 14px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Stitch line, same as .stitched. */
+.bb-card-face::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1.5px dashed var(--navy);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.bb-card-back {
+  transform: rotateY(180deg);
+  padding-top: 1.35rem;
+}
+
+.bb-card-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1.5px solid var(--navy);
+  border-radius: 8px;
+  background: var(--cream);
+}
+
+.bb-card-art img {
+  display: block;
+  pointer-events: none;
+}
+
+.bb-card-art-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.bb-card-art-contain img {
+  width: 46%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.bb-card-initials {
+  display: grid;
+  place-items: center;
+  width: 6.5rem;
+  aspect-ratio: 1;
+  border: 2.5px solid var(--navy);
+  border-radius: 50%;
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.bb-card-body {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 0.35rem 0;
+}
+
+.bb-card-kind {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.bb-card-name {
+  margin: 0;
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.bb-card-name-back {
+  margin-top: 0.2rem;
+  padding: 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.bb-card-back .bb-card-kind {
+  padding: 0 0.35rem;
+}
+
+.bb-card-tagline {
+  margin: 0.2rem 0 0;
+  color: var(--navy-soft);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.bb-card-foot {
+  position: absolute;
+  left: 1.35rem;
+  bottom: 1.35rem;
+  display: flex;
+  align-items: center;
+  min-height: 2rem;
+}
+
+.bb-card-year {
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.bb-stats {
+  display: grid;
+  margin: 0.85rem 0 0;
+  padding: 0 0.35rem;
+}
+
+.bb-stat {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.bb-stat dt {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.bb-stat dd {
+  margin: 0;
+  color: var(--navy-soft);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.bb-stat-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+}
+
+/* The flip control sits outside the rotating faces, so it never turns over. */
+.bb-card-flip {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.7rem;
+  border: 1.5px solid var(--navy);
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.bb-card-flip svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 300ms ease;
+}
+
+.bb-card-flip:hover svg {
+  transform: rotate(180deg);
+}
+
+.bb-card-flip[aria-pressed='true'] {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+/* Solid navy button, like the hat's brim. */
+.button-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.9rem;
+  padding: 0.75rem 1.3rem;
+  border: 1.5px solid var(--navy);
+  border-radius: 999px;
+  background: var(--navy);
+  color: var(--cream);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.button-solid:hover {
+  background: var(--navy-soft);
+  border-color: var(--navy-soft);
+}
+
+.button-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  transition: transform 180ms ease;
+}
+
+.button-solid:hover .button-icon {
+  transform: translateX(3px);
+}
+
+@media (max-width: 720px) {
+  .carousel-slot {
+    flex-basis: 17.5rem;
+    width: 17.5rem;
+  }
+}
+
+/* Reduced motion: crossfade between faces instead of rotating. */
+@media (prefers-reduced-motion: reduce) {
+  .bb-card-inner,
+  .bb-card.is-flipped .bb-card-inner,
+  .bb-card-back {
+    transform: none;
+    transition: none;
+  }
+
+  .bb-card-face {
+    transition: opacity 200ms ease;
+  }
+
+  .bb-card-back,
+  .bb-card.is-flipped .bb-card-front {
+    opacity: 0;
+  }
+
+  .bb-card.is-flipped .bb-card-back {
+    opacity: 1;
+  }
+
+  .bb-card-flip,
+  .bb-card-flip svg,
+  .button-solid,
+  .button-icon {
+    transition: none;
+  }
+
+  .bb-card-flip:hover svg,
+  .button-solid:hover .button-icon {
+    transform: none;
+  }
+}
+
 @media (max-width: 960px) {
-  .featured-project-layout,
-  .secondary-project-grid,
   .education-grid,
   .education-overview,
   .contact-layout {
     grid-template-columns: 1fr;
-  }
-
-  .featured-project-details {
-    padding-top: 1.5rem;
-    padding-left: 0;
-    border-top: 1px solid var(--rule);
-    border-left: 0;
   }
 
   .client-project-card {
@@ -1114,14 +1134,8 @@
     width: clamp(6.75rem, 24vw, 8rem);
   }
 
-  .project-card,
-  .education-card,
-  .featured-project-card {
+  .education-card {
     padding: 1.25rem;
-  }
-
-  .project-title-row {
-    align-items: start;
   }
 
   .contact-row {
