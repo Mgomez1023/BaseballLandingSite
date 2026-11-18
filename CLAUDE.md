@@ -18,7 +18,6 @@ Personal portfolio for Martin Gomez, a UIC computer science student applying for
 ## What must NOT change
 
 - **The baseball-diamond navigation** (home plate = Contact, bases = Projects / Education / Experience). It is the signature of the site. Restyle it, never remove or replace it.
-- **The scrolling project cards** are intentional (a rolling view of all projects), not a bug.
 - Do not invent facts, numbers, titles, or dates. The resume facts below are the source of truth.
 
 ## Design direction: "The Hat" (cream and navy)
@@ -31,18 +30,29 @@ Personal portfolio for Martin Gomez, a UIC computer science student applying for
   (diamond 3.5px, outfield arc and foul lines same navy at ~55% opacity), white bases with navy
   borders, pitcher's circle in navy, base labels in navy.
 - Do not copy the reference hat's logo. Use my own monogram/LogoTransparent.png.
-- Projects: lineup card for experience, baseball cards for projects, flip on click/tap and keyboard
-  (real <button>, aria-pressed), pure CSS 3D, prefers-reduced-motion falls back to a crossfade.
+- Projects: lineup card for experience; projects are baseball cards in a **fanned card spread**
+  (replaces the old scrolling carousel, see Concept). Flip on click/tap and keyboard (real <button>,
+  aria-pressed), pure CSS 3D, prefers-reduced-motion falls back to a crossfade.
   The front must stand alone without the flip.
 
 ## Concept: lineup card + baseball cards
 
 - Keep the chalk-line diamond reveal and diamond navigation as the entry point.
 - Experience is shown as a **lineup card** (batting order, numbered 1 to 3).
-- Each project and role is a **baseball card**: the front shows logo/screenshot, name, one-line tagline, and year;
-  the back shows a **stat line** (Stack, Role, Result, Link) using only facts from the resume section above.
-- Cards flip on click/tap and via keyboard (use a real <button>, aria-pressed). Pure CSS 3D transform with
-  backface-visibility; no animation library unless asked. With prefers-reduced-motion, crossfade instead of rotating.
+- Projects are a **fanned card spread** of baseball cards, newest first, Pitch Whiff Model leading.
+  The scrolling carousel is retired.
+  - Desktop: horizontal fan. Each covered card shows a **peek strip** (project name, year, small mark).
+    Rotation and offset are fixed per card via `:nth-child`, never random. Hover/focus on a card moves its
+    neighbors aside.
+  - Mobile (390px): vertical stack with the same peek-strip idea; tap pulls a card out.
+  - Click/tap: the card lifts to center in an overlay (focus trapped, Esc closes, focus returns to the card).
+    The front shows name, one-liner, and tags; flipping shows the **stat line** (Stack, Role, Result, Link)
+    using only facts from the content section below. Buttons: the project link (GitHub or equivalent), and a
+    write-up link only if one exists.
+  - Flip uses a real <button> with aria-pressed; pure CSS 3D transform with backface-visibility. With
+    prefers-reduced-motion, crossfade instead of rotating, and no lift or fan animation.
+  - Accessibility: real buttons, arrow-key navigation across the spread, visible focus.
+  - No new dependencies: CSS transforms plus React state only; no animation library unless asked.
 - The front must be fully understandable without flipping.
 - Remove the diagonal stripe background; use a flat var(--cream) field so the navy lines stand out.
 
