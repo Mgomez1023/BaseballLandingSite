@@ -174,10 +174,10 @@ const secondaryProjects = [
     logo: CookieClickerLogo,
     logoAlt: 'CookieClicker logo',
     description:
-      'The popular Cookie Clicker game remade in C++ using the SFML graphics library',
+      'The popular Cookie Clicker game remade in C++ using the SFML graphics library.',
     context:
-      'This project was built as my final project for my Advanced Computer Science class. I presented this project through a live classroom demonstration. ',
-    stack: ['C++', 'SFML Grpahics'],
+      'This project was built as my final project for my Advanced Computer Science class. I presented this project through a live classroom demonstration.',
+    stack: ['C++', 'SFML'],
     links: [
       { label: 'GitHub', href: 'https://github.com/Mgomez1023/Cookie-Clicker' },
     ],
@@ -187,10 +187,10 @@ const secondaryProjects = [
     logo: WallBuildingLogo,
     logoAlt: 'WallBuilder logo',
     description:
-      'A UPS-inspired 2D wall building game built with TypeScript. Players recieve increasingly random packages, build walls, and aim for high scores.',
+      'A UPS-inspired 2D wall building game built with TypeScript. Players receive increasingly random packages, build walls, and aim for high scores.',
     context:
       'Working at UPS, I always thought the concept of loading a trailer would actually make a fun game. I built this to be quick, fun, and replayable.',
-    stack: ['C++', 'SFML Grpahics'],
+    stack: ['TypeScript'],
     links: [
       { label: 'Demo', href: 'https://wall-building-simulator.vercel.app/' },
       { label: 'GitHub', href: 'https://github.com/Mgomez1023/WallBuildingSimulator' },
@@ -204,7 +204,7 @@ const clientProjects = [
     title: 'MGM Floors LLC',
     description: 'A polished marketing website for a Chicagoland flooring contractor, featuring service pages, an interactive installation guide, project galleries, and a streamlined quote experience.',
     screenshot: MGMFloorsHomepage,
-    screenshotAlt: 'Homepage screenshot of the Benito Juarez Men\'s League platform.',
+    screenshotAlt: 'Homepage screenshot for MGM Floors LLC.',
     stack: ['JavaScript', 'HTML','CSS'],
     liveUrl: 'https://mgmflooring.vercel.app/',
     contextLabel: '',
@@ -212,7 +212,7 @@ const clientProjects = [
   {
     id: 'benito-juarez-platform',
     title: 'Benito Juarez Platform',
-    description: 'A full-stack operations platform for a local men\'s baseball league, with public-facing league pages and separate workflows for commissioners and team managers. Generates roughly 1,000 users/week.',
+    description: 'A full-stack operations platform for a local men\'s baseball league, with public-facing league pages and separate workflows for commissioners and team managers. Serves 1,000+ weekly visitors in season.',
     screenshot: benitoJuarezHomepage,
     screenshotAlt: 'Homepage screenshot of the Benito Juarez Men\'s League platform.',
     stack: ['React', 'TypeScript', 'Vite', 'FastAPI', 'PostgreSQL'],
@@ -232,10 +232,10 @@ const clientProjects = [
   {
     id: 'marom-painting',
     title: 'Marom Painting',
-    description: 'A React website made for a local painting business. This site includes a hero, services, about, contact form, and a more detailed portfolio with CRUD features using PostgresSQL storage.',
+    description: 'A React website made for a local painting business. This site includes a hero, services, about, contact form, and a more detailed portfolio with CRUD features backed by PostgreSQL.',
     screenshot: maromPaintingHomepage,
     screenshotAlt: 'Homepage screenshot for Marom Painting.',
-    stack: ['React', 'TypeScript', 'Vite', 'PostgresSQL'],
+    stack: ['React', 'TypeScript', 'Vite', 'PostgreSQL'],
     liveUrl: 'https://marompainting.org/',
     contextLabel: '',
   },
@@ -246,24 +246,23 @@ const educationEntries = [
     school: 'University of Illinois Chicago',
     degree: 'B.S. in Computer Science',
     location: 'Chicago, IL',
-    timeline: 'Aug 2025 - Present',
-    expectedGraduation: 'May 2027',
+    timeline: 'Aug. 2025 – Present',
+    expectedGraduation: 'May 2028',
   },
   {
     school: 'Moraine Valley Community College',
-    degree: 'A.A.S in Computer Science',
+    degree: 'Associate in Science',
     location: 'Palos Hills, IL',
-    timeline: 'Aug 2023 - May 2025',
+    timeline: 'Aug. 2023 – May 2025',
     expectedGraduation: 'Graduated',
   },
 ]
 
 const coursework = [
-  'Data Structures',
-  'Algorithms',
-  'C++',
-  'Java',
-  'UNIX',
+  'Systems Programming',
+  'Computer Security',
+  'Cryptography',
+  'Data Structures & Algorithms',
 ]
 
 const contactLinks = [
@@ -321,7 +320,6 @@ function useScrollReveal() {
   }, [])
 
   return contentRef
-      {eyebrow ? <p className="section-eyebrow">{eyebrow}</p> : null}
 }
 
 function SectionHeader({ eyebrow, title, description }) {
@@ -373,7 +371,7 @@ function AboutSection() {
           </div>
 
           <div className="about-photo-wrap" data-reveal style={{ '--reveal-delay': '0.08s' }}>
-            <img className="about-photo" src={proPic} alt="Martin Gomez profile picture" />
+            <img className="about-photo" src={proPic} alt="Martin Gomez" />
           </div>
         </div>
 
@@ -750,7 +748,7 @@ function ProjectsSection() {
           target="_blank"
           rel="noreferrer"
         >
-          <span>More on on my GitHub</span>
+          <span>More on my GitHub</span>
           <svg
             className="projects-github-button-icon"
             viewBox="0 0 20 20"
