@@ -1,3 +1,5 @@
+import { useLayoutEffect, useRef } from 'react'
+
 const fieldGeometry = {
   homePlate: { x: 350, y: 520 },
   firstBase: { x: 486, y: 384 },
@@ -9,6 +11,11 @@ const fieldGeometry = {
   outfieldArcRadiusScale: 0.8,
   title: { x: 350, y: 20, subtitleOffsetY: 30 },
 }
+
+// Cropped to the drawing (title through the Contact label, foul line to foul
+// line) with room for labels to grow on small screens, so no empty band of the
+// SVG eats hero height.
+const viewBox = { x: 66, y: -22, width: 568, height: 618 }
 
 function extendPastBase(fromPoint, throughPoint, extension) {
   const dx = throughPoint.x - fromPoint.x
@@ -107,11 +114,37 @@ function getHomePlatePoints(x, y) {
   return `${x - 18},${y - 22} ${x + 18},${y - 22} ${x + 18},${y + 2} ${x},${y + 18} ${x - 18},${y + 2}`
 }
 
+// Publishes the field's on-screen scale (CSS px per SVG unit) as --field-scale,
+// so labels, strokes and tap targets can keep a minimum rendered size.
+function useFieldScale() {
+  const ref = useRef(null)
+
+  useLayoutEffect(() => {
+    const svg = ref.current
+    if (!svg) return undefined
+
+    const update = () => {
+      const { width } = svg.getBoundingClientRect()
+      if (width > 0) svg.style.setProperty('--field-scale', (width / viewBox.width).toFixed(4))
+    }
+
+    update()
+    const observer = new ResizeObserver(update)
+    observer.observe(svg)
+    return () => observer.disconnect()
+  }, [])
+
+  return ref
+}
+
 export function BaseballField() {
+  const ref = useFieldScale()
+
   return (
     <svg
+      ref={ref}
       className="baseball-field"
-      viewBox="0 0 700 700"
+      viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
       role="img"
       aria-labelledby="field-title field-description"
     >

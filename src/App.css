@@ -3,29 +3,49 @@
 }
 
 .hero-section {
-  --hero-pad-block: clamp(1.5rem, 4vw, 3rem);
+  --hero-h: 100vh;
+  --hero-pad-block: clamp(1rem, min(4vw, 5vh), 3rem);
   --hero-pad-inline: clamp(1.25rem, 6vw, 3rem);
-  --hero-caption-space: 3.5rem;
+  --hero-gap: clamp(0.5rem, 1.5vh, 1rem);
+  /* One line of the "Select a base" caption. */
+  --hero-caption: 1.5rem;
+  /* The field never grows past this, however large the monitor. */
+  --field-max: 52rem;
+  /* Width / height of the field's viewBox (568 / 618). */
+  --field-ratio: 0.919;
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: var(--hero-h);
   padding: var(--hero-pad-block) var(--hero-pad-inline);
+}
+
+@supports (height: 100svh) {
+  .hero-section {
+    --hero-h: 100svh;
+  }
 }
 
 .hero-center {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--hero-gap);
   width: min(100%, 68rem);
 }
 
+/* Sized from whichever runs out first: width, the height left after padding
+   and caption, or --field-max. Everything inside the SVG scales with it. */
 .baseball-field {
-  width: min(100%, 60rem, calc(100svh - (var(--hero-pad-block) * 2) - var(--hero-caption-space)));
-  max-width: 100%;
+  display: block;
+  width: min(
+    100%,
+    var(--field-max),
+    calc((var(--hero-h) - var(--hero-pad-block) * 2 - var(--hero-caption) - var(--hero-gap)) * var(--field-ratio))
+  );
   height: auto;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 568 / 618;
   overflow: visible;
 }
 
@@ -41,20 +61,20 @@
 }
 
 .field-arc {
-  stroke-width: 3;
+  stroke-width: max(3px, calc(2px / var(--field-scale, 1)));
   opacity: 0.55;
   animation: drawField 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s forwards;
 }
 
 .field-diamond {
-  stroke-width: 3.5;
+  stroke-width: max(3.5px, calc(2.5px / var(--field-scale, 1)));
   animation: drawField 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 .mound-circle {
   fill: none;
   stroke: var(--navy);
-  stroke-width: 2.5;
+  stroke-width: max(2.5px, calc(1.75px / var(--field-scale, 1)));
 }
 
 .monogram-tint-navy {
@@ -68,7 +88,8 @@
 .mound-label {
   fill: var(--navy);
   font-family: var(--font-display);
-  font-size: 2.35rem;
+  /* SVG text scales with the field; the floor keeps it legible on small screens. */
+  font-size: max(2.35rem, calc(1.65rem / var(--field-scale, 1)));
   font-weight: 700;
   letter-spacing: 0.01em;
 }
@@ -105,10 +126,19 @@
   fill: transparent;
 }
 
+/* Touch: grow the invisible hit circle (via a transparent stroke) so it never
+   renders smaller than 46px across, however small the field gets. */
+@media (pointer: coarse) {
+  .base-hit-area {
+    stroke: transparent;
+    stroke-width: max(0px, calc((23px / var(--field-scale, 1) - 40px) * 2));
+  }
+}
+
 .base-hover-ring {
   fill: none;
   stroke: var(--navy);
-  stroke-width: 2;
+  stroke-width: max(2px, calc(1.5px / var(--field-scale, 1)));
   stroke-dasharray: 4 5;
   opacity: 0;
   transition: opacity 180ms ease, transform 180ms ease;
@@ -126,7 +156,7 @@
 .base-shape {
   fill: var(--base);
   stroke: var(--navy);
-  stroke-width: 2.5;
+  stroke-width: max(2.5px, calc(1.75px / var(--field-scale, 1)));
   transition: fill 180ms ease, transform 180ms ease;
   transform-box: fill-box;
   transform-origin: center;
@@ -134,7 +164,7 @@
 
 .base-label {
   fill: var(--navy);
-  font-size: 0.82rem;
+  font-size: max(0.82rem, calc(0.75rem / var(--field-scale, 1)));
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -158,16 +188,11 @@
 
 .hero-instruction {
   margin: 0;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
   color: var(--muted);
   font-size: 0.95rem;
   font-weight: 500;
+  line-height: var(--hero-caption);
   text-align: center;
-  width: max-content;
-  max-width: 100%;
 }
 
 .content-stack {
@@ -1477,39 +1502,11 @@ html.has-dialog {
 
 @media (max-width: 640px) {
   .hero-section {
-    --hero-pad-inline: 0rem;
-    --hero-caption-space: 0rem;
-  }
-
-  .baseball-field {
-    width: min(100%, 34rem, calc(100svh - (var(--hero-pad-block) * 2) - var(--hero-caption-space)));
-  }
-
-  /* The SVG scales down ~45% at phone width; thicken lines so they keep their weight. */
-  .field-diamond {
-    stroke-width: 5.5;
-  }
-
-  .field-arc {
-    stroke-width: 4.5;
-  }
-
-  .mound-circle,
-  .base-shape {
-    stroke-width: 3.5;
-  }
-
-  .mound-label {
-    font-size: 2.9rem;
-  }
-
-  .base-label {
-    font-size: 1.15rem;
+    --hero-pad-inline: 1rem;
   }
 
   .hero-instruction {
     font-size: 0.9rem;
-    width: min(100%, 18rem);
   }
 }
 
