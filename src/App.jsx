@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import './App.css'
 import { HeroSection } from './components/HeroSection.jsx'
 import { PortfolioSections } from './components/PortfolioSections.jsx'
+import { Analytics } from '@vercel/analytics/react'
 
 export default function App() {
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function App() {
     <div className="portfolio-shell">
       <HeroSection />
       <PortfolioSections />
+      <Analytics />
     </div>
   )
 }
