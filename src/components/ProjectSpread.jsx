@@ -77,23 +77,12 @@ function FlipIcon() {
   )
 }
 
-/**
- * The card's picture: a screenshot or logo when there is one. Without one, the
- * fan shows the one-liner and the overlay shows the initials badge.
- */
-function CardGraphic({ project, variant }) {
+/** The card's picture: a screenshot or logo when there is one, else an initials badge. */
+function CardGraphic({ project, withAlt = false }) {
   if (project.image) {
     return (
       <span className={`card-graphic card-graphic-${project.imageFit}`}>
-        <img src={project.image} alt={variant === 'dialog' ? project.imageAlt : ''} draggable="false" />
-      </span>
-    )
-  }
-
-  if (variant === 'fan') {
-    return (
-      <span className="card-graphic card-graphic-text" aria-hidden="true">
-        <span>{project.tagline}</span>
+        <img src={project.image} alt={withAlt ? project.imageAlt : ''} draggable="false" />
       </span>
     )
   }
@@ -140,7 +129,7 @@ function FanSpread({ projects, openId, onOpen }) {
         >
           <button
             type="button"
-            className="fan-card"
+            className={`fan-card ${index === 0 ? 'fan-card-lead' : 'fan-card-peek'}`}
             ref={roving.ref(index)}
             tabIndex={roving.tabIndex(index)}
             aria-haspopup="dialog"
@@ -155,14 +144,24 @@ function FanSpread({ projects, openId, onOpen }) {
             onKeyDown={(event) => roving.onKeyDown(event, index)}
             onClick={(event) => onOpen(project, event.currentTarget)}
           >
-            <span className="fan-art">
-              <CardGraphic project={project} variant="fan" />
-            </span>
-            <span className="fan-strip">
-              <CardMark project={project} />
-              <span className="strip-name">{project.shortName}</span>
-              {project.year ? <span className="strip-year">{project.year}</span> : null}
-            </span>
+            {index === 0 ? (
+              <>
+                <span className="fan-lead-art">
+                  <CardGraphic project={project} />
+                </span>
+                <span className="fan-lead-body">
+                  {project.year ? <span className="lead-year">{project.year}</span> : null}
+                  <span className="lead-name">{project.name}</span>
+                  <span className="lead-description">{project.tagline}</span>
+                </span>
+              </>
+            ) : (
+              <span className="fan-strip">
+                <CardMark project={project} />
+                <span className="strip-name">{project.shortName}</span>
+                {project.year ? <span className="strip-year">{project.year}</span> : null}
+              </span>
+            )}
           </button>
         </li>
       ))}
@@ -211,7 +210,7 @@ function StatLine({ project }) {
   ]
   const rows = [
     project.stack.length ? ['Stack', project.stack.join(', ')] : null,
-    project.role ? ['Role', project.role] : null,
+    project.role ? ['What I built', project.role] : null,
     project.result ? ['Result', project.result] : null,
     project.buildsOn ? ['Builds on', project.buildsOn] : null,
   ].filter(Boolean)
@@ -363,7 +362,7 @@ function ProjectDialog({ opened, onClosed }) {
           >
             <div className="dialog-card-inner">
               <div className="dialog-face dialog-front" inert={flipped}>
-                <CardGraphic project={project} variant="dialog" />
+                <CardGraphic project={project} withAlt />
                 <div className="dialog-front-body">
                   {project.year ? <p className="dialog-year">{project.year}</p> : null}
                   <h3 className="dialog-name" id={titleId}>
@@ -390,15 +389,16 @@ function ProjectDialog({ opened, onClosed }) {
           </div>
 
           <div className="dialog-actions">
+            {/* The label states what the button does, so it carries the state and
+                aria-pressed is left off (a pressed "Front" would read as a contradiction). */}
             <button
               type="button"
-              className="dialog-button"
-              aria-pressed={flipped}
+              className="dialog-button dialog-flip"
               aria-controls={backId}
               onClick={toggleFlip}
             >
               <FlipIcon />
-              Stat line
+              {flipped ? 'Front' : 'Stat line'}
             </button>
             {project.links.map((link) => (
               <a

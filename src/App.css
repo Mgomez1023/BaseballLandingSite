@@ -728,40 +728,45 @@
 }
 
 /*
-  Projects: a fanned spread of five cards, like a hand of baseball cards.
-  The first card sits on top and is fully face-up; each later card sits one
-  layer lower, so only its peek strip (the trailing edge: right on desktop,
-  bottom on phones) shows. Poses are fixed per card via :nth-child.
+  Projects: a pile of five baseball cards. Pitch Whiff sits on top, fully
+  face-up. Each later card is tucked behind the one before it, so only its
+  ~180px peek strip shows (right edge on desktop, bottom band on phones).
+  Poses are fixed per card via :nth-child.
 */
 .fan {
-  --count: 5;
-  --card-w: 24rem;
-  --card-h: 15.5rem;
+  --card-w: 18.75rem;
   --pad: 0.75rem;
-  /* Horizontal distance between cards = width of each visible peek strip. */
-  --step: calc((100cqw - var(--card-w)) / (var(--count) - 1));
+  /* Visible width of each tucked card; shrinks only when the row runs out of room. */
+  --step: min(11.25rem, calc((100cqw - var(--card-w)) / 4));
   container-type: inline-size;
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
   margin: 0;
   padding: 1rem 0 1.5rem;
   list-style: none;
 }
 
 .fan-slot {
-  grid-area: 1 / 1;
-  width: var(--card-w);
-  margin-left: calc(var(--step) * var(--n));
-  z-index: calc(10 - var(--n));
+  position: relative;
+  z-index: var(--z);
+  display: flex;
+  flex: 0 0 var(--card-w);
   transform: translate(var(--shift-x, 0px), calc(var(--dy) + var(--shift-y, 0px))) rotate(var(--rot));
   transform-origin: 50% 100%;
   transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.fan-slot:nth-child(1) { --n: 0; --rot: -2deg; --dy: 6px; }
-.fan-slot:nth-child(2) { --n: 1; --rot: -1deg; --dy: 2px; }
-.fan-slot:nth-child(3) { --n: 2; --rot: 0deg; --dy: 0px; }
-.fan-slot:nth-child(4) { --n: 3; --rot: 1deg; --dy: 2px; }
-.fan-slot:nth-child(5) { --n: 4; --rot: 2deg; --dy: 6px; }
+/* Tuck each card behind the previous one, leaving --step of it showing. */
+.fan-slot + .fan-slot {
+  margin-left: calc(var(--step) - var(--card-w));
+}
+
+.fan-slot:nth-child(1) { --z: 5; --rot: -2deg; --dy: 6px; }
+.fan-slot:nth-child(2) { --z: 4; --rot: -1deg; --dy: 2px; }
+.fan-slot:nth-child(3) { --z: 3; --rot: 0deg; --dy: 0px; }
+.fan-slot:nth-child(4) { --z: 2; --rot: 1deg; --dy: 2px; }
+.fan-slot:nth-child(5) { --z: 1; --rot: 2deg; --dy: 6px; }
 
 /* Hover or focus: the cards above slide left to uncover the hot card, the
    cards below slide right. The hot card itself never moves, so its hit area
@@ -778,8 +783,8 @@
 .fan-card {
   position: relative;
   display: flex;
-  width: 100%;
-  height: var(--card-h);
+  flex: 1;
+  min-width: 0;
   padding: var(--pad);
   border: 0;
   border-radius: 14px;
@@ -801,37 +806,71 @@
   pointer-events: none;
 }
 
+/* Keyboard focus: a solid ring on the card's own edge. Where a card is tucked
+   behind another, that part of the ring stays hidden with it. */
 .fan-card:focus-visible,
 .minor-card:focus-visible {
-  outline: 2px solid var(--navy);
-  outline-offset: 4px;
+  outline: none;
 }
 
-.fan-art {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  min-width: 0;
-  min-height: 0;
-  display: flex;
+.fan-card:focus-visible::after,
+.minor-card:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2.5px solid var(--navy);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
-.fan-art .card-graphic {
-  height: 100%;
+/* The face-up lead card: art window, then year, name and description. */
+.fan-card-lead {
+  flex-direction: column;
 }
 
-/* The peek strip: exactly as wide as the part of the card left uncovered. */
+.fan-lead-art .card-graphic {
+  aspect-ratio: 4 / 3;
+}
+
+.fan-lead-body {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  padding: 0.9rem 0.4rem 0.5rem;
+}
+
+.lead-year {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.lead-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.lead-description {
+  color: var(--navy-soft);
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+
+/* Tucked cards keep their content in the strip that stays visible. */
+.fan-card-peek {
+  justify-content: flex-end;
+}
+
 .fan-strip {
-  position: relative;
-  z-index: 1;
   display: flex;
-  /* Reaches 0.5rem under the card above so the small rotations never expose
-     the edge of the picture frame. */
-  flex: 0 0 calc(var(--step) - var(--pad) + 0.5rem);
+  flex: 0 0 calc(var(--step) - var(--pad));
   flex-direction: column;
   gap: 0.6rem;
   min-width: 0;
-  padding: 0.6rem 0.4rem 0.4rem 1.4rem;
+  padding: 0.6rem 0.4rem 0.4rem 1rem;
 }
 
 .card-mark {
@@ -874,7 +913,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Card picture: screenshot, logo, one-liner (fan) or initials badge (overlay). */
+/* Card picture: screenshot, logo, or initials badge. */
 .card-graphic {
   position: relative;
   display: grid;
@@ -905,14 +944,6 @@
   width: 40%;
   height: auto;
   border-radius: 6px;
-}
-
-.card-graphic-text {
-  place-items: end start;
-  padding: 1.1rem;
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  line-height: 1.4;
 }
 
 .card-graphic-initials span {
@@ -979,7 +1010,7 @@
   margin: 0 0 0 auto;
 }
 
-/* The overlay. The dialog itself is the cream scrim; ::backdrop stays clear. */
+/* The overlay. The dialog itself is the navy scrim; ::backdrop stays clear. */
 html.has-dialog {
   overflow: hidden;
 }
@@ -992,18 +1023,21 @@ html.has-dialog {
   max-width: none;
   max-height: none;
   margin: 0;
-  padding: clamp(1rem, 4vw, 2rem);
+  padding: clamp(1.5rem, 8vh, 4.5rem) clamp(1rem, 4vw, 2rem);
   border: 0;
-  background: color-mix(in srgb, var(--cream) 92%, transparent);
+  background: color-mix(in srgb, var(--navy) 50%, transparent);
   color: var(--navy);
   overflow: auto;
   overscroll-behavior: contain;
   animation: scrimIn 240ms ease both;
 }
 
+/* Anchored near the top (not centered) so the card doesn't jump when its
+   height changes on flip. */
 .card-dialog[open] {
   display: grid;
-  place-items: center;
+  align-content: start;
+  justify-items: center;
 }
 
 .card-dialog::backdrop {
@@ -1055,6 +1089,13 @@ html.has-dialog {
 .dialog-back {
   transform: rotateY(180deg);
   padding-top: 1.4rem;
+}
+
+/* Only the face that is up sizes the card, so the back shrinks to its content. */
+.dialog-card:not(.is-flipped) .dialog-back,
+.dialog-card.is-flipped .dialog-front {
+  position: absolute;
+  inset: 0 0 auto;
 }
 
 .dialog-front .card-graphic {
@@ -1114,7 +1155,7 @@ html.has-dialog {
 
 .stat-row {
   display: grid;
-  grid-template-columns: 5.25rem minmax(0, 1fr);
+  grid-template-columns: 6.5rem minmax(0, 1fr);
   gap: 0.75rem;
   padding: 0.75rem 0;
   border-top: 1px solid var(--rule-strong);
@@ -1171,8 +1212,7 @@ html.has-dialog {
   flex: 0 0 auto;
 }
 
-.dialog-button:hover,
-.dialog-button[aria-pressed='true'] {
+.dialog-button:hover {
   background: var(--navy);
   color: var(--cream);
 }
@@ -1193,40 +1233,48 @@ html.has-dialog {
   from { opacity: 0; transform: translateY(6px); }
 }
 
-/* Below 1000px the fan becomes a vertical stack; each strip is a bottom band. */
+/* Below 1000px the pile stacks vertically. Each tucked card is a short card
+   slid under the one above it, leaving its bottom strip showing; the lead
+   card's height can vary freely. */
 @media (max-width: 1000px) {
   .fan {
-    --strip-h: 4.25rem;
+    --peek: 4.25rem;
+    --tucked-h: 7rem;
+    flex-direction: column;
     padding: 0.5rem 0 1rem;
   }
 
   .fan-slot {
+    flex: none;
     width: 100%;
-    margin-left: 0;
-    margin-top: calc((var(--strip-h) + var(--pad)) * var(--n));
     /* Straight stack on phones: any tilt exposes slivers of the card above. */
     transform: translate(0px, var(--shift-y, 0px));
+  }
+
+  .fan-slot + .fan-slot {
+    margin-left: 0;
+    margin-top: calc(var(--peek) - var(--tucked-h));
   }
 
   .fan-slot.is-before { --shift-x: 0px; --shift-y: -0.75rem; }
   .fan-slot.is-after { --shift-x: 0px; --shift-y: 0.5rem; }
 
-  .fan-card {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .fan-art {
-    flex: none;
+  .fan-lead-art .card-graphic {
     aspect-ratio: 16 / 9;
   }
 
+  .fan-card-peek {
+    height: var(--tucked-h);
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
   .fan-strip {
-    flex: 0 0 var(--strip-h);
+    flex: 0 0 calc(var(--peek) - var(--pad));
     flex-direction: row;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.5rem 0.35rem 0;
+    padding: 0 0.35rem;
   }
 
   .fan-strip .strip-year {
