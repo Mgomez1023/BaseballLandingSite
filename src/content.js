@@ -26,7 +26,7 @@ export const linkLabels = {
 //   initials           the small mark on the strip (and the graphic when there is no image)
 //   tagline            the one-liner on the overlay front
 //   stack              tags on the front, Stack on the stat line
-//   role, result       stat line rows; omitted when there is nothing on record
+//   role, result       stat line rows ("What I built", "Result"); omitted when nothing is on record
 //   links              [{ type, href }], labeled by type
 //   writeup            optional write-up URL
 //   buildsOn           optional extra stat line row
@@ -43,7 +43,8 @@ export const featuredProjects = [
       'ML pipeline on a full season of MLB Statcast data, testing whether pitch sequencing improves whiff prediction.',
     stack: ['FastAPI', 'Docker', 'GitHub Actions', 'AWS'],
     role: 'ML pipeline served through FastAPI, containerized with Docker, with GitHub Actions CI.',
-    result: '0.768 ROC AUC on a time-based holdout. Deployed on AWS (ECR, ECS Fargate).',
+    result:
+      '0.768 ROC AUC on a time-based holdout. A pre-registered rule kept the simpler model. Deployed on AWS (ECR, ECS Fargate).',
     buildsOn: 'PitchSearch (in the Minor leagues below)',
     links: [{ type: 'github', href: 'https://github.com/Mgomez1023/pitch-sequencing-model' }],
     writeup: 'https://github.com/Mgomez1023/pitch-sequencing-model#readme',
@@ -88,13 +89,14 @@ export const featuredProjects = [
     links: [],
   },
   {
-    // CLAUDE.md lists only the name. Tech, role and results stay empty until
-    // Martin supplies them. The repo link was already on the live site.
+    // Only the name and year (2024, from Martin) are on record. Tech, what was
+    // built and results stay empty until he supplies them. The repo link was
+    // already on the live site.
     id: 'loaner-vehicle-system',
     name: 'Loaner Vehicle Management System',
     shortName: 'Loaner Vehicles',
     initials: 'LV',
-    year: null,
+    year: '2024',
     tagline: 'A system for managing loaner vehicles.',
     stack: [],
     links: [{ type: 'github', href: 'https://github.com/Mgomez1023/Loaner-Vehicle-Project' }],

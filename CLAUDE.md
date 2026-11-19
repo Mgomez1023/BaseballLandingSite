@@ -31,8 +31,8 @@ Personal portfolio for Martin Gomez, a UIC computer science student applying for
   borders, pitcher's circle in navy, base labels in navy.
 - Do not copy the reference hat's logo. Use my own monogram/LogoTransparent.png.
 - Projects: lineup card for experience; projects are baseball cards in a **fanned card spread**
-  (replaces the old scrolling carousel, see Concept). Flip on click/tap and keyboard (real <button>,
-  aria-pressed), pure CSS 3D, prefers-reduced-motion falls back to a crossfade.
+  (replaces the old scrolling carousel, see Concept). Flip on click/tap and keyboard (real <button>
+  labeled by action), pure CSS 3D, prefers-reduced-motion falls back to a crossfade.
   The front must stand alone without the flip.
 
 ## Concept: lineup card + baseball cards
@@ -44,7 +44,9 @@ Personal portfolio for Martin Gomez, a UIC computer science student applying for
   - Only five cards are fanned: Pitch Whiff Model, Benito Juarez, Destiny Copilot, Sell Plushies, Loaner
     Vehicle Management System. Everything else (Build a Wall!, PitchSearch, Cookie Clicker, Wall Building
     Simulator) sits in a **"Minor leagues"** row below the fan.
-  - Fan poses are subtle: ±1–2° rotation and small vertical offsets.
+  - Fan poses are subtle: ±1–2° rotation and small vertical offsets. The fan reads as a pile: Pitch Whiff
+    fully face-up (~300px wide, normal art window, description below); each later card shows a ~180px strip
+    tucked behind the previous one. Overlay scrim is navy at ~50%.
   - Strips show a short name; the overlay shows the full name.
   - Years: only the dates listed in this file. Leave a year off rather than guess.
   - Desktop: horizontal fan. Each covered card shows a **peek strip** (project name, year, small mark).
@@ -53,10 +55,11 @@ Personal portfolio for Martin Gomez, a UIC computer science student applying for
   - Mobile (390px): vertical stack with the same peek-strip idea; tap pulls a card out.
   - Click/tap: the card lifts to center in an overlay (focus trapped, Esc closes, focus returns to the card).
     The front shows the graphic/screenshot, year, name, one-liner, and tags; flipping shows the **stat line**
-    (Stack, Role, Result, Link) using only facts from the content section below. Buttons are labeled by link
+    (Stack, What I built, Result, Link) using only facts from the content section below. Buttons are labeled by link
     type (GitHub, Live site, Play on Roblox, Live demo); no link, no button. A write-up button only if one
     exists. Never link an AWS URL.
-  - Flip uses a real <button> with aria-pressed; pure CSS 3D transform with backface-visibility. With
+  - Flip uses a real <button> whose label states the action ("Stat line" / "Front"; no aria-pressed, since
+    the label already carries the state). Pure CSS 3D transform with backface-visibility. With
     prefers-reduced-motion, crossfade instead of rotating, and no lift or fan animation.
   - Accessibility: real buttons, arrow-key navigation across the spread, visible focus.
   - No new dependencies: CSS transforms plus React state only; no animation library unless asked.
@@ -79,13 +82,13 @@ Personal portfolio for Martin Gomez, a UIC computer science student applying for
 - Package Handler: UPS, Chicago Area Consolidation Hub (Hodgkins, IL). Aug. 2022 to present.
 
 **Projects** (newest and strongest first):
-- Pitch Whiff Model (Nov. 2026): ML pipeline on a full season of MLB Statcast data testing whether pitch sequencing improves whiff prediction (0.768 ROC AUC on a time-based holdout); FastAPI, Docker, GitHub Actions CI, deployed on AWS (ECR, ECS Fargate). Repo: https://github.com/Mgomez1023/pitch-sequencing-model
+- Pitch Whiff Model (Nov. 2026): ML pipeline on a full season of MLB Statcast data testing whether pitch sequencing improves whiff prediction (0.768 ROC AUC on a time-based holdout; a pre-registered rule kept the simpler model); FastAPI, Docker, GitHub Actions CI, deployed on AWS (ECR, ECS Fargate). Repo: https://github.com/Mgomez1023/pitch-sequencing-model
 - Benito Juarez Men's League Platform (Feb. 2026 to present): React, TypeScript, FastAPI, PostgreSQL, Vercel. 10-team, 150+ player amateur baseball league site with schedules, standings, rosters, JWT auth, CSV game import, English/Spanish support.
 - Destiny Copilot (Sep. 2026 to present): AI companion for Destiny 2 with Bungie OAuth, tool-calling FastAPI backend, GitHub Actions CI. Repo: https://github.com/Mgomez1023/DestinyCopilot
 - Sell Plushies (Oct. 2026 to present): Roblox idle-collector game, server-authoritative economy, Luau.
 - Older projects already on the site (Build a Wall!, PitchSearch, Loaner Vehicle Management System, Cookie Clicker in C++, Wall Building Simulator) may stay, but below the newer ones.
 - Pitch Whiff Model builds on PitchSearch; say so on its stat line. Its write-up is the repo README: https://github.com/Mgomez1023/pitch-sequencing-model#readme
-- Loaner Vehicle Management System: take tech and details only from this file or what Martin pastes. No demo button, no invented results.
+- Loaner Vehicle Management System (2024): take tech and details only from this file or what Martin pastes. No demo button, no invented results.
 
 **Contact:** mgome20@uic.edu, linkedin.com/in/martin-gomez-, github.com/Mgomez1023. Do not add a phone number to the site unless it is already there.
 
